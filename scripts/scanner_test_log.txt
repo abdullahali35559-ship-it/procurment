@@ -1,0 +1,17 @@
+============================================================
+MALWARE SCANNER VERIFICATION (SAFE TEST MODE)
+============================================================
+
+Scanning clean file: scripts/clean_test.txt
+Status: CLEAN
+Detail: Scan completed (Mock Mode)
+
+Scanning infected (Safe Test) file: scripts/safe_virus_test.txt
+Status: INFECTED
+Detail: Infected with EICAR test string (Mock Mode)
+Quarantined: True
+Quarantined Path: ./storage/tenders\quarantine\1771941299_safe_virus_test.txt
+
+============================================================
+[OK] SUCCESS: Malware scanner verified with safe string!
+============================================================

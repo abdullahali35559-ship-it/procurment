@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emails - Procurement</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/variables.css?v=1.6">
+    <link rel="stylesheet" href="css/components.css?v=1.6">
+
+    <style>
+        
+
+        
+
+        .page-header {
+            margin-bottom: var(--space-8);
+        }
+
+        .page-title {
+            font-size: var(--text-4xl);
+            font-weight: var(--font-bold);
+            color: var(--text-primary);
+            margin-bottom: var(--space-2);
+        }
+
+        .page-subtitle {
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+        }
+
+        .filters {
+            background: white;
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            padding: var(--space-6);
+            margin-bottom: var(--space-6);
+            display: flex;
+            gap: var(--space-4);
+            flex-wrap: wrap;
+        }
+
+        .filter-item {
+            /* flex: 1; */
+            min-width: 200px;
+        }
+
+        .action-btn {
+            width: fit-content;
+            align-self: flex-end;
+        }
+
+        .status-processed {
+            background: #D1FAE5;
+            color: #065F46;
+        }
+
+        .status-tender {
+            background: #DBEAFE;
+            color: #1E40AF;
+        }
+
+        .status-procurement {
+            background: #FEF3C7;
+            color: #92400E;
+        }
+
+        .status-unprocessed {
+            background: #FEE2E2;
+            color: #991B1B;
+        }
+
+        .status-junk {
+            background: #F3F4F6;
+            color: #4B5563;
+            border: 1px solid #D1D5DB;
+        }
+
+        .actions {
+            display: flex;
+            gap: var(--space-2);
+        }
+
+        /* Tag Styles */
+        .tag-active {
+            background: var(--primary-orange-light);
+            color: var(--primary-orange);
+            border: 1px solid var(--primary-orange);
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .tag-suggested {
+            background: transparent;
+            color: var(--text-muted);
+            border: 1px dashed var(--border-medium);
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .tag-suggested:hover {
+            border-style: solid;
+            border-color: var(--primary-orange);
+            color: var(--primary-orange);
+            background: #fff4f0;
+        }
+
+        .tag-suggested svg {
+            width: 10px;
+            height: 10px;
+        }
+
+        .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .btn-confirm-all {
+            font-size: 0.65rem;
+            padding: 2px 6px;
+            background: #f0fdf4;
+            color: #16a34a;
+            border: 1px solid #bbf7d0;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .btn-confirm-all:hover {
+            background: #dcfce7;
+        }
+
+        .btn-add-tag {
+            font-size: 1.2rem;
+            line-height: 1;
+            padding: 0 6px;
+            background: transparent;
+            color: var(--text-muted);
+            border: 1px dashed var(--border-medium);
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 24px;
+            width: 24px;
+            transition: all 0.2s;
+        }
+
+        .btn-add-tag:hover {
+            border-style: solid;
+            border-color: var(--primary-orange);
+            color: var(--primary-orange);
+            background: #fff4f0;
+        }
+
+        .btn-icon {
+            padding: var(--space-2);
+            background: var(--bg-light);
+            border: 1px solid var(--border-medium);
+            cursor: pointer;
+            border-radius: var(--radius-md);
+            transition: all var(--transition-fast);
+        }
+
+        .btn-icon:hover {
+            background: var(--bg-dark);
+            border-color: var(--primary-orange);
+        }
+
+        @media (max-width: 1024px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            
+        }
+    </style>
+</head>
+
+<body>
+    <div id="top-loader"></div>
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="var(--primary-orange)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg><span>Procurement</span></a>
+
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Dashboard</a></li>
+                <li><a href="calendar.html" class="nav-link">Calendar</a></li>
+                <li><a href="threads.html" class="nav-link">Threads</a></li>
+                <li><a href="settings.html" class="nav-link">Settings</a></li>
+            </ul>
+
+            <div class="flex items-center gap-4">
+                <span class="badge badge-success">
+                    <span class="status-indicator status-online"></span>
+                    Online
+                </span>
+                <button onclick="Auth.logout()" class="btn btn-secondary btn-sm"
+                    style="margin-left: 8px; border: 1px solid var(--border-light); background: white; color: var(--text-primary);">
+                    Sign Out
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="layout">
+        <aside class="sidebar">
+            <ul class="sidebar-menu">
+                <li class="sidebar-item">
+                    <a href="index.html" class="sidebar-link">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+                            <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+                            <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+                            <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+                        </svg>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="calendar.html" class="sidebar-link">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                        Calendar
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="threads.html" class="sidebar-link">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                        </svg>
+                        Business Threads
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="emails.html" class="sidebar-link active">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                            </path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                        Emails
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="drafts.html" class="sidebar-link">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                        </svg>
+                        Draft Replies
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="attachments.html" class="sidebar-link">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z">
+                            </path>
+                        </svg>
+                        Documents
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="contacts.html" class="sidebar-link">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                        Contacts
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="assistant.html" class="sidebar-link"><svg width="18" height="18" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                        </svg>Procurement Assistant</a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="settings.html" class="sidebar-link">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="3"></circle>
+                            <path
+                                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+                            </path>
+                        </svg>
+                        Settings
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1 class="page-title">Emails</h1>
+                <p class="page-subtitle">View and manage all processed emails</p>
+            </div>
+
+            <!-- Filters -->
+            <div class="filters">
+                <div class="filter-item">
+                    <label class="form-label">Search</label>
+                    <input type="text" class="form-input" placeholder="Search emails..." id="searchInput">
+                </div>
+
+                <div class="filter-item">
+                    <label class="form-label">Status</label>
+                    <select class="form-select" id="statusFilter">
+                        <option value="all" selected>All Emails</option>
+                        <option value="actionable">Actionable Only</option>
+                        <option value="junk">Junk/Miscellaneous</option>
+                        <option value="processed">Processed Only</option>
+                        <option value="unprocessed">Unprocessed Only</option>
+                    </select>
+                </div>
+
+                <div class="filter-item">
+                    <label class="form-label">Date Range</label>
+                    <input type="date" class="form-input" id="dateFilter">
+                </div>
+
+                <div class="filter-item">
+                    <label class="form-label">Client</label>
+                    <select class="form-select" id="clientFilter">
+                        <option value="all" selected>All Clients</option>
+                    </select>
+                </div>
+
+                <div class="filter-item">
+                    <label class="form-label">Tag/Label</label>
+                    <select class="form-select" id="tagFilter">
+                        <option value="all" selected>All Tags</option>
+                    </select>
+                </div>
+
+                <button class="btn btn-primary action-btn" onclick="applyFilters()">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    Apply Filters
+                </button>
+            </div>
+
+            <!-- Emails Table -->
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 15%;">From</th>
+                            <th style="width: 30%;">Subject</th>
+                            <th style="width: 15%;">Tags</th>
+                            <th style="width: 10%;">Date</th>
+                            <th style="width: 10%;">Status</th>
+                            <th style="width: 10%;">Files</th>
+                            <th style="width: 10%;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="emailsTableBody">
+                        <tr>
+                            <td colspan="6" style="text-align: center; padding: 3rem; color: var(--text-muted);">
+                                <div>
+                                    <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="2"
+                                        style="margin: 0 auto 1rem;">
+                                        <path
+                                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                    </svg>
+                                    <div>No emails found</div>
+                                    <div style="font-size: 0.875rem; margin-top: 0.5rem;">Process emails to view them
+                                        here</div>
+                                    <button class="btn btn-primary" style="margin-top: 1rem;" onclick="processEmails()">
+                                        Process Emails Now
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <!-- Email Modal -->
+    <div id="emailModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalSubject">Email Details</h2>
+                <span class="modal-close" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <div class="email-meta">
+                    <div class="email-meta-item"><span class="email-meta-label">From:</span> <span
+                            id="modalFrom"></span></div>
+                    <div class="email-meta-item"><span class="email-meta-label">Date:</span> <span
+                            id="modalDate"></span></div>
+                    <div class="email-meta-item"><span class="email-meta-label">ID:</span> <span id="modalId"></span>
+                    </div>
+                </div>
+                <div class="email-body-content" id="modalText"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/auth.js?v=1.6"></script>
+    <script src="js/api.js?v=1.6"></script>
+    <script>
+        function showToast(message, type = 'info') {
+            let container = document.querySelector('.toast-container');
+            if (!container) {
+                container = document.createElement('div');
+                container.className = 'toast-container';
+                document.body.appendChild(container);
+            }
+
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type}`;
+
+            let icon = '';
+            if (type === 'success') icon = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>';
+            else if (type === 'error') icon = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>';
+            else icon = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>';
+
+            toast.innerHTML = `
+                ${icon}
+                <div class="toast-message">${message}</div>
+                <div class="toast-close" onclick="this.parentElement.remove()">×</div>
+            `;
+
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.animation = 'toastFadeOut 0.3s ease-in forwards';
+                setTimeout(() => toast.remove(), 300);
+            }, 5000);
+        }
+
+        let allEmails = [];
+
+        // Load emails on page load
+        document.addEventListener('DOMContentLoaded', async () => {
+            console.log('Emails page loaded, fetching data...');
+
+            // Check for thread_id in URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const threadIdParam = urlParams.get('thread_id');
+
+            if (threadIdParam) {
+                console.log(`Filtering for thread_id: ${threadIdParam}`);
+                document.getElementById('searchInput').value = threadIdParam;
+                await loadEmails({ thread_id: threadIdParam, include_all: true });
+            } else {
+                await loadEmails();
+            }
+
+            // Set up search and filter listeners
+            document.getElementById('searchInput').addEventListener('keyup', applyFilters);
+            document.getElementById('statusFilter').addEventListener('change', applyFilters);
+            document.getElementById('dateFilter').addEventListener('change', applyFilters);
+            document.getElementById('clientFilter').addEventListener('change', applyFilters);
+            document.getElementById('tagFilter').addEventListener('change', applyFilters);
+
+            // Close modal when clicking outside
+            window.onclick = function (event) {
+                const modal = document.getElementById('emailModal');
+                if (event.target == modal) {
+                    closeModal();
+                }
+            }
+        });
+
+        async function loadEmails(filters = {}) {
+            try {
+                console.log('Requesting /api/emails with filters:', filters);
+                const response = await window.ProcurementAgentAPI.getEmails(filters);
+                console.log('Emails API response:', response);
+                if (response.success) {
+                    allEmails = response.data;
+                    console.log(`Found ${allEmails.length} emails`);
+                    populateMetadataFilters(allEmails);
+                    displayEmails(allEmails);
+                } else {
+                    console.error('API returned success=false:', response);
+                }
+            } catch (error) {
+                console.error('Emails API error:', error);
+            }
+        }
+        function populateMetadataFilters(emails) {
+            const clientFilter = document.getElementById('clientFilter');
+            const tagFilter = document.getElementById('tagFilter');
+
+            // Unique Clients
+            const clients = [...new Set(emails.map(e => e.from || e.sender).filter(Boolean))].sort();
+            while (clientFilter.options.length > 1) clientFilter.remove(1);
+            clients.forEach(c => {
+                const opt = document.createElement('option');
+                opt.value = c;
+                opt.textContent = c;
+                clientFilter.appendChild(opt);
+            });
+
+            // Unique Tags
+            const allTags = [];
+            emails.forEach(e => {
+                (e.tags || []).forEach(t => allTags.push(t.name));
+            });
+            const uniqueTags = [...new Set(allTags)].sort();
+            while (tagFilter.options.length > 1) tagFilter.remove(1);
+            uniqueTags.forEach(t => {
+                const opt = document.createElement('option');
+                opt.value = t;
+                opt.textContent = t;
+                tagFilter.appendChild(opt);
+            });
+        }
+
+        function displayEmails(emails) {
+            const tbody = document.getElementById('emailsTableBody');
+
+            if (!emails || emails.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="7" style="text-align: center; padding: 3rem; color: var(--text-muted);">
+                            <div>No matching emails found</div>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            tbody.innerHTML = emails.map(email => {
+                const statusClass = (email.status || 'unprocessed').toLowerCase();
+
+                // Render Active Tags
+                const activeTagsHtml = (email.tags || []).map(t =>
+                    `<span class="tag-active" onclick="filterByTag('${t.name}')" style="background: ${t.color}15; color: ${t.color}; border-color: ${t.color}; cursor: pointer; transition: transform 0.1s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">${t.name}</span>`
+                ).join('');
+
+                // Render Suggested Tags (Robust parsing for stringified arrays or single tags)
+                const rawSuggested = email.tags_suggested || [];
+                let suggestedArray = [];
+
+                if (Array.isArray(rawSuggested)) {
+                    suggestedArray = rawSuggested;
+                } else if (typeof rawSuggested === 'string' && rawSuggested.trim() !== '') {
+                    const trimmed = rawSuggested.trim();
+                    if (trimmed.startsWith('[') && trimmed.endsWith(']')) {
+                        try {
+                            // Try parsing as JSON, handle single quotes which LLMs often use
+                            const sanitized = trimmed.replace(/'/g, '"');
+                            suggestedArray = JSON.parse(sanitized);
+                        } catch (e) {
+                            console.warn("Could not parse suggested_tags string as array:", trimmed);
+                            suggestedArray = [trimmed];
+                        }
+                    } else {
+                        suggestedArray = [trimmed];
+                    }
+                }
+
+                // Final safety: filter out non-strings or single-char artifacts (except known ones)
+                if (Array.isArray(suggestedArray)) {
+                    suggestedArray = suggestedArray.filter(t => typeof t === 'string' && t.length > 1);
+                } else {
+                    suggestedArray = [];
+                }
+
+                const suggestedTagsHtml = suggestedArray.map(tagName =>
+                    `<span class="tag-suggested" onclick="confirmSuggestedTags(${email.id})" title="Click to confirm AI suggestion">
+                        ${tagName}
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </span>`
+                ).join('');
+
+                const emailDate = email.date || email.received_at;
+                const formattedDate = emailDate ? new Date(emailDate).toLocaleDateString() : 'N/A';
+
+                return `
+                <tr>
+                    <td>
+                        <div onclick="filterByClient('${email.from || email.sender}')" style="font-weight: 600; color: var(--text-primary); text-overflow: ellipsis; overflow: hidden; white-space: nowrap; max-width: 200px; cursor: pointer; text-decoration: underline; text-decoration-color: transparent; transition: all 0.2s;" onmouseover="this.style.color='var(--primary-orange)'; this.style.textDecorationColor='var(--primary-orange)'" onmouseout="this.style.color='var(--text-primary)'; this.style.textDecorationColor='transparent'">${email.from || email.sender || 'Unknown'}</div>
+                        ${email.thread_id ? `<div style="font-size: 0.75rem; color: var(--text-muted);">${email.thread_id}</div>` : ''}
+                    </td>
+                    <td>
+                        <div style="display: flex; align-items: flex-start; gap: 8px;">
+                            ${email.has_draft ? `<a href="drafts.html" title="View Draft" style="color: var(--primary-orange); font-weight: bold; text-decoration: none; flex-shrink: 0;">[Reply]</a>` : ''}
+                            <span style="line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">${email.subject || '(No Subject)'}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="tag-container">
+                            ${activeTagsHtml}
+                            ${suggestedTagsHtml}
+                            ${(email.tags_suggested && email.tags_suggested.length > 0) ? `<button class="btn-confirm-all" onclick="confirmSuggestedTags(${email.id})" title="Confirm all suggestions">Confirm All</button>` : ''}
+                            <button class="btn-add-tag" onclick="addManualTag(${email.id})" title="Add manual tag">+</button>
+                        </div>
+                    </td>
+                    <td style="white-space: nowrap;">${formattedDate}</td>
+                    <td><span class="badge status-${statusClass}">${email.status || 'unprocessed'}</span></td>
+                    <td style="white-space: nowrap; text-align: center;">${email.attachments || 0}</td>
+                    <td>
+                        <div class="actions">
+                            <button class="btn-icon" title="View Details" onclick="viewEmail('${email.id}')">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                            </button>
+                            <button class="btn-icon" title="Mark as Seen" onclick="archiveEmail('${email.id}')">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `}).join('');
+        }
+
+        async function applyFilters() {
+            const searchTerm = (document.getElementById('searchInput').value || '').toLowerCase();
+            const statusTerm = document.getElementById('statusFilter').value;
+            const dateTerm = document.getElementById('dateFilter').value;
+            const clientTerm = document.getElementById('clientFilter').value;
+            const tagTerm = document.getElementById('tagFilter').value;
+
+            // Re-fetch from API if the status filter changed to something that requires more data
+            if (statusTerm === 'all') {
+                await loadEmails({ include_all: true });
+            } else if (statusTerm === 'junk') {
+                await loadEmails({ status: 'junk' });
+            } else if (statusTerm === 'tender') {
+                await loadEmails();
+            } else if (statusTerm === 'processed' || statusTerm === 'unprocessed') {
+                await loadEmails({ status: statusTerm });
+            }
+
+            const filteredEmails = allEmails.filter(email => {
+                const matchesSearch =
+                    (email.sender || email.from || '').toLowerCase().includes(searchTerm) ||
+                    (email.subject || '').toLowerCase().includes(searchTerm) ||
+                    (email.body || '').toLowerCase().includes(searchTerm) ||
+                    (email.thread_id || '').toLowerCase().includes(searchTerm);
+
+                // Frontend second-pass filtering
+                const matchesStatus = !statusTerm || statusTerm === 'all' || (email.status || '').toLowerCase() === statusTerm.toLowerCase();
+                const matchesClient = !clientTerm || clientTerm === 'all' || (email.from || email.sender) === clientTerm;
+                const matchesTag = !tagTerm || tagTerm === 'all' || (email.tags || []).some(t => t.name === tagTerm);
+
+                let matchesDate = true;
+                if (dateTerm) {
+                    const emailDate = new Date(email.date).toDateString();
+                    const filterDate = new Date(dateTerm).toDateString();
+                    matchesDate = emailDate === filterDate;
+                }
+
+                return matchesSearch && matchesStatus && matchesDate && matchesClient && matchesTag;
+            });
+
+            displayEmails(filteredEmails);
+        }
+        function filterByClient(client) {
+            document.getElementById('clientFilter').value = client;
+            applyFilters();
+            showToast(`Filtering for client: ${client}`, 'info');
+        }
+
+        function filterByTag(tagName) {
+            document.getElementById('tagFilter').value = tagName;
+            applyFilters();
+            showToast(`Filtering for tag: ${tagName}`, 'info');
+        }
+
+        async function confirmSuggestedTags(emailId) {
+            try {
+                const result = await window.ProcurementAgentAPI.request(`/api/emails/${emailId}/confirm_tags`, {
+                    method: 'POST'
+                });
+                if (result.success) {
+                    showToast(result.message || 'Tags confirmed', 'success');
+                    loadEmails();
+                } else {
+                    showToast(result.error || result.detail || 'Failed to confirm tags', 'error');
+                }
+            } catch (error) {
+                console.error('Error confirming tags:', error);
+                showToast('Connection error', 'error');
+            }
+        }
+
+        async function addManualTag(emailId) {
+            try {
+                // Fetch all tags first
+                const response = await window.ProcurementAgentAPI.getTags();
+
+                const tags = response.success ? response.data : [];
+                const tagNames = tags.map((t, idx) => `${idx + 1}. ${t.name}`).join('\n');
+                const choice = prompt(`Select a tag for this email:\n\n${tagNames}\n\nType the NUMBER or the NAME:`);
+
+                if (!choice) return;
+
+                let selectedTag = null;
+                const trimmedChoice = choice.trim();
+
+                // 1. Try Number match
+                const num = parseInt(trimmedChoice);
+                if (!isNaN(num) && num > 0 && num <= tags.length) {
+                    selectedTag = tags[num - 1];
+                } else {
+                    // 2. Try Name match (case-insensitive)
+                    selectedTag = tags.find(t => t.name.toLowerCase() === trimmedChoice.toLowerCase());
+                }
+
+                // 3. If no match, offer to create!
+                if (!selectedTag) {
+                    const createNew = confirm(`Tag '${trimmedChoice}' not found. Would you like to CREATE it and add it to this email?`);
+                    if (createNew) {
+                        const colors = ['#6366f1', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899', '#06b6d4'];
+                        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+                        const createResult = await window.ProcurementAgentAPI.createTag(trimmedChoice, randomColor);
+                        if (createResult.success) {
+                            selectedTag = createResult.data;
+                            showToast(`New tag '${selectedTag.name}' created!`, 'success');
+                        } else {
+                            showToast(createResult.error || 'Failed to create new tag', 'error');
+                            return;
+                        }
+                    } else {
+                        return;
+                    }
+                }
+                const result = await window.ProcurementAgentAPI.addTagToEmail(emailId, selectedTag.id);
+
+                if (result.success) {
+                    showToast(`Tag "${selectedTag.name}" added`, 'success');
+                    loadEmails();
+                } else {
+                    showToast(result.error || 'Failed to add tag', 'error');
+                }
+            } catch (error) {
+                console.error('Error adding manual tag:', error);
+                showToast('Error adding tag', 'error');
+            }
+        }
+
+        function processEmails() {
+            window.location.href = 'index.html';
+        }
+
+        async function archiveEmail(id) {
+            if (confirm('Are you sure you want to archive this email?')) {
+                try {
+                    await window.ProcurementAgentAPI.archiveEmail(id);
+                    loadEmails();
+                } catch (error) {
+                    console.error('Error archiving email:', error);
+                    showToast('Failed to archive email. Ensure backend is running.', 'error');
+                }
+            }
+        }
+
+        async function viewEmail(id) {
+            console.log(`Fetching details for email ${id}...`);
+            try {
+                const result = await window.ProcurementAgentAPI.getEmail(id);
+
+                if (result.success) {
+                    const email = result.data;
+                    const emailDate = email.received_at || email.date;
+                    document.getElementById('modalSubject').textContent = email.subject || '(No Subject)';
+                    document.getElementById('modalFrom').textContent = email.sender || email.from;
+                    document.getElementById('modalDate').textContent = emailDate ? new Date(emailDate).toLocaleString() : 'N/A';
+                    document.getElementById('modalId').textContent = email.id;
+                    document.getElementById('modalText').textContent = email.body || '(Empty Body)';
+
+                    document.getElementById('emailModal').classList.add('active');
+                } else {
+                    showToast('Error: ' + (result.detail || 'Could not fetch email details'), 'error');
+                }
+            } catch (error) {
+                console.error('Error viewing email:', error);
+                showToast('Connection error while fetching email. Ensure backend is running.', 'error');
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('emailModal').classList.remove('active');
+        }
+    </script>
+</body>
+
+</html>

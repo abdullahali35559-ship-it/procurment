@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulk Action Center - Procurement</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/variables.css?v=1.6">
+    <link rel="stylesheet" href="css/components.css?v=1.6">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        
+
+        
+
+        .bulk-card {
+            background: white;
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            margin-bottom: var(--space-6);
+        }
+
+        .bulk-header {
+            padding: var(--space-6);
+            background: white;
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .bulk-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .bulk-table th {
+            text-align: left;
+            padding: var(--space-4) var(--space-6);
+            background: var(--bg-light);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .bulk-table td {
+            padding: var(--space-4) var(--space-6);
+            border-bottom: 1px solid var(--border-light);
+            font-size: 0.9rem;
+        }
+
+        .bulk-table tr:hover {
+            background: #fcfcfd;
+        }
+
+        .item-type-badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .type-draft { background: #e0e7ff; color: #4338ca; }
+        .type-followup { background: #fef3c7; color: #b45309; }
+
+        .action-bar {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1e293b;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            z-index: 1000;
+            display: none; /* Hidden by default */
+        }
+
+        .selection-count {
+            font-weight: 600;
+            border-right: 1px solid #475569;
+            padding-right: 24px;
+        }
+
+        .btn-bulk {
+            padding: 8px 20px;
+            border-radius: 20px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-bulk-approve { background: var(--primary-orange); color: white; }
+        .btn-bulk-approve:hover { background: #e67e22; }
+    </style>
+</head>
+
+<body>
+    <div id="top-loader"></div>
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary-orange)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg><span>Procurement</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Dashboard</a></li>
+                <li><a href="bulk-actions.html" class="nav-link active">Bulk Actions</a></li>
+                <li><a href="settings.html" class="nav-link">Settings</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="layout">
+        <aside class="sidebar">
+            <ul class="sidebar-menu">
+                <li class="sidebar-item"><a href="index.html" class="sidebar-link"><i class="fas fa-th-large"></i> Dashboard</a></li>
+                <li class="sidebar-item"><a href="bulk-actions.html" class="sidebar-link active"><i class="fas fa-layer-group"></i> Bulk Actions</a></li>
+                <li class="sidebar-item"><a href="drafts.html" class="sidebar-link"><i class="fas fa-pen-nib"></i> Draft Replies</a></li>
+                <li class="sidebar-item"><a href="settings.html" class="sidebar-link"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <div class="page-header">
+                <h1 class="page-title">Bulk Action Center</h1>
+                <p class="page-subtitle">Review and approve all AI-generated communications at once.</p>
+            </div>
+
+            <div class="bulk-card">
+                <div class="bulk-header">
+                    <h3 style="font-size: 1.1rem; font-weight: 600;">Pending Actions</h3>
+                    <div style="display: flex; gap: 8px;">
+                        <button class="btn btn-secondary btn-sm" onclick="loadActions()"><i class="fas fa-sync-alt"></i> Refresh</button>
+                    </div>
+                </div>
+                <table class="bulk-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 40px;"><input type="checkbox" id="selectAll" onclick="toggleAll(this)"></th>
+                            <th>Type</th>
+                            <th>Recipient</th>
+                            <th>Subject / Context</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="actionsBody">
+                        <!-- Actions will be loaded here -->
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <!-- Floating Action Bar -->
+    <div class="action-bar" id="actionBar">
+        <div class="selection-count"><span id="selectedCount">0</span> Items Selected</div>
+        <button class="btn-bulk btn-bulk-approve" onclick="processBulk()">
+            <i class="fas fa-check-double"></i> Approve & Send Selected
+        </button>
+        <button class="btn-bulk" style="background: transparent; color: #94a3b8;" onclick="deselectAll()">Cancel</button>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/api.js"></script>
+    <script>
+        let pendingActions = [];
+
+        async function loadActions() {
+            const body = document.getElementById('actionsBody');
+            body.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 3rem;">Loading pending actions...</td></tr>';
+            
+            try {
+                // 1. Fetch Drafts
+                const draftsRes = await window.ProcurementAgentAPI.request('/api/drafts/pending');
+                // 2. Fetch Follow-ups
+                const followupsRes = await window.ProcurementAgentAPI.request('/api/admin/followups');
+                
+                pendingActions = [
+                    ...(draftsRes.data || []).map(d => ({ ...d, ui_type: 'DRAFT' })),
+                    ...(followupsRes.data || []).filter(f => f.status === 'PENDING').map(f => ({ ...f, ui_type: 'FOLLOWUP' }))
+                ];
+
+                if (pendingActions.length === 0) {
+                    body.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 3rem;">No pending actions! All caught up.</td></tr>';
+                    return;
+                }
+
+                body.innerHTML = pendingActions.map((item, idx) => `
+                    <tr>
+                        <td><input type="checkbox" class="item-check" data-idx="${idx}" onchange="updateSelection()"></td>
+                        <td><span class="item-type-badge ${item.ui_type === 'DRAFT' ? 'type-draft' : 'type-followup'}">${item.ui_type}</span></td>
+                        <td><div style="font-weight: 600;">${item.recipient || 'Unknown'}</div></td>
+                        <td>
+                            <div style="color: var(--text-primary); font-weight: 500;">${item.subject || 'Follow-up needed'}</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted);">${(item.body || item.suggested_body || '').substring(0, 80)}...</div>
+                        </td>
+                        <td><span class="badge badge-warning">${item.status}</span></td>
+                    </tr>
+                `).join('');
+
+            } catch (err) {
+                body.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 3rem; color: var(--accent-red);">Error loading actions.</td></tr>';
+            }
+        }
+
+        function toggleAll(master) {
+            document.querySelectorAll('.item-check').forEach(c => c.checked = master.checked);
+            updateSelection();
+        }
+
+        function updateSelection() {
+            const selected = document.querySelectorAll('.item-check:checked');
+            const bar = document.getElementById('actionBar');
+            const count = document.getElementById('selectedCount');
+            
+            if (selected.length > 0) {
+                bar.style.display = 'flex';
+                count.textContent = selected.length;
+            } else {
+                bar.style.display = 'none';
+            }
+        }
+
+        function deselectAll() {
+            document.getElementById('selectAll').checked = false;
+            toggleAll({checked: false});
+        }
+
+        async function processBulk() {
+            const selectedIdxs = Array.from(document.querySelectorAll('.item-check:checked')).map(c => c.dataset.idx);
+            if (!confirm(`Are you sure you want to approve and send ${selectedIdxs.length} items?`)) return;
+
+            // Simplified processing logic for demo
+            alert(`Processing ${selectedIdxs.length} items... In a real system, this would trigger the email sender for each item.`);
+            loadActions();
+            deselectAll();
+        }
+
+        document.addEventListener('DOMContentLoaded', loadActions);
+    </script>
+</body>
+</html>

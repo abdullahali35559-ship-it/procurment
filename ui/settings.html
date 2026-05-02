@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Procurement</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/variables.css?v=1.6">
+    <link rel="stylesheet" href="css/components.css?v=1.6">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        
+
+        
+
+        .page-header {
+            margin-bottom: var(--space-8);
+        }
+
+        .page-title {
+            font-size: var(--text-4xl);
+            font-weight: var(--font-bold);
+            color: var(--text-primary);
+            margin-bottom: var(--space-2);
+        }
+
+        .page-subtitle {
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+        }
+
+        .settings-section {
+            background: white;
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            padding: var(--space-6);
+            margin-bottom: var(--space-6);
+        }
+
+        .section-title {
+            font-size: var(--text-xl);
+            font-weight: var(--font-semibold);
+            margin-bottom: var(--space-4);
+            padding-bottom: var(--space-4);
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .oauth-status {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-4);
+            background: var(--bg-light);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-4);
+        }
+
+        .oauth-info {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+        }
+
+        .oauth-icon {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .voice-sync-card {
+            background: var(--bg-light);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            padding: var(--space-4);
+            margin-top: var(--space-4);
+        }
+
+        .sync-status-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-4);
+            padding-bottom: var(--space-4);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .status-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-right: 8px;
+        }
+
+        .status-value {
+            font-weight: 600;
+            color: var(--primary-orange);
+        }
+
+        .style-guide-preview {
+            background: white;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            padding: var(--space-4);
+        }
+
+        .guide-content {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--text-primary);
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .status-online-large {
+            width: 12px; height: 12px; background: var(--accent-green); border-radius: 50%;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+        }
+
+        /* Toast Notifications */
+        .toast-container {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .toast {
+            background: white;
+            color: var(--text-primary);
+            padding: 16px 24px;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 300px;
+            transform: translateX(120%);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-left: 4px solid var(--primary-orange);
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .toast-success { border-left-color: var(--accent-green); }
+        .toast-error { border-left-color: var(--accent-red); }
+
+        .toast-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .toast-success .toast-icon { background: rgba(16, 185, 129, 0.1); color: var(--accent-green); }
+        .toast-error .toast-icon { background: rgba(239, 68, 68, 0.1); color: var(--accent-red); }
+    </style>
+</head>
+
+<body>
+    <div id="top-loader"></div>
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary-orange)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                <span>Procurement</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Dashboard</a></li>
+                <li><a href="calendar.html" class="nav-link">Calendar</a></li>
+                <li><a href="threads.html" class="nav-link">Threads</a></li>
+                <li><a href="settings.html" class="nav-link active">Settings</a></li>
+            </ul>
+            <div class="flex items-center gap-4">
+                <button onclick="Auth.logout()" class="btn btn-secondary btn-sm">Sign Out</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="layout">
+        <aside class="sidebar">
+            <ul class="sidebar-menu">
+                <li class="sidebar-item">
+                    <a href="index.html" class="sidebar-link">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+                            <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+                            <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+                            <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+                        </svg>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="calendar.html" class="sidebar-link">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                        Calendar
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="threads.html" class="sidebar-link">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                        </svg>
+                        Business Threads
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="emails.html" class="sidebar-link">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                            </path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                        Emails
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="drafts.html" class="sidebar-link">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                        </svg>
+                        Draft Replies
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="attachments.html" class="sidebar-link">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z">
+                            </path>
+                        </svg>
+                        Documents
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="contacts.html" class="sidebar-link">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                        Contacts
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="assistant.html" class="sidebar-link"><svg width="18" height="18" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                        </svg>Procurement Assistant</a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="settings.html" class="sidebar-link active">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="3"></circle>
+                            <path
+                                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+                            </path>
+                        </svg>
+                        Settings
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <div class="page-header">
+                <h1 class="page-title">Settings</h1>
+                <p class="page-subtitle">Configure your executive intelligence suite</p>
+            </div>
+
+            <!-- Brand Voice Sync Section -->
+            <div class="settings-section">
+                <h2 class="section-title">
+                    <i class="fas fa-magic" style="color: var(--primary-orange);"></i>
+                    Advanced Brand Voice Sync
+                </h2>
+                <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.875rem;">
+                    Train the AI to write exactly like you by analyzing your historical sent emails.
+                </p>
+
+                <div class="voice-sync-card">
+                    <div class="sync-status-header">
+                        <div class="sync-info">
+                            <span class="status-label">Style Sync Status:</span>
+                            <span id="lastSyncDate" class="status-value">Checking...</span>
+                        </div>
+                        <button class="btn btn-primary" id="btnSyncVoice" onclick="syncBrandVoice()">
+                            <i class="fas fa-sync-alt" id="syncIcon"></i>
+                            Sync My Voice (Last 50 Emails)
+                        </button>
+                    </div>
+
+                    <div class="style-guide-preview">
+                        <label class="form-label" style="font-weight: 600; margin-bottom: 8px; display: block;">AI-Derived Writing Style Guide</label>
+                        <div id="styleGuideDisplay" class="guide-content">
+                            Loading style profile...
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem;">
+                    <label class="form-label" style="font-weight: 600;">Manual Custom Instructions</label>
+                    <p style="color: var(--text-muted); font-size: 0.75rem; margin-bottom: 0.5rem;">Specific rules the AI should always follow (e.g., 'Never use bold text', 'Always mention my mobile number').</p>
+                    <textarea id="customInstructionsInput" class="form-input" style="min-height: 100px;" 
+                        placeholder="e.g., Always end with 'Kind Regards', keep sentences under 15 words..."></textarea>
+                </div>
+
+                <div style="display: flex; justify-content: flex-end; margin-top: 1rem;">
+                    <button class="btn btn-primary" onclick="saveAISettings()">Save Guidelines</button>
+                </div>
+            </div>
+
+            <!-- Email Providers -->
+            <div class="settings-section">
+                <h2 class="section-title"><i class="fas fa-at"></i> Email Providers</h2>
+                <div class="oauth-status">
+                    <div class="oauth-info">
+                        <div class="oauth-icon"><i class="fab fa-google" style="color: #EA4335;"></i></div>
+                        <div><div style="font-weight: 600;">Gmail</div></div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="status-offline-large" id="gmailStatus"></div>
+                        <button class="btn btn-secondary btn-sm" onclick="configureGmail()">Connect</button>
+                    </div>
+                </div>
+                <div class="oauth-status">
+                    <div class="oauth-info">
+                        <div class="oauth-icon"><i class="fab fa-microsoft" style="color: #0078D4;"></i></div>
+                        <div><div style="font-weight: 600;">Outlook</div></div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="status-online-large" id="outlookStatus"></div>
+                        <button class="btn btn-secondary btn-sm" onclick="viewOutlookSettings()">Connect</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/api.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', loadSettings);
+
+        async function loadSettings() {
+            try {
+                const data = await window.ProcurementAgentAPI.request('/api/user/me');
+                if (data) {
+                    document.getElementById('customInstructionsInput').value = data.custom_instructions || '';
+                    const guideDisplay = document.getElementById('styleGuideDisplay');
+                    if (data.writing_style_guide) {
+                        guideDisplay.textContent = data.writing_style_guide;
+                        document.getElementById('lastSyncDate').textContent = 'Synced';
+                    } else {
+                        guideDisplay.textContent = "No style profile yet. Click 'Sync My Voice' to begin.";
+                        document.getElementById('lastSyncDate').textContent = 'Never Synced';
+                    }
+                }
+                loadOAuthStatus();
+            } catch (err) { console.error(err); }
+        }
+
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type}`;
+            
+            const icon = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle';
+            
+            toast.innerHTML = `
+                <div class="toast-icon"><i class="fas ${icon}"></i></div>
+                <div class="toast-content" style="font-weight: 500;">${message}</div>
+            `;
+            
+            container.appendChild(toast);
+            
+            // Trigger animation
+            setTimeout(() => toast.classList.add('show'), 10);
+            
+            // Auto remove
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => toast.remove(), 400);
+            }, 4000);
+        }
+
+        async function syncBrandVoice() {
+            const btn = document.getElementById('btnSyncVoice');
+            try {
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fas fa-sync-alt fa-spin"></i> Analyzing Style...';
+                const res = await window.ProcurementAgentAPI.request('/api/user/sync-voice', { method: 'POST' });
+                if (res.success) {
+                    showToast('Writing style synced successfully!');
+                    loadSettings();
+                } else {
+                    showToast('Sync Failed: ' + (res.error || 'Unknown error'), 'error');
+                }
+            } catch (err) { showToast('Error during sync', 'error'); }
+            finally { btn.disabled = false; btn.innerHTML = '<i class="fas fa-sync-alt"></i> Sync My Voice (Last 50 Emails)'; }
+        }
+
+        async function saveAISettings() {
+            const customInstructions = document.getElementById('customInstructionsInput').value;
+            try {
+                const res = await window.ProcurementAgentAPI.request('/api/user/settings', {
+                    method: 'PUT',
+                    body: JSON.stringify({ custom_instructions: customInstructions })
+                });
+                if (res.success) showToast('Settings saved successfully!');
+            } catch (err) { showToast('Error saving settings', 'error'); }
+        }
+
+        async function loadOAuthStatus() {
+            try {
+                const outlook = await window.ProcurementAgentAPI.getOAuthStatus();
+                document.getElementById('outlookStatus').className = (outlook.status === 'connected') ? 'status-online-large' : 'status-offline-large';
+                const gmail = await window.ProcurementAgentAPI.request('/api/gmail/oauth/status');
+                document.getElementById('gmailStatus').className = (gmail.authenticated) ? 'status-online-large' : 'status-offline-large';
+            } catch (e) {}
+        }
+
+        async function configureGmail() {
+            try {
+                const res = await window.ProcurementAgentAPI.request('/api/gmail/oauth/login');
+                if (res.auth_url) {
+                    const win = window.open(res.auth_url, 'GmailLogin', 'width=600,height=700');
+                    if (!win || win.closed || typeof win.closed == 'undefined') {
+                        // Popup blocked - use direct redirect
+                        window.location.href = res.auth_url;
+                    }
+                }
+            } catch (e) { alert('Failed to start Gmail connection'); }
+        }
+
+        async function viewOutlookSettings() {
+            try {
+                const res = await window.ProcurementAgentAPI.request('/api/outlook/oauth/login');
+                if (res.auth_url) {
+                    const win = window.open(res.auth_url, 'OutlookLogin', 'width=600,height=700');
+                    if (!win || win.closed || typeof win.closed == 'undefined') {
+                        // Popup blocked - use direct redirect
+                        window.location.href = res.auth_url;
+                    }
+                }
+            } catch (e) { alert('Failed to start Outlook connection'); }
+        }
+    </script>
+</body>
+</html>

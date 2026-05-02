@@ -1,0 +1,53 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+venv/
+.venv/
+venv*/
+backup*/
+*.backup
+*.old
+node_modules/
+/storage/tenders/*
+/storage/backups/*
+/temp/*
+
+# Docker/Compose
+docker-compose.override.yml
+.dockerignore
+
+# Environment & Sensitive
+.env
+.gmail_oauth_token.json
+.outlook_oauth_token.json
+
+# App Specific
+storage/tenders/*
+!storage/tenders/.gitkeep
+temp/*
+logs/*
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo

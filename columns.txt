@@ -1,0 +1,1 @@
+['id', 'tender_id', 'email_id', 'subject', 'sender', 'recipients', 'body', 'received_at', 'is_tender', 'detection_confidence', 'keywords_found', 'processed', 'created_at', 'tags_suggested', 'is_actionable', 'is_junk', 'thread_id']

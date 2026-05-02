@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacts - Procurement</title>
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%23FF5C35%22/><text y=%22.9em%22 font-size=%2280%22 x=%2250%25%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22serif%22 font-weight=%22bold%22>R</text></svg>">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/variables.css?v=1.6">
+    <link rel="stylesheet" href="css/components.css?v=1.6">
+
+    <style>
+        
+
+        
+
+        .page-header {
+            margin-bottom: var(--space-8);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .page-title {
+            font-size: var(--text-4xl);
+            font-weight: var(--font-bold);
+            color: var(--text-primary);
+            margin-bottom: var(--space-2);
+        }
+
+        .page-subtitle {
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+        }
+
+        .filters {
+            background: white;
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            padding: var(--space-6);
+            margin-bottom: var(--space-6);
+            display: flex;
+            gap: var(--space-4);
+            flex-wrap: wrap;
+        }
+
+        .filter-item {
+            /* flex: 1; */
+            min-width: 200px;
+        }
+
+        .actions {
+            display: flex;
+            gap: var(--space-2);
+        }
+
+        .btn-icon {
+            padding: var(--space-2);
+            background: var(--bg-light);
+            border: 1px solid var(--border-medium);
+            cursor: pointer;
+            border-radius: var(--radius-md);
+            transition: all var(--transition-fast);
+        }
+
+        .btn-icon:hover {
+            background: var(--bg-dark);
+            border-color: var(--primary-orange);
+        }
+
+        @media (max-width: 1024px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            
+        }
+    </style>
+</head>
+
+<body>
+    <div id="top-loader"></div>
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="var(--primary-orange)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg><span>Procurement</span></a>
+
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Dashboard</a></li>
+                <li><a href="calendar.html" class="nav-link">Calendar</a></li>
+                <li><a href="threads.html" class="nav-link">Threads</a></li>
+                <li><a href="settings.html" class="nav-link">Settings</a></li>
+            </ul>
+
+            <div class="flex items-center gap-4">
+                <span class="badge badge-success">
+                    <span class="status-indicator status-online"></span>
+                    Online
+                </span>
+                <button onclick="Auth.logout()" class="btn btn-secondary btn-sm"
+                    style="margin-left: 8px; border: 1px solid var(--border-light); background: white; color: var(--text-primary);">
+                    Sign Out
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="layout">
+        <aside class="sidebar">
+            <ul class="sidebar-menu">
+                <li class="sidebar-item">
+                    <a href="index.html" class="sidebar-link">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+                            <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+                            <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+                            <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+                        </svg>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="calendar.html" class="sidebar-link">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                        Calendar
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="threads.html" class="sidebar-link">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                        </svg>
+                        Business Threads
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="emails.html" class="sidebar-link">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                            </path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                        Emails
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="drafts.html" class="sidebar-link">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                        </svg>
+                        Draft Replies
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="attachments.html" class="sidebar-link">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z">
+                            </path>
+                        </svg>
+                        Documents
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="contacts.html" class="sidebar-link active">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                        Contacts
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="assistant.html" class="sidebar-link"><svg width="18" height="18" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                        </svg>Procurement Assistant</a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="settings.html" class="sidebar-link">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="3"></circle>
+                            <path
+                                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+                            </path>
+                        </svg>
+                        Settings
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Contacts</h1>
+                    <p class="page-subtitle">Manage business contacts and communication history</p>
+                </div>
+                <button class="btn btn-primary" onclick="addContact()">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                    Add Contact
+                </button>
+            </div>
+
+            <!-- Filters -->
+            <div class="filters">
+                <div class="filter-item">
+                    <label class="form-label">Search</label>
+                    <input type="text" class="form-input" placeholder="Search contacts..." id="searchInput">
+                </div>
+
+                <div class="filter-item">
+                    <label class="form-label">Status</label>
+                    <select class="form-select" id="statusFilter">
+                        <option value="">All Status</option>
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                </div>
+
+                <button class="btn btn-primary" style="width: fit-content; align-self: flex-end;"
+                    onclick="applyFilters()">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    Apply Filters
+                </button>
+            </div>
+
+            <!-- Contacts Table -->
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Contact Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Total Threads</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="contactsTableBody">
+                        <tr>
+                            <td colspan="6" style="text-align: center; padding: 3rem; color: var(--text-muted);">
+                                <div>
+                                    <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="2"
+                                        style="margin: 0 auto 1rem;">
+                                        <path
+                                            d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                                    </svg>
+                                    <div>No contacts found</div>
+                                    <div style="font-size: 0.875rem; margin-top: 0.5rem;">Add your first contact to get
+                                        started</div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <!-- Contact Modal -->
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalContactName">Contact Details</h2>
+                <span class="modal-close" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <div class="email-meta">
+                    <div class="email-meta-item"><span class="email-meta-label">Domain/Email:</span> <span
+                            id="modalDomain"></span></div>
+                    <div class="email-meta-item"><span class="email-meta-label">First Seen:</span> <span
+                            id="modalFirstSeen"></span></div>
+                    <div class="email-meta-item"><span class="email-meta-label">Threads:</span> <span
+                            id="modalThreads"></span></div>
+                    <div class="email-meta-item"><span class="email-meta-label">ID:</span> <span id="modalId"></span>
+                    </div>
+                </div>
+                <div id="contactEditForm" style="display: none; margin-top: var(--space-4);">
+                    <div class="form-group">
+                        <label class="form-label">Contact Name</label>
+                        <input type="text" class="form-input" id="editContactName">
+                    </div>
+                    <div class="form-group" style="margin-top: var(--space-4);">
+                        <label class="form-label">Email Domain</label>
+                        <input type="text" class="form-input" id="editContactDomain">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">Close</button>
+                <button class="btn btn-primary" id="saveContactBtn" style="display: none;" onclick="saveContact()">Save
+                    Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/auth.js"></script>
+    <script src="js/api.js"></script>
+    <script>
+        function showToast(message, type = 'info') {
+            let container = document.querySelector('.toast-container');
+            if (!container) {
+                container = document.createElement('div');
+                container.className = 'toast-container';
+                document.body.appendChild(container);
+            }
+
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type}`;
+
+            let icon = '';
+            if (type === 'success') icon = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>';
+            else if (type === 'error') icon = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>';
+            else icon = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>';
+
+            toast.innerHTML = `
+                ${icon}
+                <div class="toast-message">${message}</div>
+                <div class="toast-close" onclick="this.parentElement.remove()">×</div>
+            `;
+
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.animation = 'toastFadeOut 0.3s ease-in forwards';
+                setTimeout(() => toast.remove(), 300);
+            }, 5000);
+        }
+
+        let allContacts = [];
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            console.log('Contacts page loaded, fetching data...');
+            await loadContacts();
+
+            // Setup listeners
+            document.getElementById('searchInput').addEventListener('keyup', applyFilters);
+
+            // Close modal when clicking outside
+            window.onclick = function (event) {
+                const modal = document.getElementById('contactModal');
+                if (event.target == modal) {
+                    closeModal();
+                }
+            }
+        });
+
+        async function loadContacts() {
+            try {
+                console.log('Requesting /api/contacts...');
+                const response = await window.ProcurementAgentAPI.getContacts();
+                console.log('Contacts API response:', response);
+                if (response.success) {
+                    allContacts = response.data;
+                    console.log(`Found ${allContacts.length} contacts`);
+                    displayContacts(allContacts);
+                } else {
+                    console.error('API returned success=false:', response);
+                }
+            } catch (error) {
+                console.error('Contacts API error:', error);
+            }
+        }
+
+        function displayContacts(contacts) {
+            const tbody = document.getElementById('contactsTableBody');
+
+            if (!contacts || contacts.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="6" style="text-align: center; padding: 3rem; color: var(--text-muted);">
+                            <div>No matching contacts found</div>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            tbody.innerHTML = contacts.map(contact => `
+                <tr>
+                    <td><strong>${contact.name}</strong></td>
+                    <td>${contact.email}</td>
+                    <td>${contact.phone || 'N/A'}</td>
+                    <td>${contact.threads || 0}</td>
+                    <td><span class="badge badge-${contact.status === 'active' ? 'success' : 'neutral'}">${contact.status}</span></td>
+                    <td>
+                        <div class="actions">
+                            <button class="btn-icon" title="View Details" onclick="viewContact(${contact.id})">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                            </button>
+                            <button class="btn-icon" title="Edit Contact" onclick="editContact(${contact.id})">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        async function viewContact(id) {
+            try {
+                const result = await window.ProcurementAgentAPI.getContact(id);
+                if (result.success) {
+                    const contact = result.data;
+                    document.getElementById('modalContactName').textContent = contact.name;
+                    document.getElementById('modalDomain').textContent = contact.email || 'N/A';
+                    document.getElementById('modalFirstSeen').textContent = new Date(contact.first_seen).toLocaleDateString();
+                    document.getElementById('modalThreads').textContent = contact.threads;
+                    document.getElementById('modalId').textContent = contact.id;
+
+                    document.getElementById('contactEditForm').style.display = 'none';
+                    document.getElementById('saveContactBtn').style.display = 'none';
+                    document.getElementById('contactModal').classList.add('active');
+                }
+            } catch (error) {
+                console.error('Error viewing contact:', error);
+                alert('Connection error while fetching contact details');
+            }
+        }
+
+        async function editContact(id) {
+            try {
+                const result = await window.ProcurementAgentAPI.getContact(id);
+                if (result.success) {
+                    const contact = result.data;
+                    document.getElementById('modalContactName').textContent = `Edit: ${contact.name}`;
+                    document.getElementById('editContactName').value = contact.name;
+                    document.getElementById('editContactDomain').value = contact.email || '';
+
+                    document.getElementById('contactEditForm').style.display = 'block';
+                    document.getElementById('saveContactBtn').style.display = 'block';
+                    document.getElementById('contactModal').classList.add('active');
+                }
+            } catch (error) {
+                console.error('Error editing contact:', error);
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('contactModal').classList.remove('active');
+        }
+
+        async function saveContact() {
+            const name = document.getElementById('modalContactName').innerText;
+            const email = document.getElementById('modalContactEmail').innerText;
+            // For now, this is just a demonstration
+            showToast(`Saving changes for ${name}...`, 'info');
+            setTimeout(() => {
+                showToast('Contact updated successfully', 'success');
+                closeModal();
+                loadContacts();
+            }, 1000);
+        }
+
+        function applyFilters() {
+            const searchTerm = (document.getElementById('searchInput').value || '').toLowerCase();
+
+            const filteredContacts = allContacts.filter(contact => {
+                return (contact.name || '').toLowerCase().includes(searchTerm) ||
+                    (contact.email || '').toLowerCase().includes(searchTerm) ||
+                    String(contact.phone || '').toLowerCase().includes(searchTerm);
+            });
+
+            displayContacts(filteredContacts);
+        }
+
+        async function addContact() {
+            const name = prompt("Enter contact name:");
+            if (!name) return;
+            const email = prompt("Enter contact email:");
+            if (!email) return;
+
+            try {
+                const response = await window.ProcurementAgentAPI.request('/api/contacts', {
+                    method: 'POST',
+                    body: JSON.stringify({ name, email })
+                });
+                if (response.success) {
+                    showToast('Contact added successfully!', 'success');
+                    await loadContacts();
+                } else {
+                    showToast('Failed to add contact: ' + (response.error || 'Unknown error'), 'error');
+                }
+            } catch (error) {
+                console.error('Error adding contact:', error);
+                showToast('Error adding contact. Ensure backend is running.', 'error');
+            }
+        }
+    </script>
+</body>
+
+</html>

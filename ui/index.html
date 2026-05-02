@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Procurement Dashboard</title>
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%23FF5C35%22/><text y=%22.9em%22 font-size=%2280%22 x=%2250%25%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22serif%22 font-weight=%22bold%22>R</text></svg>">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/variables.css?v=1.6">
+    <link rel="stylesheet" href="css/components.css?v=1.6">
+    
+    <!-- FullCalendar v6 (Styles are auto-injected by JS) -->
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
+
+    <!-- Flatpickr (Professional Date Picker) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <style>
+        
+
+        
+
+        .page-header {
+            margin-bottom: var(--space-8);
+        }
+
+        .page-title {
+            font-size: var(--text-4xl);
+            font-weight: var(--font-bold);
+            color: var(--text-primary);
+            margin-bottom: var(--space-2);
+        }
+
+        .page-subtitle {
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-6);
+            margin-bottom: var(--space-8);
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-6);
+            margin-bottom: var(--space-8);
+        }
+
+        .action-card {
+            background: white;
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            padding: var(--space-6);
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+
+        .action-card:hover {
+            border-color: var(--primary-orange);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .action-icon {
+            width: 48px;
+            height: 48px;
+            background: #FFF4F0;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .action-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--primary-orange);
+        }
+
+        .action-content h3 {
+            font-size: var(--text-lg);
+            font-weight: var(--font-semibold);
+            margin-bottom: var(--space-1);
+        }
+
+        .action-content p {
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        .recent-activity {
+            background: white;
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            padding: var(--space-6);
+        }
+
+        .activity-item {
+            display: flex;
+            gap: var(--space-4);
+            padding: var(--space-4);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-icon-wrapper {
+            width: 40px;
+            height: 40px;
+            background: var(--bg-light);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-title {
+            font-weight: var(--font-medium);
+            color: var(--text-primary);
+            margin-bottom: var(--space-1);
+        }
+
+        .activity-meta {
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+        }
+
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        body {
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+
+            to {
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+
+            .stats-grid,
+            .quick-actions {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Unified Mobile Responsiveness */
+        @media (max-width: 1024px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr !important;
+            }
+
+            .sidebar-right {
+                order: 2;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .app-container {
+                padding: 10px;
+            }
+
+            .nav-header {
+                flex-direction: column;
+                padding: 15px;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .welcome-section {
+                padding: 20px;
+            }
+
+            .stat-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                width: 95% !important;
+                margin: 10px;
+                max-height: 90vh;
+                overflow-y: auto;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* Professional Icon Sizing Fix (Fail-safe) */
+        .fc-icon {
+            width: 1.2em !important;
+            height: 1.2em !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            font-size: 1em !important;
+        }
+        
+        .fc-button .fc-icon {
+            vertical-align: middle;
+        }
+
+        .fc-button-group {
+            display: flex !important;
+            gap: 4px;
+        }
+        
+        .fc .fc-button {
+            padding: 6px 12px !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 4px !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="top-loader"></div>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary-orange)"
+                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                <span>Procurement</span>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link active">Dashboard</a></li>
+                <li><a href="calendar.html" class="nav-link">Calendar</a></li>
+                <li><a href="threads.html" class="nav-link">Threads</a></li>
+                <li><a href="settings.html" class="nav-link">Settings</a></li>
+            </ul>
+
+            <div class="flex items-center gap-4">
+                <div id="premiumStatus" class="badge"
+                    style="background: rgba(14, 165, 233, 0.1); border: 1px solid rgba(14, 165, 233, 0.2); color: var(--primary-orange); display: none;">
+                    <span class="status-indicator status-online pulse"></span>
+                    <span id="premiumStatusText">AI Indexing...</span>
+                </div>
+                <span class="badge badge-success">
+                    <span class="status-indicator status-online"></span>
+                    Online
+                </span>
+                <button onclick="Auth.logout()" class="btn btn-secondary btn-sm"
+                    style="margin-left: 8px; border: 1px solid var(--border-light); background: white; color: var(--text-primary);">
+                    Sign Out
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <ul class="sidebar-menu">
+                <li class="sidebar-item">
+                    <a href="index.html" class="sidebar-link active">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+                            <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+                            <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+                            <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+                        </svg>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="calendar.html" class="sidebar-link">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                        Calendar
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="threads.html" class="sidebar-link">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                        </svg>
+                        Business Threads
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="emails.html" class="sidebar-link">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                            </path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                        Emails
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="drafts.html" class="sidebar-link">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                        </svg>
+                        Draft Replies
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="attachments.html" class="sidebar-link">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z">
+                            </path>
+                        </svg>
+                        Documents
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="contacts.html" class="sidebar-link">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                        Contacts
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="assistant.html" class="sidebar-link"><svg width="18" height="18" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                        </svg>Procurement Assistant</a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="settings.html" class="sidebar-link">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="3"></circle>
+                            <path
+                                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+                            </path>
+                        </svg>
+                        Settings
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Page Header -->
+            <div class="page-header" style="display: flex; justify-content: space-between; align-items: flex-end;">
+                <div>
+                    <h1 class="page-title">Executive Overview</h1>
+                    <p class="page-subtitle" id="welcomeMessage">Good afternoon, Abdullah. Here is your priority list
+                        for today.</p>
+                </div>
+                <div style="display: flex; gap: 12px;">
+                    <button id="btnSyncAll" class="btn btn-primary" onclick="triggerSync()">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" style="margin-right: 8px;">
+                            <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38" />
+                        </svg>
+                        <span>Sync Intelligence</span>
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.location.href='assistant.html'">
+                        Ask Procurement
+                    </button>
+                </div>
+            </div>
+
+            <!-- Morning Brief Banner -->
+            <div id="morningBriefContainer" style="display: none; margin-bottom: var(--space-8);">
+                <div
+                    style="background: linear-gradient(135deg, #f0f9ff 0%, #FFFFFF 100%); border: 1px solid var(--primary-blue); border-left: 6px solid var(--primary-blue); border-radius: var(--radius-lg); padding: 20px; display: flex; align-items: center; gap: 20px; box-shadow: var(--shadow-sm);">
+                    <div
+                        style="background: var(--primary-blue); width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <path
+                                d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41">
+                            </path>
+                        </svg>
+                    </div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 700; color: var(--text-primary); font-size: 1rem; margin-bottom: 4px;">
+                            Executive Morning Brief</div>
+                        <div id="morningBriefText"
+                            style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5;">
+                            Good morning, Abdullah. Loading your priority intelligence...
+                        </div>
+                    </div>
+                    <button class="btn btn-secondary btn-sm"
+                        onclick="this.parentElement.parentElement.style.display='none'">Dismiss</button>
+                </div>
+            </div>
+
+            <!-- Minimalist Sync Progress -->
+            <div id="syncProgressContainer" style="display: none; margin-bottom: var(--space-8);">
+                <div
+                    style="background: white; border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 20px; box-shadow: var(--shadow-sm);">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <span
+                            style="font-weight: 700; color: var(--text-primary); font-size: 0.9rem; text-transform: uppercase;">Sync
+                            Intelligence</span>
+                        <span id="syncPercentLabel"
+                            style="font-weight: 800; color: var(--primary-blue); font-size: 1.2rem;">0%</span>
+                    </div>
+                    <div
+                        style="height: 8px; background: #f0f0f0; border-radius: 4px; overflow: hidden; position: relative;">
+                        <div id="syncProgressBar"
+                            style="width: 0%; height: 100%; background: var(--primary-blue); transition: width 0.4s ease;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard Grid -->
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: var(--space-8);">
+
+                <!-- Center Column: Key Priorities -->
+                <div style="display: flex; flex-direction: column; gap: var(--space-8);">
+
+                    <!-- EXECUTIVE APPROVAL CENTER (Hold Queue) -->
+                    <div id="approvalCenterCard" class="recent-activity"
+                        style="border-top: 4px solid var(--primary-blue); display: none;">
+                        <div class="card-header"
+                            style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <h2 class="card-title">Executive Approval Center</h2>
+                                <p style="font-size: 0.75rem; color: var(--text-muted); margin: 2px 0 0;">Review and
+                                    release [HOLD] meetings to clients</p>
+                            </div>
+                            <span class="badge"
+                                style="background: rgba(14, 165, 233, 0.1); color: var(--primary-blue);"
+                                id="holdCountBadge">0 Pending</span>
+                        </div>
+                        <div id="holdQueueList">
+                            <!-- Populated via JS -->
+                        </div>
+                    </div>
+
+                    <!-- High Priority Communications -->
+                    <div class="recent-activity" style="border-top: 4px solid var(--primary-dark);">
+                        <div class="card-header">
+                            <h2 class="card-title">Action Required</h2>
+                        </div>
+                        <div id="priorityList">
+                            <!-- Populated via JS -->
+                            <div style="text-align: center; padding: 2rem; color: var(--text-muted);">
+                                <p>No immediate actions required. You are up to date.</p>
+                            </div>
+                        </div>
+                        <div
+                            style="padding: var(--space-4); text-align: center; border-top: 1px solid var(--border-light);">
+                            <a href="threads.html"
+                                style="color: var(--primary-orange); font-size: 0.85rem; font-weight: 600;">View All
+                                Business Threads</a>
+                        </div>
+                    </div>
+
+                    <!-- Pending Drafts -->
+                    <div class="recent-activity" style="border-top: 4px solid var(--primary-blue);">
+                        <div class="card-header">
+                            <h2 class="card-title">Drafts Awaiting Approval</h2>
+                        </div>
+                        <div id="pendingDraftsList">
+                            <!-- Populated via JS -->
+                        </div>
+                        <div
+                            style="padding: var(--space-4); text-align: center; border-top: 1px solid var(--border-light);">
+                            <a href="drafts.html"
+                                style="color: var(--primary-blue); font-size: 0.85rem; font-weight: 600;">Manage
+                                Drafts</a>
+                        </div>
+                    </div>
+
+                    <!-- Follow-up Assistant -->
+                    <div class="recent-activity" style="border-top: 4px solid var(--primary-blue);">
+                        <div class="card-header"
+                            style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <h2 class="card-title">Follow-up Assistant</h2>
+                                <p style="font-size: 0.75rem; color: var(--text-muted); margin: 2px 0 0;">Threads with
+                                    no reply after 3 days</p>
+                            </div>
+                            <span class="badge" style="background: rgba(14, 165, 233, 0.1); color: var(--primary-blue);"
+                                id="followupCountBadge">0 Pending</span>
+                        </div>
+                        <div id="followupList">
+                            <!-- Populated via JS -->
+                            <div style="text-align: center; padding: 2rem; color: var(--text-muted);">
+                                <p>Checking for stale threads...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Time Management -->
+                <div style="display: flex; flex-direction: column; gap: var(--space-8);">
+
+                    <!-- AI To-Do List (New Fyxer Feature) -->
+                    <div class="recent-activity" style="border-top: 4px solid var(--primary-dark); margin-bottom: var(--space-8);">
+                        <div class="card-header">
+                            <h2 class="card-title" style="display:flex;align-items:center;gap:8px;">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary-blue)"
+                                    stroke-width="2">
+                                    <path d="M9 11l3 3L22 4"></path>
+                                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                                </svg>
+                                Proactive Tasks
+                            </h2>
+                        </div>
+                        <div id="aiTaskList">
+                            <div
+                                style="text-align: center; padding: 1.5rem; color: var(--text-muted); font-size: 0.8rem;">
+                                No action items identified from recent emails.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Agenda Widget -->
+                    <div class="recent-activity" style="border-top: 4px solid var(--primary-blue);">
+                        <div class="card-header">
+                            <h2 class="card-title">Today's Agenda</h2>
+                        </div>
+                        <div id="agendaWidgetList">
+                            <div style="text-align: center; padding: 2rem; color: var(--text-muted);">
+                                <p style="font-size: 0.85rem;">No meetings scheduled for today.</p>
+                                <button class="btn btn-secondary btn-sm"
+                                    onclick="window.location.href='calendar.html'">Full Calendar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Executive Stats (Small) -->
+                    <div class="recent-activity">
+                        <div class="card-header">
+                            <h2 class="card-title">Pulse Check</h2>
+                        </div>
+                        <div style="padding: 0 var(--space-6) var(--space-6);">
+                            <div
+                                style="display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 0.85rem;">
+                                <span style="color: var(--text-muted);">Weekly Efficiency</span>
+                                <span style="font-weight: 700;">94%</span>
+                            </div>
+                            <div
+                                style="height: 6px; background: #eee; border-radius: 3px; overflow: hidden; margin-bottom: 20px;">
+                                <div style="height: 100%; width: 94%; background: #4CAF50;"></div>
+                            </div>
+
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                                <div
+                                    style="background: var(--bg-light); padding: 12px; border-radius: 8px; text-align: center;">
+                                    <div
+                                        style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;">
+                                        Emails Pulled</div>
+                                    <div style="font-size: 1.1rem; font-weight: 700;" id="totalPulledNum">0</div>
+                                </div>
+                                <div
+                                    style="background: var(--bg-light); padding: 12px; border-radius: 8px; text-align: center;">
+                                    <div
+                                        style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;">
+                                        Meetings Today</div>
+                                    <div style="font-size: 1.1rem; font-weight: 700; color: var(--primary-orange);"
+                                        id="totalMeetingsNum">0</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- End of Right Column -->
+
+            </div> <!-- End of Dashboard Grid -->
+
+            <!-- Processing Session Summary (Moved inside main-content) -->
+            <div class="recent-activity" style="margin-top: var(--space-8);">
+                <div class="card-header" style="margin-bottom:0; border-bottom: none;">
+                    <div>
+                        <h2 class="card-title" style="display:flex;align-items:center;gap:8px;">
+                            <svg width="18" height="18" fill="none" stroke="var(--primary-orange)" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10" />
+                                <polyline points="12 6 12 12 16 14" />
+                            </svg>
+                            Processing Session Summary
+                        </h2>
+                        <p style="font-size:0.8rem;color:var(--text-muted);margin:2px 0 0;">View all emails &amp;
+                            threads processed within a time window</p>
+                    </div>
+                </div>
+                <div style="display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 10px;">
+                    <button class="btn btn-secondary btn-sm" onclick="applyPreset('today')" id="preset-today">Today
+                        (9AM-5PM)</button>
+                    <button class="btn btn-secondary btn-sm" onclick="applyPreset('8h')" id="preset-8h">Last 8
+                        Hours</button>
+                    <button class="btn btn-secondary btn-sm" onclick="applyPreset('24h')" id="preset-24h">Last 24
+                        Hours</button>
+                    <button class="btn btn-secondary btn-sm" onclick="applyPreset('week')" id="preset-week">This
+                        Week</button>
+                </div>
+                <div
+                    style="background:var(--bg-light);border-radius:var(--radius-md);padding:12px;display:flex;gap:14px;align-items:flex-end;flex-wrap:wrap;margin-bottom:14px;border:1px solid var(--border-light);">
+                    <div>
+                        <label
+                            style="font-size:0.73rem;font-weight:600;color:var(--text-secondary);display:block;margin-bottom:4px;">FROM</label>
+                        <input type="datetime-local" id="sessionFrom" class="form-input"
+                            style="padding:6px 10px;font-size:0.83rem;width:auto;">
+                    </div>
+                    <div>
+                        <label
+                            style="font-size:0.73rem;font-weight:600;color:var(--text-secondary);display:block;margin-bottom:4px;">TO</label>
+                        <input type="datetime-local" id="sessionTo" class="form-input"
+                            style="padding:6px 10px;font-size:0.83rem;width:auto;">
+                    </div>
+                    <button class="btn btn-primary btn-sm" onclick="loadSessionSummary()"
+                        style="height:36px;">Search</button>
+                </div>
+                <div id="sessionResults">
+                    <div style="text-align:center;padding:2rem;color:var(--text-muted);">
+                        <p style="font-size:0.88rem;">Select a time range or click a quick button above</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/auth.js?v=1.6"></script>
+    <script src="js/api.js?v=1.6"></script>
+    <script>
+
+        function showToast(message, type = 'info') {
+            let container = document.querySelector('.toast-container');
+            if (!container) {
+                container = document.createElement('div');
+                container.className = 'toast-container';
+                document.body.appendChild(container);
+            }
+
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type}`;
+
+            let icon = '';
+            if (type === 'success') icon = '<svg viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+            else if (type === 'error') icon = '<svg viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>';
+            else icon = '<svg viewBox="0 0 24 24" fill="none" stroke="var(--primary-orange)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>';
+
+            toast.innerHTML = `
+                ${icon}
+                <div class="toast-message">${message}</div>
+                <div class="toast-close" onclick="this.parentElement.remove()">×</div>
+            `;
+
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.animation = 'toastFadeOut 0.4s ease-in forwards';
+                setTimeout(() => toast.remove(), 400);
+            }, 6000);
+        }
+
+        async function checkSystem() {
+            try {
+                const status = await window.ProcurementAgentAPI.getSystemStatus();
+                if (status.success) {
+                    showToast('System is Online', 'success');
+                } else {
+                    showToast('System Error', 'error');
+                }
+            } catch (error) {
+                showToast('System Offline or Connection Error', 'error');
+            }
+        }
+
+        // Initialize API client
+        window.addEventListener('load', () => {
+            // Initial load
+            if (window.loadDashboardData) window.loadDashboardData();
+
+            // Set polling for dashboard stats (every 30 seconds)
+            setInterval(() => {
+                console.log('Refreshing dashboard stats...');
+                if (window.loadDashboardData) window.loadDashboardData();
+            }, 30000);
+        });
+        // Fail-safe close function
+        function closeBookingModal() {
+            const modal = document.getElementById('bookingModal');
+            if (modal) modal.classList.remove('active');
+            // Also reset fields
+            ['bookingTitle', 'bookingAttendees', 'bookingDate', 'bookingTime'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.value = '';
+            });
+        }
+    </script>
+    <!-- Add Meeting Modal -->
+    <div id="bookingModal" class="modal" style="display: none;">
+        <div class="modal-content"
+            style="max-width: 550px; border-radius: 20px; overflow: hidden; border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); backdrop-filter: blur(20px);">
+            <div class="modal-header"
+                style="background: linear-gradient(135deg, #1f2937 0%, #111827 100%); padding: 25px 30px; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                <h2 style="color: white; margin: 0; display: flex; align-items: center; gap: 12px; font-size: 1.5rem;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary-orange)"
+                        stroke-width="2">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                        <line x1="16" y1="2" x2="16" y2="6" />
+                        <line x1="8" y1="2" x2="8" y2="6" />
+                        <line x1="3" y1="10" x2="21" y2="10" />
+                    </svg>
+                    Confirm Meeting
+                </h2>
+                <span class="modal-close"
+                    onclick="closeBookingModal(); document.getElementById('bookingModal').classList.remove('active');"
+                    style="color: rgba(255,255,255,0.6);">&times;</span>
+            </div>
+            <div class="modal-body" style="padding: 30px 30px 40px; background: rgba(255,255,255,0.02);">
+                <form id="bookingForm" onsubmit="handleBookingSubmit(event)">
+                    <div class="form-group" style="margin-bottom: 16px;">
+                        <label class="form-label">Meeting Title</label>
+                        <input type="text" id="bookingTitle" class="form-input" required
+                            placeholder="e.g. Project Discovery Call">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 16px;">
+                        <label class="form-label">Attendees (Emails)</label>
+                        <input type="text" id="bookingAttendees" class="form-input" required
+                            placeholder="client@example.com">
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+                        <div class="form-group">
+                            <label class="form-label">Date</label>
+                            <input type="date" id="bookingDate" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Time</label>
+                            <input type="time" id="bookingTime" class="form-input" required>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 24px;">
+                        <label class="form-label">Calendar Provider</label>
+                        <select id="bookingProvider" class="form-select">
+                            <option value="google">Google Calendar</option>
+                            <option value="outlook">Outlook / Teams</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 24px;">
+                        <label class="form-label"
+                            style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                            <input type="checkbox" id="bookingNotifyGuests" checked
+                                style="width: 18px; height: 18px; accent-color: var(--primary-orange);">
+                            <span>Send professional email notification to guests</span>
+                        </label>
+                    </div>
+                    <div style="display: flex; gap: 12px;">
+                        <button type="submit" id="btnConfirmBooking" class="btn btn-primary" style="flex: 1;">Create
+                            Meeting</button>
+                        <button type="button" class="btn btn-secondary"
+                            onclick="closeBookingModal(); document.getElementById('bookingModal').classList.remove('active');"
+                            style="flex: 1;">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/dashboard.js?v=1.6"></script>
+</body>
+
+</html>

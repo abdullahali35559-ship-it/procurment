@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Graph Builder — Drop & Visualize</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d0f1a;
+      --surface: #13162b;
+      --surface2: #1a1f38;
+      --border: rgba(255,255,255,0.08);
+      --accent: #6c63ff;
+      --accent2: #ff6584;
+      --accent3: #43e97b;
+      --accent4: #f7971e;
+      --text: #e8eaf6;
+      --muted: #7b7fa8;
+      --glass: rgba(255,255,255,0.04);
+      --glow: 0 0 30px rgba(108,99,255,0.3);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* Animated mesh background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 20% 10%, rgba(108,99,255,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 80%, rgba(255,101,132,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 60% at 60% 30%, rgba(67,233,123,0.05) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Top Bar ── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 28px;
+      background: rgba(13,15,26,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    .logo-icon {
+      width: 32px; height: 32px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+      box-shadow: 0 0 18px rgba(108,99,255,0.5);
+    }
+    .logo span { color: var(--accent); }
+
+    header .subtitle {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-left: 4px;
+    }
+
+    .header-actions {
+      margin-left: auto;
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn {
+      padding: 8px 18px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--glass);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.15); }
+    .btn.primary {
+      background: linear-gradient(135deg, var(--accent), #8b83ff);
+      border-color: transparent;
+      color: #fff;
+      box-shadow: 0 4px 18px rgba(108,99,255,0.35);
+    }
+    .btn.primary:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(108,99,255,0.5); }
+    .btn.danger { border-color: rgba(255,101,132,0.3); color: var(--accent2); }
+    .btn.danger:hover { background: rgba(255,101,132,0.1); }
+
+    /* ── Layout ── */
+    .app-body {
+      display: flex;
+      flex: 1;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      width: 280px;
+      min-height: calc(100vh - 61px);
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      padding: 20px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      flex-shrink: 0;
+    }
+
+    .sidebar-section-title {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    /* Dropdown selector */
+    .dropdown-wrap {
+      position: relative;
+    }
+    .dropdown-wrap select {
+      width: 100%;
+      padding: 11px 38px 11px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 500;
+      appearance: none;
+      cursor: pointer;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .dropdown-wrap select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(108,99,255,0.2);
+    }
+    .dropdown-arrow {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+      color: var(--muted);
+      font-size: 0.7rem;
+    }
+
+    /* Graph cards in sidebar */
+    .graph-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .graph-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      cursor: grab;
+      transition: all 0.2s;
+      user-select: none;
+    }
+    .graph-card:hover {
+      border-color: var(--accent);
+      background: rgba(108,99,255,0.08);
+      transform: translateX(4px);
+      box-shadow: var(--glow);
+    }
+    .graph-card:active { cursor: grabbing; transform: scale(0.97); }
+
+    .graph-card.dragging {
+      opacity: 0.4;
+    }
+
+    .graph-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .graph-card-info { flex: 1; min-width: 0; }
+    .graph-card-info strong { font-size: 0.88rem; font-weight: 600; display: block; }
+    .graph-card-info span { font-size: 0.72rem; color: var(--muted); }
+
+    .drag-hint {
+      font-size: 0.72rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.03);
+      border: 1px dashed var(--border);
+    }
+
+    /* ── Canvas ── */
+    .canvas {
+      flex: 1;
+      position: relative;
+      overflow: auto;
+      padding: 28px;
+      min-height: calc(100vh - 61px);
+    }
+
+    .empty-state {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      pointer-events: none;
+      opacity: 1;
+      transition: opacity 0.3s;
+    }
+    .empty-state.hidden { opacity: 0; }
+    .empty-icon { font-size: 52px; opacity: 0.25; }
+    .empty-state h2 { font-size: 1.1rem; font-weight: 600; color: var(--muted); }
+    .empty-state p { font-size: 0.82rem; color: var(--muted); opacity: 0.7; }
+
+    .drop-overlay {
+      position: absolute;
+      inset: 0;
+      border: 2px dashed var(--accent);
+      border-radius: 16px;
+      background: rgba(108,99,255,0.06);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      color: var(--accent);
+      font-weight: 600;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+      z-index: 50;
+      letter-spacing: 0.5px;
+    }
+    .drop-overlay.active { opacity: 1; }
+
+    /* Dropped chart widget */
+    .chart-widget {
+      position: absolute;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow 0.2s;
+      resize: both;
+      min-width: 260px;
+      min-height: 220px;
+    }
+    .chart-widget:hover {
+      box-shadow: 0 12px 50px rgba(0,0,0,0.7), 0 0 0 1px rgba(108,99,255,0.25);
+    }
+
+    .widget-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface2);
+      cursor: move;
+      flex-shrink: 0;
+    }
+    .widget-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      flex: 1;
+    }
+    .widget-badge {
+      font-size: 0.65rem;
+      padding: 3px 8px;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+    .widget-close {
+      width: 22px; height: 22px;
+      border-radius: 6px;
+      border: none;
+      background: rgba(255,101,132,0.15);
+      color: var(--accent2);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px;
+      transition: background 0.15s;
+    }
+    .widget-close:hover { background: rgba(255,101,132,0.35); }
+
+    .widget-body {
+      flex: 1;
+      padding: 14px;
+      position: relative;
+      min-height: 0;
+    }
+    .widget-body canvas { width: 100% !important; height: 100% !important; }
+
+    /* Resize handle hint */
+    .chart-widget::after {
+      content: '⤡';
+      position: absolute;
+      bottom: 4px;
+      right: 6px;
+      font-size: 12px;
+      color: var(--muted);
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+
+    /* Animations */
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.85); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    .chart-widget { animation: popIn 0.25s cubic-bezier(0.34,1.56,0.64,1); }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+    .drag-hint svg { animation: pulse 2s infinite; }
+  </style>
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header>
+  <div class="logo">
+    <div class="logo-icon">📊</div>
+    Graph<span>Drop</span>
+  </div>
+  <span class="subtitle">Drag · Drop · Visualize</span>
+  <div class="header-actions">
+    <button class="btn danger" id="clearAll">Clear All</button>
+    <button class="btn primary" id="addRandom">＋ Add Chart</button>
+  </div>
+</header>
+
+<div class="app-body">
+
+  <!-- ── Sidebar ── -->
+  <aside class="sidebar">
+    <div>
+      <div class="sidebar-section-title">Select Chart Type</div>
+      <div class="dropdown-wrap">
+        <select id="graphSelect">
+          <option value="">— Choose a graph —</option>
+          <option value="bar">📊 Bar Chart</option>
+          <option value="line">📈 Line Chart</option>
+          <option value="pie">🥧 Pie Chart</option>
+          <option value="doughnut">🍩 Doughnut Chart</option>
+          <option value="radar">🕸️ Radar Chart</option>
+          <option value="polarArea">🎯 Polar Area</option>
+          <option value="scatter">✦ Scatter Plot</option>
+          <option value="bubble">🫧 Bubble Chart</option>
+        </select>
+        <span class="dropdown-arrow">▼</span>
+      </div>
+    </div>
+
+    <div>
+      <div class="sidebar-section-title">Drag to Canvas</div>
+      <div class="graph-list" id="graphList">
+        <!-- Cards injected by JS -->
+      </div>
+    </div>
+
+    <div class="drag-hint">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      Drag a card onto the canvas or click <strong>&nbsp;+ Add Chart</strong>
+    </div>
+  </aside>
+
+  <!-- ── Canvas ── -->
+  <main class="canvas" id="canvas">
+    <div class="drop-overlay" id="dropOverlay">📌 Release to drop chart</div>
+    <div class="empty-state" id="emptyState">
+      <div class="empty-icon">📉</div>
+      <h2>No charts yet</h2>
+      <p>Select a chart type and drag it here, or click + Add Chart</p>
+    </div>
+  </main>
+
+</div>
+
+<script>
+// ── Graph definitions ──
+const GRAPHS = {
+  bar: {
+    label: 'Bar Chart',
+    emoji: '📊',
+    color: '#6c63ff',
+    bg: 'rgba(108,99,255,0.15)',
+    desc: 'Compare categories',
+    config: () => ({
+      type: 'bar',
+      data: {
+        labels: ['Jan','Feb','Mar','Apr','May','Jun'],
+        datasets: [{
+          label: 'Revenue',
+          data: randArr(6, 20, 100),
+          backgroundColor: palette(6, '#6c63ff'),
+          borderRadius: 8,
+          borderSkipped: false,
+        }]
+      },
+      options: chartOpts({ title: 'Monthly Revenue' })
+    })
+  },
+  line: {
+    label: 'Line Chart',
+    emoji: '📈',
+    color: '#43e97b',
+    bg: 'rgba(67,233,123,0.15)',
+    desc: 'Trends over time',
+    config: () => ({
+      type: 'line',
+      data: {
+        labels: ['Q1','Q2','Q3','Q4','Q5','Q6'],
+        datasets: [{
+          label: 'Growth',
+          data: randArr(6, 10, 90),
+          borderColor: '#43e97b',
+          backgroundColor: 'rgba(67,233,123,0.1)',
+          fill: true,
+          tension: 0.45,
+          pointBackgroundColor: '#43e97b',
+          pointRadius: 5,
+        }]
+      },
+      options: chartOpts({ title: 'Growth Trend' })
+    })
+  },
+  pie: {
+    label: 'Pie Chart',
+    emoji: '🥧',
+    color: '#f7971e',
+    bg: 'rgba(247,151,30,0.15)',
+    desc: 'Part-to-whole',
+    config: () => ({
+      type: 'pie',
+      data: {
+        labels: ['Design','Dev','Marketing','Sales','Support'],
+        datasets: [{
+          data: randArr(5, 10, 40),
+          backgroundColor: ['#6c63ff','#43e97b','#f7971e','#ff6584','#38bdf8'],
+          borderWidth: 2,
+          borderColor: '#13162b',
+        }]
+      },
+      options: chartOpts({ title: 'Budget Split', legend: true })
+    })
+  },
+  doughnut: {
+    label: 'Doughnut',
+    emoji: '🍩',
+    color: '#ff6584',
+    bg: 'rgba(255,101,132,0.15)',
+    desc: 'Ring-style split',
+    config: () => ({
+      type: 'doughnut',
+      data: {
+        labels: ['Mobile','Desktop','Tablet','Other'],
+        datasets: [{
+          data: randArr(4, 15, 45),
+          backgroundColor: ['#ff6584','#6c63ff','#43e97b','#f7971e'],
+          borderWidth: 2,
+          borderColor: '#13162b',
+        }]
+      },
+      options: chartOpts({ title: 'Device Share', legend: true })
+    })
+  },
+  radar: {
+    label: 'Radar Chart',
+    emoji: '🕸️',
+    color: '#38bdf8',
+    bg: 'rgba(56,189,248,0.15)',
+    desc: 'Multi-axis comparison',
+    config: () => ({
+      type: 'radar',
+      data: {
+        labels: ['Speed','Power','Accuracy','Stamina','Agility','Vision'],
+        datasets: [{
+          label: 'Player A',
+          data: randArr(6, 40, 99),
+          borderColor: '#38bdf8',
+          backgroundColor: 'rgba(56,189,248,0.15)',
+          pointBackgroundColor: '#38bdf8',
+        },{
+          label: 'Player B',
+          data: randArr(6, 40, 99),
+          borderColor: '#ff6584',
+          backgroundColor: 'rgba(255,101,132,0.1)',
+          pointBackgroundColor: '#ff6584',
+        }]
+      },
+      options: chartOpts({ title: 'Player Stats', legend: true })
+    })
+  },
+  polarArea: {
+    label: 'Polar Area',
+    emoji: '🎯',
+    color: '#a855f7',
+    bg: 'rgba(168,85,247,0.15)',
+    desc: 'Magnitude by angle',
+    config: () => ({
+      type: 'polarArea',
+      data: {
+        labels: ['Alpha','Beta','Gamma','Delta','Epsilon'],
+        datasets: [{
+          data: randArr(5, 20, 80),
+          backgroundColor: ['rgba(108,99,255,0.7)','rgba(67,233,123,0.7)','rgba(247,151,30,0.7)','rgba(255,101,132,0.7)','rgba(56,189,248,0.7)'],
+          borderWidth: 1,
+          borderColor: '#13162b',
+        }]
+      },
+      options: chartOpts({ title: 'Polar Analysis', legend: true })
+    })
+  },
+  scatter: {
+    label: 'Scatter Plot',
+    emoji: '✦',
+    color: '#fbbf24',
+    bg: 'rgba(251,191,36,0.15)',
+    desc: 'Correlation view',
+    config: () => ({
+      type: 'scatter',
+      data: {
+        datasets: [{
+          label: 'Dataset',
+          data: Array.from({length: 18}, () => ({ x: rnd(0,100), y: rnd(0,100) })),
+          backgroundColor: 'rgba(251,191,36,0.7)',
+          pointRadius: 6,
+        }]
+      },
+      options: chartOpts({ title: 'Scatter Analysis' })
+    })
+  },
+  bubble: {
+    label: 'Bubble Chart',
+    emoji: '🫧',
+    color: '#06b6d4',
+    bg: 'rgba(6,182,212,0.15)',
+    desc: '3-variable data',
+    config: () => ({
+      type: 'bubble',
+      data: {
+        datasets: [{
+          label: 'Bubbles',
+          data: Array.from({length: 10}, () => ({ x: rnd(5,95), y: rnd(5,95), r: rnd(5,22) })),
+          backgroundColor: palette(10, '#06b6d4', 0.5),
+        }]
+      },
+      options: chartOpts({ title: 'Bubble Analysis' })
+    })
+  }
+};
+
+// ── Helpers ──
+function rnd(a, b) { return Math.floor(Math.random() * (b - a + 1)) + a; }
+function randArr(n, a, b) { return Array.from({length: n}, () => rnd(a, b)); }
+function palette(n, hex, alpha = 0.75) {
+  return Array.from({length: n}, (_, i) => {
+    const h = (parseInt(hex.slice(1), 16) >> 16) & 0xff;
+    const hue = (parseInt(hex.slice(1,3),16) * 1.4 + i * 30) % 360;
+    return `hsla(${hue},72%,62%,${alpha})`;
+  });
+}
+
+function chartOpts({ title, legend = false } = {}) {
+  return {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        display: legend,
+        labels: { color: '#e8eaf6', font: { family: 'Inter', size: 11 }, boxWidth: 12, padding: 14 }
+      },
+      title: {
+        display: true,
+        text: title,
+        color: '#e8eaf6',
+        font: { family: 'Inter', size: 13, weight: '600' },
+        padding: { bottom: 10 }
+      },
+      tooltip: {
+        backgroundColor: '#1a1f38',
+        titleColor: '#e8eaf6',
+        bodyColor: '#7b7fa8',
+        borderColor: 'rgba(255,255,255,0.08)',
+        borderWidth: 1,
+        cornerRadius: 10,
+        padding: 10,
+      }
+    },
+    scales: title !== 'Bubble Analysis' && title !== 'Scatter Analysis' ? undefined : {
+      x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#7b7fa8' } },
+      y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#7b7fa8' } }
+    }
+  };
+}
+
+// Add scales to line/bar
+['bar','line','scatter'].forEach(t => {
+  const orig = GRAPHS[t]?.config;
+  if (!orig) return;
+  GRAPHS[t].config = () => {
+    const cfg = orig();
+    cfg.options.scales = {
+      x: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: '#7b7fa8', font: { family: 'Inter', size: 11 } } },
+      y: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: '#7b7fa8', font: { family: 'Inter', size: 11 } } }
+    };
+    return cfg;
+  };
+});
+
+// ── Populate sidebar cards ──
+const graphList = document.getElementById('graphList');
+const graphSelect = document.getElementById('graphSelect');
+
+function buildCards(filter = '') {
+  graphList.innerHTML = '';
+  Object.entries(GRAPHS).forEach(([key, g]) => {
+    if (filter && filter !== key) return;
+    const card = document.createElement('div');
+    card.className = 'graph-card';
+    card.draggable = true;
+    card.dataset.type = key;
+    card.innerHTML = `
+      <div class="graph-icon" style="background:${g.bg};">${g.emoji}</div>
+      <div class="graph-card-info">
+        <strong>${g.label}</strong>
+        <span>${g.desc}</span>
+      </div>
+      <span style="color:${g.color};font-size:1rem;">⋮⋮</span>
+    `;
+    card.addEventListener('dragstart', onDragStart);
+    card.addEventListener('click', () => dropChart(key));
+    graphList.appendChild(card);
+  });
+}
+buildCards();
+
+graphSelect.addEventListener('change', () => {
+  buildCards(graphSelect.value);
+});
+
+// ── Drag & Drop ──
+const canvas = document.getElementById('canvas');
+const dropOverlay = document.getElementById('dropOverlay');
+const emptyState = document.getElementById('emptyState');
+
+let dragType = null;
+
+function onDragStart(e) {
+  dragType = e.currentTarget.dataset.type;
+  e.currentTarget.classList.add('dragging');
+  setTimeout(() => e.currentTarget.classList.remove('dragging'), 0);
+  e.dataTransfer.effectAllowed = 'copy';
+}
+
+canvas.addEventListener('dragover', e => {
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'copy';
+  dropOverlay.classList.add('active');
+});
+
+canvas.addEventListener('dragleave', e => {
+  if (!canvas.contains(e.relatedTarget)) dropOverlay.classList.remove('active');
+});
+
+canvas.addEventListener('drop', e => {
+  e.preventDefault();
+  dropOverlay.classList.remove('active');
+  if (!dragType) return;
+  const rect = canvas.getBoundingClientRect();
+  const scrollX = canvas.scrollLeft;
+  const scrollY = canvas.scrollTop;
+  const x = e.clientX - rect.left + scrollX - 160;
+  const y = e.clientY - rect.top + scrollY - 100;
+  dropChart(dragType, Math.max(0, x), Math.max(0, y));
+  dragType = null;
+});
+
+// ── Create widget ──
+let widgetCount = 0;
+
+function dropChart(type, x, y) {
+  const g = GRAPHS[type];
+  if (!g) return;
+
+  emptyState.classList.add('hidden');
+  widgetCount++;
+
+  const defaultX = x ?? (40 + (widgetCount % 3) * 320);
+  const defaultY = y ?? (40 + Math.floor((widgetCount-1) / 3) * 280);
+
+  const widget = document.createElement('div');
+  widget.className = 'chart-widget';
+  widget.style.cssText = `
+    left:${defaultX}px; top:${defaultY}px;
+    width:360px; height:280px;
+  `;
+
+  widget.innerHTML = `
+    <div class="widget-header" style="border-top: 3px solid ${g.color};">
+      <span style="font-size:1.1rem">${g.emoji}</span>
+      <span class="widget-title">${g.label}</span>
+      <span class="widget-badge" style="background:${g.bg};color:${g.color};">${type}</span>
+      <button class="widget-close" title="Remove">✕</button>
+    </div>
+    <div class="widget-body">
+      <canvas id="chart-${widgetCount}"></canvas>
+    </div>
+  `;
+
+  canvas.appendChild(widget);
+
+  // Render Chart.js
+  const ctx = document.getElementById(`chart-${widgetCount}`).getContext('2d');
+  new Chart(ctx, g.config());
+
+  // Close button
+  widget.querySelector('.widget-close').addEventListener('click', () => {
+    widget.style.animation = 'none';
+    widget.style.transition = 'opacity 0.2s, transform 0.2s';
+    widget.style.opacity = '0';
+    widget.style.transform = 'scale(0.9)';
+    setTimeout(() => {
+      widget.remove();
+      if (!document.querySelector('.chart-widget')) emptyState.classList.remove('hidden');
+    }, 200);
+  });
+
+  // Drag-move widget
+  makeDraggable(widget, widget.querySelector('.widget-header'));
+}
+
+function makeDraggable(el, handle) {
+  let startX, startY, origX, origY;
+
+  handle.addEventListener('mousedown', e => {
+    if (e.button !== 0) return;
+    startX = e.clientX;
+    startY = e.clientY;
+    const rect = el.getBoundingClientRect();
+    const cRect = canvas.getBoundingClientRect();
+    origX = rect.left - cRect.left + canvas.scrollLeft;
+    origY = rect.top - cRect.top + canvas.scrollTop;
+    el.style.transition = 'none';
+    el.style.zIndex = 999;
+
+    function onMove(e) {
+      const dx = e.clientX - startX;
+      const dy = e.clientY - startY;
+      el.style.left = Math.max(0, origX + dx) + 'px';
+      el.style.top = Math.max(0, origY + dy) + 'px';
+    }
+    function onUp() {
+      el.style.zIndex = '';
+      document.removeEventListener('mousemove', onMove);
+      document.removeEventListener('mouseup', onUp);
+    }
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseup', onUp);
+    e.preventDefault();
+  });
+}
+
+// ── Header buttons ──
+document.getElementById('addRandom').addEventListener('click', () => {
+  const types = Object.keys(GRAPHS);
+  const sel = graphSelect.value || types[Math.floor(Math.random() * types.length)];
+  dropChart(sel);
+});
+
+document.getElementById('clearAll').addEventListener('click', () => {
+  document.querySelectorAll('.chart-widget').forEach(w => w.remove());
+  emptyState.classList.remove('hidden');
+  widgetCount = 0;
+});
+</script>
+</body>
+</html>

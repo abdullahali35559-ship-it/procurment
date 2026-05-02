@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Procurement</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/variables.css?v=1.6">
+    <link rel="stylesheet" href="css/components.css?v=1.6">
+    <style>
+        :root {
+            /* Heavenly Color Palette - Enhanced */
+            --primary-yellow: #FFFDF0;
+            --secondary-yellow: #FFF9E6;
+            --accent-yellow: #FFE599;
+            --warm-yellow: #FFD966;
+
+            --primary-blue: #F0F9FF;
+            --secondary-blue: #E0F2FE;
+            --accent-blue: #7DD3FC;
+            --deep-blue: #0EA5E9;
+            --vibrant-blue: #0284C7;
+
+            /* Neutral Colors */
+            --text-primary: #0F172A;
+            --text-secondary: #334155;
+            --text-muted: #64748B;
+            --white: #FFFFFF;
+            --border-light: rgba(14, 165, 233, 0.15);
+
+            /* Gradients */
+            --gradient-heaven: linear-gradient(135deg, #FFFDF0 0%, #F0F9FF 50%, #FFF9E6 100%);
+            --gradient-vibrant: linear-gradient(135deg, #38BDF8 0%, #0EA5E9 100%);
+            
+            /* Glassmorphism */
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.4);
+            --glass-blur: blur(12px);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gradient-heaven);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Decorative Clouds */
+        .login-bg {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 100px;
+            filter: blur(50px);
+            animation: cloudFloat 20s ease-in-out infinite;
+        }
+
+        .cloud-1 { width: 400px; height: 200px; top: -50px; right: 10%; animation-duration: 20s; }
+        .cloud-2 { width: 300px; height: 150px; bottom: 20%; left: 5%; animation-duration: 25s; animation-direction: reverse; }
+        .cloud-3 { width: 350px; height: 180px; top: 40%; right: -5%; animation-duration: 22s; }
+
+        @keyframes cloudFloat {
+            0%, 100% { transform: translateX(0) translateY(0); }
+            25% { transform: translateX(20px) translateY(-10px); }
+            50% { transform: translateX(-10px) translateY(5px); }
+            75% { transform: translateX(15px) translateY(-5px); }
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 420px;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .login-card {
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 48px;
+            box-shadow: 0 20px 60px -15px rgba(14, 165, 233, 0.2);
+            animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .brand-section {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .login-logo {
+            width: 64px;
+            height: 64px;
+            background: var(--gradient-vibrant);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            box-shadow: 0 10px 20px -5px rgba(14, 165, 233, 0.4);
+            color: white;
+        }
+
+        .brand-name {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--deep-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .brand-tagline {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            pointer-events: none;
+            width: 18px;
+            height: 18px;
+        }
+
+        .login-input {
+            width: 100%;
+            padding: 14px 14px 14px 48px;
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 15px;
+            transition: all 0.2s ease;
+            color: var(--text-primary);
+        }
+
+        .login-input:focus {
+            outline: none;
+            border-color: var(--deep-blue);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.15);
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 16px;
+            background: var(--gradient-vibrant);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 10px 20px -5px rgba(14, 165, 233, 0.4);
+            margin-top: 12px;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 25px -5px rgba(14, 165, 233, 0.5);
+        }
+
+        .btn-login:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .footer-links {
+            text-align: center;
+            margin-top: 32px;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .footer-links a {
+            color: var(--deep-blue);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .error-message {
+            background: #FEF2F2;
+            color: #DC2626;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 13px;
+            border: 1px solid #FEE2E2;
+            margin-bottom: 20px;
+            display: none;
+            text-align: center;
+        }
+
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.8s linear infinite;
+            display: none;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+</head>
+
+<body>
+    <div id="top-loader"></div>
+    <div class="login-bg">
+        <div class="cloud cloud-1"></div>
+        <div class="cloud cloud-2"></div>
+        <div class="cloud cloud-3"></div>
+    </div>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="brand-section">
+                <div class="login-logo">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    </svg>
+                </div>
+                <h1 class="brand-name">Procurement Assistant</h1>
+                <p class="brand-tagline">Login</p>
+            </div>
+
+            <div id="errorBox" class="error-message"></div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label class="form-label" for="username">Username</label>
+                    <div class="input-wrapper">
+                        <svg class="input-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                        </svg>
+                        <input type="text" id="username" class="login-input" placeholder="Enter your username" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="password">Password</label>
+                    <div class="input-wrapper">
+                        <svg class="input-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
+                            </path>
+                        </svg>
+                        <input type="password" id="password" class="login-input" placeholder="••••••••" required>
+                    </div>
+                </div>
+
+                <button type="submit" id="submitBtn" class="btn-login">
+                    <div id="submitSpinner" class="spinner"></div>
+                    <span id="submitLabel">Sign In to Dashboard</span>
+                </button>
+            </form>
+
+            <div class="footer-links">
+                Forgot password? <a href="#">Contact Admin</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/api.js"></script>
+    <script>
+        document.getElementById('loginForm').onsubmit = async (e) => {
+            e.preventDefault();
+
+            const btn = document.getElementById('submitBtn');
+            const label = document.getElementById('submitLabel');
+            const spinner = document.getElementById('submitSpinner');
+            const errorBox = document.getElementById('errorBox');
+
+            // AGGRESSIVE CACHE RESET: Wipe all old session data before trying to log in
+            localStorage.clear();
+
+            // Loading state
+            btn.disabled = true;
+            label.textContent = 'Authenticating...';
+            spinner.style.display = 'block';
+            errorBox.style.display = 'none';
+
+            const formData = new FormData();
+            formData.append('username', document.getElementById('username').value);
+            formData.append('password', document.getElementById('password').value);
+
+            try {
+                const resp = await fetch(`${window.location.origin}/api/auth/login`, {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await resp.json();
+
+                if (resp.ok) {
+                    label.textContent = 'Identity Verified. Entering Portal...';
+                    // Mark session as active in local cache (Not a token!)
+                    localStorage.setItem('procurement_user_session', 'active');
+                    window.location.href = data.redirect_url;
+                } else {
+                    throw new Error(data.detail || 'Access denied');
+                }
+            } catch (err) {
+                errorBox.textContent = err.message || 'Connection failed';
+                errorBox.style.display = 'block';
+                btn.disabled = false;
+                label.textContent = 'Sign In to Dashboard';
+                spinner.style.display = 'none';
+            }
+        };
+    </script>
+</body>
+
+</html>
