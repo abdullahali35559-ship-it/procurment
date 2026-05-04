@@ -446,6 +446,45 @@
             background: #ccc;
         }
 
+        .message.assistant a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 1.5px solid rgba(14, 165, 233, 0.2);
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .message.assistant a:hover {
+            color: var(--primary-dark);
+            border-bottom-color: var(--primary-dark);
+            background: rgba(14, 165, 233, 0.05);
+            padding: 0 4px;
+            border-radius: 4px;
+        }
+
+        .message.assistant a::after {
+            content: '↗';
+            font-size: 0.8em;
+            vertical-align: super;
+        }
+
+        .message.assistant a, .assistant-link {
+            color: #0ea5e9 !important; /* Bright Professional Blue */
+            text-decoration: underline !important;
+            font-weight: 700 !important;
+            display: inline-block;
+            margin: 5px 0;
+            cursor: pointer;
+        }
+
+        .message.assistant a:hover, .assistant-link:hover {
+            color: #0369a1 !important;
+            text-decoration: none !important;
+        }
+
         .procurement-mode .mode-indicator { background: var(--primary-orange); }
         .general-mode .mode-indicator { background: #6366f1; }
     </style>
@@ -784,7 +823,15 @@
 
         async function loadConversations(mode = currentMode) {
             try {
-                const response = await window.ProcurementAgentAPI.getConversations(mode);
+                // Ensure API is loaded
+                const api = window.api || window.ProcurementAgentAPI;
+                if (!api) {
+                    console.warn('[Assistant] API not ready, retrying in 500ms...');
+                    setTimeout(() => loadConversations(mode), 500);
+                    return;
+                }
+
+                const response = await api.getConversations(mode);
                 if (response.success) {
                     convList.innerHTML = '';
                     if (response.data.length === 0) {
@@ -919,6 +966,14 @@
             }
         }
 
+        // Configure marked for better rendering (Once)
+        marked.setOptions({
+            gfm: true,
+            breaks: true,
+            headerIds: false,
+            mangle: false
+        });
+
         function appendMessage(role, text, shouldScroll = true) {
             const div = document.createElement('div');
             div.className = `message ${role}`;
@@ -927,10 +982,14 @@
             if (role === 'assistant') {
                 div.innerHTML = marked.parse(text);
                 // Ensure all links open in new tab
-                div.querySelectorAll('a').forEach(link => link.target = '_blank');
+                div.querySelectorAll('a').forEach(link => {
+                    link.target = '_blank';
+                    link.classList.add('assistant-link');
+                });
                 // Style images
                 div.querySelectorAll('img').forEach(img => {
                     img.style.maxWidth = '100%';
+                    img.style.height = 'auto';
                     img.style.borderRadius = '12px';
                     img.style.marginTop = '12px';
                     img.style.display = 'block';

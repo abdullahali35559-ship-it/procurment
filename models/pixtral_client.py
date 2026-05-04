@@ -60,8 +60,8 @@ class PixtralClient:
         if self.api_key:
             headers['Authorization'] = f'Bearer {self.api_key}'
         
-        max_retries = 3
-        retry_delay = 5  # Base delay for free tier rate limits
+        max_retries = 5
+        retry_delay = 2 # Start with a shorter delay
         
         for attempt in range(max_retries):
             try:
@@ -83,20 +83,17 @@ class PixtralClient:
                         "options": {"num_predict": 1000}
                     }
 
-                # Add a small delay only during retries to avoid hitting rate limits again
                 if attempt > 0:
-                    time.sleep(retry_delay * (attempt + 1))
+                    time.sleep(retry_delay * attempt)
 
-                response = self.session.post(url, json=payload, headers=headers, timeout=120)
+                response = self.session.post(url, json=payload, headers=headers, timeout=60)
                 
-                # Handle rate limits
                 if response.status_code == 429:
-                    print(f"   [!] Rate limit (429). Retrying in {retry_delay * 2}s... (Attempt {attempt+1}/{max_retries})")
-                    time.sleep(retry_delay * 2)
+                    print(f"   [!] Rate limit (429). Retrying... (Attempt {attempt+1}/{max_retries})")
+                    time.sleep(retry_delay * 3)
                     continue
                 
                 response.raise_for_status()
-                
                 result = response.json()
                 
                 if self.provider == "openrouter" or self.provider == "openai":
@@ -105,7 +102,6 @@ class PixtralClient:
                     message_obj = result.get('message', {})
                     response_text = message_obj.get('content', result.get('response', ''))
                 
-                # Try to parse as JSON
                 try:
                     cleaned_text = response_text.strip()
                     if cleaned_text.startswith('```json'):
@@ -116,21 +112,16 @@ class PixtralClient:
                         cleaned_text = cleaned_text[:-3]
                     return json.loads(cleaned_text.strip())
                 except json.JSONDecodeError:
-                    import re
-                    json_match = re.search(r'\{.*\}', response_text, re.DOTALL)
-                    if json_match:
-                        try: return json.loads(json_match.group())
-                        except: pass
-                    return {"response": response_text, "error": "Could not parse as JSON"}
+                    return {"response": response_text}
                     
-            except Exception as e:
-                # Retry on connection errors or 5xx
-                if attempt < max_retries - 1 and ("429" in str(e) or "5" in str(e) or "Timeout" in str(e)):
-                    print(f"   [!] LLM Attempt {attempt+1} failed: {e}. Retrying...")
+            except (requests.exceptions.RequestException, Exception) as e:
+                # Retry on ALMOST ANY error for maximum reliability
+                if attempt < max_retries - 1:
+                    print(f"   [!] LLM Attempt {attempt+1} failed: {str(e)}. Retrying in {retry_delay * (attempt+1)}s...")
                     time.sleep(retry_delay * (attempt + 1))
                     continue
                 
-                print(f"LLM API Error: {e}")
+                print(f"LLM API FINAL ERROR after {max_retries} attempts: {e}")
                 raise Exception(f"LLM Provider ({self.provider}) error: {str(e)}")
 
     def chat(self, system_prompt: str, user_prompt: str, temperature: float = 0.7) -> Dict[str, Any]:

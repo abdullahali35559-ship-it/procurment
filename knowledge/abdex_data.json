@@ -16,75 +16,30 @@
       "Chemical Processing",
       "Hydraulic Systems"
     ],
-    "logo_url": "/assets/abdex_images/abdex-1.png",
+    "logo_url": "https://abdex.com/wp-content/uploads/2019/06/abdex-1.png",
     "contact": {
       "email_australia": "info@abdex.com.au",
       "email_uk": "info@abdex.co.uk",
       "contact_page": "https://abdex.com/contact/"
     },
-    "locations": [
-      "Australia",
-      "United Kingdom"
-    ],
+    "locations": ["Australia", "United Kingdom"],
     "accreditations": [
-      {
-        "name": "DNV",
-        "logo": "/assets/abdex_images/DNV2-1-390x231.jpg"
-      },
-      {
-        "name": "NATA",
-        "logo": "/assets/abdex_images/NATA-2-390x231.jpg"
-      },
-      {
-        "name": "DNV-GL",
-        "logo": "/assets/abdex_images/DNV1-1-390x231.jpg"
-      },
-      {
-        "name": "WJA - Water Jetting Association",
-        "logo": "/assets/abdex_images/WJA-2-390x231.jpg"
-      },
-      {
-        "name": "BFPDA - British Fluid Power Distributors Association",
-        "logo": "/assets/abdex_images/BFPDA-390x231.jpg"
-      },
-      {
-        "name": "Australian High Pressure Water Jetting Association",
-        "logo": "/assets/abdex_images/ausjet-2-390x231.jpg"
-      },
-      {
-        "name": "ASSEMS",
-        "logo": "/assets/abdex_images/assems-1-390x231.jpg"
-      },
-      {
-        "name": "SIR - Stichting Industriele Reinging",
-        "logo": "/assets/abdex_images/SIR.jpg"
-      }
+      { "name": "DNV", "logo": "https://abdex.com/wp-content/uploads/2020/09/DNV2-1-390x231.jpg" },
+      { "name": "NATA", "logo": "https://abdex.com/wp-content/uploads/2020/09/NATA-2-390x231.jpg" },
+      { "name": "DNV-GL", "logo": "https://abdex.com/wp-content/uploads/2020/09/DNV1-1-390x231.jpg" },
+      { "name": "WJA - Water Jetting Association", "logo": "https://abdex.com/wp-content/uploads/2020/09/WJA-2-390x231.jpg" },
+      { "name": "BFPDA - British Fluid Power Distributors Association", "logo": "https://abdex.com/wp-content/uploads/2020/09/BFPDA-390x231.jpg" },
+      { "name": "Australian High Pressure Water Jetting Association", "logo": "https://abdex.com/wp-content/uploads/2020/09/ausjet-2-390x231.jpg" },
+      { "name": "ASSEMS", "logo": "https://abdex.com/wp-content/uploads/2020/09/assems-1-390x231.jpg" },
+      { "name": "SIR - Stichting Industriele Reinging", "logo": "https://abdex.com/wp-content/uploads/2020/12/SIR.jpg" }
     ],
     "key_suppliers": [
-      {
-        "name": "Uniflex",
-        "logo": "/assets/abdex_images/uniflex-1-390x231.jpg"
-      },
-      {
-        "name": "Parker",
-        "logo": "/assets/abdex_images/PArker-390x231.jpg"
-      },
-      {
-        "name": "Fitok",
-        "logo": "/assets/abdex_images/fitok-1-390x231.jpg"
-      },
-      {
-        "name": "Gates",
-        "logo": "/assets/abdex_images/gates-2-390x231.jpg"
-      },
-      {
-        "name": "Continental",
-        "logo": "/assets/abdex_images/conti-390x231.jpg"
-      },
-      {
-        "name": "Danfoss",
-        "logo": "/assets/abdex_images/Danfoss-1-390x231.jpg"
-      }
+      { "name": "Uniflex", "logo": "https://abdex.com/wp-content/uploads/2020/09/uniflex-1-390x231.jpg" },
+      { "name": "Parker", "logo": "https://abdex.com/wp-content/uploads/2020/09/PArker-390x231.jpg" },
+      { "name": "Fitok", "logo": "https://abdex.com/wp-content/uploads/2020/09/fitok-1-390x231.jpg" },
+      { "name": "Gates", "logo": "https://abdex.com/wp-content/uploads/2020/09/gates-2-390x231.jpg" },
+      { "name": "Continental", "logo": "https://abdex.com/wp-content/uploads/2020/09/conti-390x231.jpg" },
+      { "name": "Danfoss", "logo": "https://abdex.com/wp-content/uploads/2023/11/Danfoss-1-390x231.jpg" }
     ],
     "capability_statement_pdf": "https://abdex.com/wp-content/uploads/2024/04/Capability-Statement-Email.pdf",
     "legal": {
@@ -93,6 +48,7 @@
       "terms_australia": "https://abdex.com/wordpress_abdex/wp-content/uploads/2022/12/Terms_and_Conditions_ABDEX_AUS.pdf"
     }
   },
+
   "services": [
     {
       "id": "hose-testing-assembly",
@@ -100,7 +56,7 @@
       "url": "https://abdex.com/service/hose-testing-and-assembly/",
       "description": "Pressure testing and certification is a key element of what Abdex does. Abdex provides onsite inspection, assembling and pressure testing of hose assemblies. The dedicated service team handles hose assembly and certifies assemblies to the required working pressure.",
       "image": {
-        "url": "/assets/abdex_images/crimper-440x260.jpg",
+        "url": "https://abdex.com/wp-content/uploads/2019/09/crimper-440x260.jpg",
         "alt": "Hose Testing"
       },
       "key_features": [
@@ -117,7 +73,7 @@
       "url": "https://abdex.com/service/hose-management-system/",
       "description": "Keeping track of high pressure assets is constant and often difficult work. The A-track system incorporates individual product etching and state-of-the-art RFID technology for tracking assets. You need to know what you have and where it is at all times.",
       "image": {
-        "url": "/assets/abdex_images/hosemanagement2-1170x694-copy2-440x260.jpg",
+        "url": "https://abdex.com/wp-content/uploads/2019/08/hosemanagement2-1170x694-copy2-440x260.jpg",
         "alt": "Hose Management System"
       },
       "key_features": [
@@ -134,7 +90,7 @@
       "url": "https://abdex.com/service/machine-training/",
       "description": "Abdex offers a full training and installation service. We understand service and the need to keep machines working year after year. Service, calibration and training is available for Uniflex hose machinery and other equipment.",
       "image": {
-        "url": "/assets/abdex_images/training2-440x260.jpg",
+        "url": "https://abdex.com/wp-content/uploads/2019/08/training2-440x260.jpg",
         "alt": "Uniflex Training"
       },
       "key_features": [
@@ -151,7 +107,7 @@
       "url": "https://abdex.com/service/rental-equipment/",
       "description": "Abdex stocks a range of pressure control equipment. This equipment is available to rent at short notice with highly competitive rates. Ideal for projects that need equipment fast without capital purchase.",
       "image": {
-        "url": "/assets/abdex_images/rental-440x260.jpg",
+        "url": "https://abdex.com/wp-content/uploads/2019/06/rental-440x260.jpg",
         "alt": "hose testing rig"
       },
       "key_features": [
@@ -168,7 +124,7 @@
       "url": "https://abdex.com/service/umbilical-hose/",
       "description": "Abdex has facilities for hose bundling (umbilicals) and Hydraulic Flying Leads (HFLs). Umbilical hoses bundle multiple hose lines together for subsea and offshore applications, providing a clean integrated solution.",
       "image": {
-        "url": "/assets/abdex_images/Multi-line-hose-pic3-1-440x260.jpg",
+        "url": "https://abdex.com/wp-content/uploads/2018/01/Multi-line-hose-pic3-1-440x260.jpg",
         "alt": "Umbilical Hose"
       },
       "key_features": [
@@ -180,44 +136,37 @@
       ]
     }
   ],
+
   "product_categories": [
     {
       "id": "oil-and-gas-hoses",
       "name": "Oil & Gas Hoses",
       "url": "https://abdex.com/oil-and-gas-hoses/",
       "description": "High quality API certified oilfield hose assemblies for offshore and onshore oil & gas applications. Pressure rated for demanding exploration and production environments.",
-      "banner_image": "/assets/abdex_images/bop-optimised-1.jpg",
+      "banner_image": "https://abdex.com/wp-content/uploads/2024/04/bop-optimised-1.jpg",
       "subcategories": [
         {
           "id": "black-eagle",
           "name": "Black Eagle Hoses",
           "url": "https://abdex.com/product-category/oil-and-gas-hose/black-eagle/",
           "description": "Parker Black Eagle hoses are a multi-spiral, wire-reinforced thermoplastic high-pressure hose series specifically designed for the oil and gas market. Applications include offshore projects and land operations including acidising, cementing, methanol injection, and gas injection.",
-          "pressure_ranges": [
-            "3,001-5,000 psi",
-            "5,001-10,500 psi",
-            "10,501-15,500 psi"
-          ],
-          "bore_sizes": [
-            "1 1/2 (38mm)",
-            "2 (50mm)",
-            "3 (75mm)"
-          ],
+          "pressure_ranges": ["3,001-5,000 psi", "5,001-10,500 psi", "10,501-15,500 psi"],
+          "bore_sizes": ["1 1/2 (38mm)", "2 (50mm)", "3 (75mm)"],
           "products": [
             {
               "name": "Parker Black Eagle Hose Features",
               "url": "https://abdex.com/products/oil-and-gas-hose/black-eagle/black-eagle-features/",
               "image": {
-                "url": "/assets/abdex_images/blackeagle2-1-300x149.jpg",
+                "url": "https://abdex.com/wp-content/uploads/2019/08/blackeagle2-1-300x149.jpg",
                 "alt": "Parker Black Eagle Hose Features"
               }
             },
             {
-              "name": "Parker Black Eagle \u2013 5,000 psi",
+              "name": "Parker Black Eagle – 5,000 psi",
               "url": "https://abdex.com/products/oil-and-gas-hose/black-eagle/parker-black-eagle-5k/",
               "working_pressure": "345 Bar / 5,000 psi",
               "image": {
-                "url": "/assets/abdex_images/2448N-32V80-1-1-300x149.jpg",
+                "url": "https://abdex.com/wp-content/uploads/2019/08/2448N-32V80-1-1-300x149.jpg",
                 "alt": "Parker Black Eagle - 5,000 psi"
               }
             },
@@ -228,26 +177,26 @@
               "working_pressure": "345 Bar / 5,000 psi",
               "bore_size": "2 inch",
               "image": {
-                "url": "/assets/abdex_images/2248N-32V10-1-1-300x149.jpg",
+                "url": "https://abdex.com/wp-content/uploads/2019/10/2248N-32V10-1-1-300x149.jpg",
                 "alt": "2 inch 5K Parker Black Eagle Light Hose"
               }
             },
             {
-              "name": "Parker Black Eagle Hose \u2013 10,000 psi",
+              "name": "Parker Black Eagle Hose – 10,000 psi",
               "url": "https://abdex.com/products/oil-and-gas-hose/black-eagle/parker-black-eagle-10k/",
               "part_number": "2580N-32V80",
               "working_pressure": "690 Bar / 10,000 psi",
               "image": {
-                "url": "/assets/abdex_images/2580N-32V80-1-1-300x149.jpg",
+                "url": "https://abdex.com/wp-content/uploads/2019/10/2580N-32V80-1-1-300x149.jpg",
                 "alt": "Parker Black Eagle Hose - 10,000 Psi"
               }
             },
             {
-              "name": "Parker Black Eagle \u2013 15,000 psi",
+              "name": "Parker Black Eagle – 15,000 psi",
               "url": "https://abdex.com/products/oil-and-gas-hose/black-eagle/parker-black-eagle-15k/",
               "working_pressure": "1034 Bar / 15,000 psi",
               "image": {
-                "url": "/assets/abdex_images/2448N-32V80-1-1-300x149.jpg",
+                "url": "https://abdex.com/wp-content/uploads/2019/08/2448N-32V80-1-1-300x149.jpg",
                 "alt": "Parker Black Eagle - 15,000 psi"
               }
             }
@@ -258,23 +207,9 @@
           "name": "BOP & Hot Line Hoses",
           "url": "https://abdex.com/product-category/oil-and-gas-hose/bop-and-hot-line/",
           "description": "Blowout Preventer (BOP) hoses developed to meet the most rigorous demands in exploration and deep drilling, both onshore and offshore. High-performance BOP hoses designed for hydraulic connections between well control equipment and control systems. Certified to withstand fire, high heat, and pressures in safety critical applications.",
-          "standards": [
-            "API16D"
-          ],
-          "pressure_ranges": [
-            "3,001-5,000 psi",
-            "5,001-10,500 psi"
-          ],
-          "bore_sizes": [
-            "1/4 (6.4mm)",
-            "3/8 (10mm)",
-            "1/2 (13mm)",
-            "3/4 (19.6mm)",
-            "1 (25mm)",
-            "1 1/4 (32mm)",
-            "1 1/2 (38mm)",
-            "2 (50mm)"
-          ],
+          "standards": ["API16D"],
+          "pressure_ranges": ["3,001-5,000 psi", "5,001-10,500 psi"],
+          "bore_sizes": ["1/4 (6.4mm)", "3/8 (10mm)", "1/2 (13mm)", "3/4 (19.6mm)", "1 (25mm)", "1 1/4 (32mm)", "1 1/2 (38mm)", "2 (50mm)"],
           "products": [
             {
               "name": "Gates BOP Hose | 5000 Megashield | WP 345 Bar",
@@ -282,7 +217,7 @@
               "working_pressure": "345 Bar / 5,000 psi",
               "brand": "Gates",
               "image": {
-                "url": "/assets/abdex_images/megasheild-300x149.jpg",
+                "url": "https://abdex.com/wp-content/uploads/2019/08/megasheild-300x149.jpg",
                 "alt": "Gates BOP Hose | 5000 Megashield | WP 345 Bar"
               }
             },
@@ -293,7 +228,7 @@
               "working_pressure": "280-490 Bar",
               "brand": "Parker",
               "image": {
-                "url": "/assets/abdex_images/2390N-1-300x149.jpg",
+                "url": "https://abdex.com/wp-content/uploads/2020/05/2390N-1-300x149.jpg",
                 "alt": "Parker Bop Hose"
               }
             }
@@ -304,20 +239,9 @@
           "name": "Aramid Braided Hose",
           "url": "https://abdex.com/product-category/oil-and-gas-hose/aramid-braided-hose/",
           "description": "Aramid braided hoses are low weight with high flexibility. Feature a smooth bore for improved flow rate and low pressure drop. Fully compliant to ISO 13628-5 / API 17E 'Specification for Subsea Production Control Umbilicals'.",
-          "standards": [
-            "ISO 13628-5",
-            "API 17E"
-          ],
-          "pressure_ranges": [
-            "3,001-5,000 psi",
-            "5,001-10,500 psi"
-          ],
-          "bore_sizes": [
-            "1/4 (6.4mm)",
-            "3/8 (10mm)",
-            "1/2 (13mm)",
-            "3/4 (19.6mm)"
-          ],
+          "standards": ["ISO 13628-5", "API 17E"],
+          "pressure_ranges": ["3,001-5,000 psi", "5,001-10,500 psi"],
+          "bore_sizes": ["1/4 (6.4mm)", "3/8 (10mm)", "1/2 (13mm)", "3/4 (19.6mm)"],
           "products": [
             {
               "name": "Parker Aramid Braided Hose | 2022N-5K | WP 345 Bar | Offshore",
@@ -326,7 +250,7 @@
               "working_pressure": "345 Bar / 5,000 psi",
               "brand": "Parker",
               "image": {
-                "url": "/assets/abdex_images/2022N-5K-2-1-300x149.jpg",
+                "url": "https://abdex.com/wp-content/uploads/2019/08/2022N-5K-2-1-300x149.jpg",
                 "alt": "Parker Aramid Braided Hose 2022N-5K"
               }
             },
@@ -337,7 +261,7 @@
               "working_pressure": "345 Bar / 5,000 psi",
               "brand": "Parker",
               "image": {
-                "url": "/assets/abdex_images/575X-12-1-1-300x149.jpg",
+                "url": "https://abdex.com/wp-content/uploads/2019/08/575X-12-1-1-300x149.jpg",
                 "alt": "Parker Aramid Braided Hose 575X-12"
               }
             },
@@ -348,7 +272,7 @@
               "working_pressure": "690 Bar / 10,000 psi",
               "brand": "Parker",
               "image": {
-                "url": "/assets/abdex_images/2022N-10K-1-300x149.jpg",
+                "url": "https://abdex.com/wp-content/uploads/2019/08/2022N-10K-1-300x149.jpg",
                 "alt": "Parker Aramid Braided Hose 2022N-10K"
               }
             }
@@ -359,39 +283,17 @@
           "name": "Drilling Hoses",
           "url": "https://abdex.com/product-category/oil-and-gas-hose/drilling-hoses/",
           "description": "Large range of drilling hoses including rotary drilling hose, air drill hose. Abdex is the only certified manufacturer in Australia of API7K hose. Matched fittings available.",
-          "standards": [
-            "API7K"
-          ],
-          "subcategories": [
-            "Oilfield Hose",
-            "API7K",
-            "Rotary Drilling Hose",
-            "Slim Hole Rotary"
-          ],
-          "pressure_ranges": [
-            "0-3,000 psi",
-            "3,001-5,000 psi",
-            "5,001-10,500 psi",
-            "10,501-15,500 psi"
-          ],
-          "bore_sizes": [
-            "1 (25mm)",
-            "1 1/2 (38mm)",
-            "1 1/4 (32mm)",
-            "2 (50mm)",
-            "2 1/2 (63mm)",
-            "3 (75mm)",
-            "3 1/2 (88mm)",
-            "4 (100mm)",
-            "5 (125mm)"
-          ],
+          "standards": ["API7K"],
+          "subcategories": ["Oilfield Hose", "API7K", "Rotary Drilling Hose", "Slim Hole Rotary"],
+          "pressure_ranges": ["0-3,000 psi", "3,001-5,000 psi", "5,001-10,500 psi", "10,501-15,500 psi"],
+          "bore_sizes": ["1 (25mm)", "1 1/2 (38mm)", "1 1/4 (32mm)", "2 (50mm)", "2 1/2 (63mm)", "3 (75mm)", "3 1/2 (88mm)", "4 (100mm)", "5 (125mm)"],
           "products": [
             {
               "name": "Bull Hose Air 600 | WP 165 Bar",
               "url": "https://abdex.com/products/oil-and-gas-hose/drilling-hoses/bull-hose-air-600/",
               "working_pressure": "165 Bar",
               "image": {
-                "url": "/assets/abdex_images/Reflex-Steel-Air-600-300x149.jpg",
+                "url": "https://abdex.com/wp-content/uploads/2025/10/Reflex-Steel-Air-600-300x149.jpg",
                 "alt": "R13 Hose - Bull Hose Air 600"
               }
             },
@@ -401,7 +303,7 @@
               "working_pressure": "207 Bar / 3,000 psi",
               "brand": "Abdex",
               "image": {
-                "url": "/assets/abdex_images/oilfieldhose-1-300x149.jpg",
+                "url": "https://abdex.com/wp-content/uploads/2019/08/oilfieldhose-1-300x149.jpg",
                 "alt": "Abdex Rough Neck High Pressure Hose"
               }
             },
@@ -410,7 +312,7 @@
               "url": "https://abdex.com/products/oil-and-gas-hose/drilling-hoses/bull-hose-air-1200/",
               "working_pressure": "330 Bar",
               "image": {
-                "url": "/assets/abdex_images/Steel-Air-1200-300x149.jpg",
+                "url": "https://abdex.com/wp-content/uploads/2025/10/Steel-Air-1200-300x149.jpg",
                 "alt": "Bull Hose Air 1200"
               }
             },
@@ -419,7 +321,7 @@
               "url": "https://abdex.com/products/oil-and-gas-hose/drilling-hoses/r13-hose/",
               "working_pressure": "344 Bar / 5,000 psi",
               "image": {
-                "url": "/assets/abdex_images/R13-300x149.jpg",
+                "url": "https://abdex.com/wp-content/uploads/2025/10/R13-300x149.jpg",
                 "alt": "R13 Hose"
               }
             },
@@ -428,7 +330,7 @@
               "url": "https://abdex.com/products/oil-and-gas-hose/drilling-hoses/slim-hole-rotary/slim-hole-rotary-hose/",
               "working_pressure": "207-345 Bar",
               "image": {
-                "url": "/assets/abdex_images/slimhole-1-300x149.jpg",
+                "url": "https://abdex.com/wp-content/uploads/2020/06/slimhole-1-300x149.jpg",
                 "alt": "Slim Hole Rotary Drilling Hose"
               }
             },
@@ -438,7 +340,7 @@
               "working_pressure": "345 Bar / 5,000 psi",
               "grade": "API7K Grade D",
               "image": {
-                "url": "/assets/abdex_images/Rotary-Vibrator-5000-Grade-D-1-Rotated-1-300x149.jpg",
+                "url": "https://abdex.com/wp-content/uploads/2019/10/Rotary-Vibrator-5000-Grade-D-1-Rotated-1-300x149.jpg",
                 "alt": "Rotary Drilling Hose 5000 Grade D"
               }
             },
@@ -448,7 +350,7 @@
               "working_pressure": "345 Bar / 5,000 psi",
               "brand": "Gates",
               "image": {
-                "url": "/assets/abdex_images/5000-POWERSPIRAL-1-1-300x149.jpg",
+                "url": "https://abdex.com/wp-content/uploads/2019/10/5000-POWERSPIRAL-1-1-300x149.jpg",
                 "alt": "Gates Rotary Drilling Hose Powerspiral 5000"
               }
             },
@@ -456,11 +358,9 @@
               "name": "API 7K Hose | 5,000 psi | WP 345 Bar",
               "url": "https://abdex.com/products/oil-and-gas-hose/drilling-hoses/api7k-drilling/api-7k-hose/",
               "working_pressure": "345 Bar / 5,000 psi",
-              "standards": [
-                "API7K"
-              ],
+              "standards": ["API7K"],
               "image": {
-                "url": "/assets/abdex_images/API7K-5000-1-1-1-300x149.jpg",
+                "url": "https://abdex.com/wp-content/uploads/2019/10/API7K-5000-1-1-1-300x149.jpg",
                 "alt": "API 7K Hose 5000 psi"
               }
             },
@@ -471,7 +371,7 @@
               "brand": "Parker",
               "bore_size": "2 inch",
               "image": {
-                "url": "/assets/abdex_images/2-drilling-hose.jpg",
+                "url": "https://abdex.com/wp-content/uploads/2019/08/2-drilling-hose.jpg",
                 "alt": "Parker Drilling Hose WP 350 Bar"
               }
             },
@@ -482,7 +382,7 @@
               "working_pressure": "350 Bar / 5,000 psi",
               "brand": "Parker",
               "image": {
-                "url": "/assets/abdex_images/P35-32-1.jpg",
+                "url": "https://abdex.com/wp-content/uploads/2019/08/P35-32-1.jpg",
                 "alt": "Parker No Skive Hose P35-32"
               }
             },
@@ -493,7 +393,7 @@
               "brand": "Gates",
               "grade": "API7K Grade E",
               "image": {
-                "url": "/assets/abdex_images/Rotary-Vibrator-5000-Grade-D-1-Rotated-1-300x149.jpg",
+                "url": "https://abdex.com/wp-content/uploads/2019/10/Rotary-Vibrator-5000-Grade-D-1-Rotated-1-300x149.jpg",
                 "alt": "Gates Rotary Drilling Hose Grade E"
               }
             },
@@ -504,7 +404,7 @@
               "working_pressure": "552 Bar / 8,000 psi",
               "brand": "Abdex",
               "image": {
-                "url": "/assets/abdex_images/P5675-1-1-300x149.jpg",
+                "url": "https://abdex.com/wp-content/uploads/2019/10/P5675-1-1-300x149.jpg",
                 "alt": "Abdex Drilling Hose P5675"
               }
             },
@@ -513,7 +413,7 @@
               "url": "https://abdex.com/products/oil-and-gas-hose/drilling-hoses/black-gold-hose/",
               "working_pressure": "345-689 Bar (5,000-10,000 psi)",
               "image": {
-                "url": "/assets/abdex_images/slimhole-300x149.jpg",
+                "url": "https://abdex.com/wp-content/uploads/2019/10/slimhole-300x149.jpg",
                 "alt": "Black Gold Hose"
               }
             },
@@ -521,647 +421,35 @@
               "name": "API 16C Choke & Kill Hoses | WP 689 Bar | 10,000 psi",
               "url": "https://abdex.com/products/oil-and-gas-hose/drilling-hoses/choke-and-kill-line/",
               "working_pressure": "689 Bar / 10,000 psi",
-              "standards": [
-                "API 16C"
-              ],
+              "standards": ["API 16C"],
               "image": {
-                "url": "/assets/abdex_images/Choke-and-Kill-Imag-2-300x149.jpg",
+                "url": "https://abdex.com/wp-content/uploads/2024/06/Choke-and-Kill-Imag-2-300x149.jpg",
                 "alt": "Choke and Kill Line"
               }
+            },
+            {
+              "name": "Gates CR2 | 2-Wire Braid Hose",
+              "url": "https://abdex.com/products/hydraulic-hoses/gates-hydraulic-hose-fittings/wire-reinforced-hose-hydraulic/gates-cr2/",
+              "image": {
+                "url": "https://abdex.com/wp-content/uploads/2022/12/CR2.jpg",
+                "alt": "Gates CR2"
+              },
+              "description": "2-Wire braid hose with 3,125 PSI working pressure, compliant with SAE 100R2.",
+              "key_features": ["3,125 PSI WP", "2-Wire Braid", "SAE 100R2 compliant"]
+            },
+            {
+              "name": "Parker Non-Conductive Hose | 588N",
+              "url": "https://abdex.com/products/hydraulic-hoses/thermoplastic-hydraulic-hose/100r8-hydraulic-hose/parker-non-conductive-hose/",
+              "image": {
+                "url": "https://abdex.com/wp-content/uploads/2019/07/588N-3-1.jpg",
+                "alt": "Parker 588N"
+              },
+              "description": "Non-conductive thermoplastic hydraulic hose with 345 Bar (5,000 PSI) working pressure.",
+              "key_features": ["Non-conductive", "345 Bar WP", "SAE 100R8 compliant"]
             }
           ]
-        },
-        {
-          "id": "chemical-injection",
-          "name": "Chemical Injection Hose",
-          "url": "https://abdex.com/product-category/oil-and-gas-hose/chemical-injection/",
-          "description": "Chemical injection hoses for oil and gas applications where precise chemical dosing is required. High pressure rated for demanding oilfield chemical injection systems."
-        },
-        {
-          "id": "umbilicals-jumpers",
-          "name": "Umbilicals & Jumpers",
-          "url": "https://abdex.com/product-category/oil-and-gas-hose/umbilicals-and-jumpers/",
-          "description": "Subsea umbilical hoses and jumper assemblies for offshore oil & gas applications. Multi-line bundled assemblies for subsea control systems."
-        }
-      ]
-    },
-    {
-      "id": "industrial-hoses",
-      "name": "Industrial Hoses",
-      "url": "https://abdex.com/industrial-hoses/",
-      "description": "Comprehensive range of industrial hoses for chemical transfer, air, petroleum, food, vacuum, and water jetting applications.",
-      "subcategories": [
-        {
-          "id": "chemical-hoses",
-          "name": "Chemical Hoses",
-          "url": "https://abdex.com/product-category/industrial-hoses/chemical-hoses-4/",
-          "description": "Range of industrial chemical hoses from Gates and Continental for chemical transfer, suction and delivery.",
-          "brands": [
-            "Gates",
-            "Continental"
-          ],
-          "pressure_ranges": [
-            "0-3,000 psi"
-          ],
-          "bore_sizes": [
-            "3/4 (19.6mm)",
-            "1 (25mm)",
-            "1 1/4 (32mm)",
-            "1 1/2 (38mm)",
-            "2 (50mm)",
-            "2 1/2 (63mm)",
-            "3 (75mm)",
-            "4 (100mm)"
-          ],
-          "products": [
-            {
-              "name": "Continental Chemical Hose | Pure One | WP 13.8 Bar",
-              "url": "https://abdex.com/products/industrial-hoses/chemical-hoses-4/suction-and-delivery/continental-chemical-hose/",
-              "working_pressure": "13.8 Bar / 200 psi",
-              "brand": "Continental",
-              "image": {
-                "url": "/assets/abdex_images/Pure-one.jpg",
-                "alt": "Continental Chemical Hose Pure One"
-              }
-            },
-            {
-              "name": "Gates Chemical Hose | Chem Master Plus XLPE | WP 13.8 Bar",
-              "url": "https://abdex.com/products/industrial-hoses/chemical-hoses-4/suction-and-delivery/gates-chemical-hose-wp-13-8-bar/",
-              "working_pressure": "13.8 Bar / 200 psi",
-              "brand": "Gates",
-              "image": {
-                "url": "/assets/abdex_images/Chem-Master.jpg",
-                "alt": "Gates Chemical Hose Chem Master Plus XLPE"
-              }
-            },
-            {
-              "name": "Continental Chem One | WP 13.8 Bar | Chemical Transfer",
-              "url": "https://abdex.com/products/industrial-hoses/chemical-hoses-4/chemical-transfer/continental-chem-one/",
-              "working_pressure": "13.8 Bar / 200 psi",
-              "brand": "Continental",
-              "image": {
-                "url": "/assets/abdex_images/Chem-One.jpg",
-                "alt": "Continental Chem One Chemical Transfer"
-              }
-            }
-          ]
-        },
-        {
-          "id": "air-multipurpose",
-          "name": "Air & Multipurpose Hose",
-          "url": "https://abdex.com/product-category/industrial-hoses/air-and-multipurpose/",
-          "description": "Flexible air and multipurpose hoses for general industrial use, compressed air systems and multi-fluid applications."
-        },
-        {
-          "id": "petroleum-transfer",
-          "name": "Petroleum Transfer Hose",
-          "url": "https://abdex.com/product-category/industrial-hoses/petroleum-transfer-hose/",
-          "description": "Petroleum and fuel transfer hoses designed for safe handling of fuels, oils and petroleum-based products."
-        },
-        {
-          "id": "ptfe",
-          "name": "PTFE Hose",
-          "url": "https://abdex.com/product-category/industrial-hoses/ptfe/",
-          "description": "PTFE lined hoses for chemical resistance, food grade applications, and high purity fluid transfer. Excellent for aggressive chemicals and steam."
-        },
-        {
-          "id": "suction-discharge",
-          "name": "Suction & Discharge Hose",
-          "url": "https://abdex.com/product-category/industrial-hoses/suction-and-discharge/",
-          "description": "Heavy-duty suction and discharge hoses for bulk transfer of water, chemicals, and other media. Available in large bore sizes."
-        },
-        {
-          "id": "vacuum-truck",
-          "name": "Vacuum Truck Hoses",
-          "url": "https://abdex.com/product-category/industrial-hoses/vacuum-truck-hoses/",
-          "description": "Specialised vacuum truck hoses for industrial vacuum applications, waste collection, and liquid transfer."
-        },
-        {
-          "id": "water-jetting",
-          "name": "Water Jetting Hose",
-          "url": "https://abdex.com/product-category/thermoplastic-hose/water-jetting-hose/",
-          "description": "High pressure thermoplastic water jetting hoses for industrial cleaning, surface preparation, and hydro-blasting applications. WJA certified."
-        },
-        {
-          "id": "food-beverage",
-          "name": "Food & Beverage Hose",
-          "url": "https://abdex.com/product-category/rubber-hoses/food-and-beverage-hose/",
-          "description": "Food-grade rubber hoses approved for use in food processing, beverage, dairy and pharmaceutical applications. FDA compliant."
-        }
-      ]
-    },
-    {
-      "id": "hydraulic-hoses",
-      "name": "Hydraulic Hoses",
-      "url": "https://abdex.com/hydraulic-hoses/",
-      "description": "Thermoplastic and rubber hydraulic hoses for industrial and mobile hydraulic systems. Wide range of pressure ratings and bore sizes.",
-      "subcategories": [
-        {
-          "id": "thermoplastic-hydraulic",
-          "name": "Thermoplastic Hydraulic Hose",
-          "url": "https://abdex.com/product-category/hydraulic-hoses/thermoplastic-hydraulic-hose/",
-          "description": "Lightweight, flexible thermoplastic hydraulic hoses offering excellent resistance to oils and high pressure. Ideal for mobile hydraulics."
-        },
-        {
-          "id": "rubber-hoses",
-          "name": "Rubber Hoses",
-          "url": "https://abdex.com/product-category/rubber-hoses/",
-          "description": "Traditional rubber hydraulic hoses for standard and high pressure hydraulic applications. Excellent durability."
-        },
-        {
-          "id": "wire-reinforced",
-          "name": "Wire Reinforced Hose",
-          "url": "https://abdex.com/product-category/hydraulic-hoses/gates-hydraulic-hose-fittings/wire-reinforced-hose-hydraulic/",
-          "description": "Gates wire reinforced hydraulic hoses with high pressure capability for demanding hydraulic systems.",
-          "brand": "Gates"
-        }
-      ]
-    },
-    {
-      "id": "couplings-accessories",
-      "name": "Couplings & Accessories",
-      "url": "https://abdex.com/couplings-accessories/",
-      "description": "Comprehensive range of hose couplings, hammer unions, containment grips, hose protection and pipe slings for oilfield and industrial applications.",
-      "subcategories": [
-        {
-          "id": "hammer-unions",
-          "name": "Hammer Unions",
-          "url": "https://abdex.com/product-category/hammer-unions-2/",
-          "description": "High pressure hammer union fittings for oilfield and industrial high pressure fluid transfer connections."
-        },
-        {
-          "id": "containment-grips",
-          "name": "Containment Grips",
-          "url": "https://abdex.com/product-category/couplings-and-accessories/containment-grips/",
-          "description": "Hose containment grips for safety \u2014 prevent whiplash and contain hose assemblies in case of fitting failure."
-        },
-        {
-          "id": "hose-protection",
-          "name": "Hose Protection",
-          "url": "https://abdex.com/hose-protection-1/",
-          "description": "Protective sleeving, guards and covers to extend hose life and protect against abrasion, UV, heat and mechanical damage."
-        },
-        {
-          "id": "pipe-slings",
-          "name": "Pipe Slings",
-          "url": "https://abdex.com/products/couplings-and-accessories/pipe-slings/pipe-slings/",
-          "description": "Pipe slings for safe lifting and handling of pipes and hose assemblies on industrial and offshore sites."
-        }
-      ]
-    },
-    {
-      "id": "fittings-valves",
-      "name": "Fittings & Valves",
-      "url": "https://abdex.com/fittings-and-valves/",
-      "description": "Premium high pressure fittings, valves, tubing, filters, and control panels from Fitok and Parker. Pressure ratings from 6,000 psi up to 60,000 psi. Used in oil & gas, chemical processing, defence and manufacturing.",
-      "subcategories": [
-        {
-          "id": "adaptors-fittings",
-          "name": "Adaptors & Fittings",
-          "url": "https://abdex.com/product-category/fittings-and-valves/adaptors-fittings/",
-          "description": "High pressure adaptor fittings in a wide range of end connections and materials including stainless steel, alloy 400 and 904L."
-        },
-        {
-          "id": "high-pressure-filters",
-          "name": "High Pressure Filters",
-          "url": "https://abdex.com/product-category/fittings-and-valves/high-pressure-filters/",
-          "description": "Inline high pressure filters for protection of instrumentation and equipment in critical pressure applications."
-        },
-        {
-          "id": "high-pressure-tubing",
-          "name": "Ultra High Pressure Tubing",
-          "url": "https://abdex.com/product-category/fittings-and-valves/high-pressure-tubing/",
-          "description": "Ultra high pressure tubing rated up to 60,000 psi for waterjet and ultra-high pressure fluid transfer systems."
-        },
-        {
-          "id": "sour-service",
-          "name": "Sour Service Parts",
-          "url": "https://abdex.com/product-category/fittings-and-valves/sour-service-parts/",
-          "description": "NACE MR0175 compliant sour service fittings, valves and tubing for hydrogen sulfide (H2S) environments in oil & gas."
-        },
-        {
-          "id": "tooling",
-          "name": "Tooling",
-          "url": "https://abdex.com/product-category/fittings-and-valves/tooling/",
-          "description": "Specialist tooling for high pressure fitting assembly, tube bending, and instrumentation work."
-        },
-        {
-          "id": "high-pressure-valves",
-          "name": "High Pressure Valves",
-          "url": "https://abdex.com/product-category/fittings-and-valves/high-pressure-valves/",
-          "description": "Premium high pressure valves from Fitok and Alco. Pressure ratings from 6,000 psi to 60,000 psi. All rated to global standards including NACE MR0175 and ISO certifications.",
-          "brands": [
-            "Fitok",
-            "Alco"
-          ],
-          "pressure_range": "6,000 psi to 60,000 psi",
-          "materials": [
-            "316 Stainless Steel",
-            "Alloy 400",
-            "904L"
-          ],
-          "applications": [
-            "Oil & Gas",
-            "Chemical Processing",
-            "Hydrogen & Specialty Gas",
-            "Aerospace & Defence",
-            "Manufacturing & Industrial"
-          ],
-          "valve_types": [
-            "Needle Valves",
-            "Ball Valves",
-            "Check Valves",
-            "Relief Valves",
-            "Block and Bleed Valves",
-            "Manifold Valves",
-            "Metering Valves",
-            "Oilfield Valves",
-            "Subsea Valves"
-          ],
-          "products": [
-            {
-              "name": "1 Piece Instrumentation Ball Valves",
-              "url": "https://abdex.com/products/fittings-and-valves/high-pressure-valves/ball-valves/1k-to-10k/1-piece-instrumentation-ball-valves/",
-              "image": {
-                "url": "/assets/abdex_images/BOSeries-1-300x230.jpg",
-                "alt": "1 Piece Instrumentation Ball Valves"
-              }
-            },
-            {
-              "name": "10-60K Pneumatic Needle Valves",
-              "url": "https://abdex.com/products/fittings-and-valves/high-pressure-valves/needle-valves/10k-to-60k-needle-valves/10-60k-pneumatic-needle-valves/",
-              "pressure_range": "10,000-60,000 psi",
-              "image": {
-                "url": "/assets/abdex_images/Pneumatic-Needle-Valves-1-300x230.jpg",
-                "alt": "10-60K Pneumatic Needle Valves"
-              }
-            },
-            {
-              "name": "10, 15 & 20K Pneumatic Ball Valves",
-              "url": "https://abdex.com/products/fittings-and-valves/high-pressure-valves/ball-valves/10k-to-20k/10-15-20k-pneumatic-ball-valves/",
-              "pressure_range": "10,000-20,000 psi",
-              "image": {
-                "url": "/assets/abdex_images/10-15-20K-Pneumatic-Ball-Valves-1-1-300x230.jpg",
-                "alt": "10-15-20K Pneumatic Ball Valves"
-              }
-            },
-            {
-              "name": "10000 psi Check Valve",
-              "url": "https://abdex.com/products/fittings-and-valves/high-pressure-valves/check-valves/10k-to-60k/10000-psi-check-valve/",
-              "pressure_rating": "10,000 psi",
-              "image": {
-                "url": "/assets/abdex_images/checkvalves_2-1-300x230.jpg",
-                "alt": "10000 psi Check Valve"
-              }
-            },
-            {
-              "name": "10000 psi Needle Valves",
-              "url": "https://abdex.com/products/fittings-and-valves/high-pressure-valves/needle-valves/10k-to-60k-needle-valves/10000-psi-needle-valve/",
-              "pressure_rating": "10,000 psi",
-              "image": {
-                "url": "/assets/abdex_images/needlevalves2-1-300x230.jpg",
-                "alt": "10000 psi Needle Valve"
-              }
-            },
-            {
-              "name": "10K Ball Valves",
-              "url": "https://abdex.com/products/fittings-and-valves/high-pressure-valves/ball-valves/10k-to-20k/10k-ball-valves/",
-              "pressure_rating": "10,000 psi",
-              "image": {
-                "url": "/assets/abdex_images/10B-series-BaLL-VaLVes-1-300x230.jpg",
-                "alt": "10K Ball Valves"
-              }
-            },
-            {
-              "name": "15, 30 & 60K Metering Valves",
-              "url": "https://abdex.com/products/fittings-and-valves/high-pressure-valves/metering-valves/10k-to-60k-metering-valves/15-30-60k-metering-valves/",
-              "pressure_range": "15,000-60,000 psi",
-              "image": {
-                "url": "/assets/abdex_images/metervalves-1-1-300x230.jpg",
-                "alt": "15-30-60K Metering Valves"
-              }
-            },
-            {
-              "name": "15000 psi Ball Valve",
-              "url": "https://abdex.com/products/fittings-and-valves/high-pressure-valves/ball-valves/10k-to-20k/15k-ball-valves/",
-              "pressure_rating": "15,000 psi",
-              "image": {
-                "url": "/assets/abdex_images/10B-series-BaLL-VaLVes-2-300x230.jpg",
-                "alt": "15000 psi ball valve"
-              }
-            },
-            {
-              "name": "15000 psi Needle Valve",
-              "url": "https://abdex.com/products/fittings-and-valves/high-pressure-valves/needle-valves/10k-to-60k-needle-valves/15000-psi-needle-valve/",
-              "pressure_rating": "15,000 psi",
-              "image": {
-                "url": "/assets/abdex_images/needlevalves3-1-300x230.jpg",
-                "alt": "15000 psi needle valve"
-              }
-            },
-            {
-              "name": "20K Ball Valves",
-              "url": "https://abdex.com/products/fittings-and-valves/high-pressure-valves/ball-valves/10k-to-20k/20k-ball-vales/",
-              "pressure_rating": "20,000 psi",
-              "image": {
-                "url": "/assets/abdex_images/10B-series-BaLL-VaLVes-3-300x230.jpg",
-                "alt": "20K Ball Valves"
-              }
-            },
-            {
-              "name": "20K Relief Valves",
-              "url": "https://abdex.com/products/fittings-and-valves/high-pressure-valves/relief-valves/10k-to-60k-relief-valves/20k-relief-valves/",
-              "pressure_rating": "20,000 psi",
-              "image": {
-                "url": "/assets/abdex_images/relief2-1-300x230.jpg",
-                "alt": "20K Relief Valves"
-              }
-            }
-          ]
-        },
-        {
-          "id": "a-frames-manifolds",
-          "name": "A-Frames, Manifolds & Valves",
-          "url": "https://abdex.com/product-category/fittings-and-valves/a-frames-manifolds-and-valves/",
-          "description": "A-frame manifold assemblies and valve blocks for offshore and onshore high pressure fluid distribution systems."
-        },
-        {
-          "id": "custom-control-panels",
-          "name": "Custom Control Panels",
-          "url": "https://abdex.com/products/fittings-and-valves/control-panels/custom-control-panels/",
-          "description": "Custom designed and built control panels for high pressure fluid control systems. Bespoke engineering to customer specification."
-        }
-      ]
-    },
-    {
-      "id": "uniflex-machinery",
-      "name": "Uniflex Machinery",
-      "url": "https://abdex.com/uniflex-machinery/",
-      "description": "Abdex is the authorised Uniflex distributor in Australia. Uniflex manufactures the world's most comprehensive range of hose manufacturing machinery. Slide bearings on crimp tools improve efficiency up to 20%, reduce friction and keep tools free of contaminants.",
-      "brand": "Uniflex",
-      "subcategories": [
-        {
-          "id": "hose-crimping-machines",
-          "name": "Hydraulic Hose Crimping Machines",
-          "url": "https://abdex.com/uniflex-machinery/hydraulic-hose-crimping-machines/",
-          "description": "Full range of Uniflex hydraulic hose crimping machines from workshop to production crimpers. Slide bearings improve efficiency up to 20%.",
-          "products": [
-            {
-              "name": "Uniflex HM3 H",
-              "url": "https://abdex.com/products/uniflex-machinery/hydraulic-hose-crimpers-production/uniflex-hm3-h/",
-              "image": {
-                "url": "/assets/abdex_images/UNIFLEX_HM-3H_IPC-Square-300x300.png",
-                "alt": "Uniflex HM3 H Crimper"
-              }
-            },
-            {
-              "name": "Uniflex HM 220 \u2013 HM 222(220), HM 225",
-              "url": "https://abdex.com/products/uniflex-machinery/hydraulic-hose-crimpers-production/uniflex-hm-220/",
-              "image": {
-                "url": "/assets/abdex_images/HM225_IPC-Square-300x300.png",
-                "alt": "Uniflex HM 220 Series"
-              }
-            },
-            {
-              "name": "Uniflex HM 380 \u2013 HM 375, HM 380, HM 400",
-              "url": "https://abdex.com/products/uniflex-machinery/hydraulic-hose-crimpers-production/uniflex-hm-380/",
-              "image": {
-                "url": "/assets/abdex_images/HM-380_IPC-Square-no-background-300x300.png",
-                "alt": "Uniflex HM 380 Series"
-              }
-            },
-            {
-              "name": "Uniflex HM 450, HM 480, HM 495",
-              "url": "https://abdex.com/products/uniflex-machinery/hydraulic-hose-crimpers-production/uniflex-hm-450/",
-              "image": {
-                "url": "/assets/abdex_images/HM450-1-300x300.jpg",
-                "alt": "Uniflex HM 450"
-              }
-            },
-            {
-              "name": "Ultra 2000 Tonne Crimper",
-              "url": "https://abdex.com/products/uniflex-machinery/hydraulic-hose-crimpers-production/ultra-2000-tonne-crimper/",
-              "description": "Heavy duty 2000 tonne crimper for large bore hose assemblies",
-              "image": {
-                "url": "/assets/abdex_images/ultra2000_2-1-300x300.jpg",
-                "alt": "Ultra 2000 Tonne Crimper"
-              }
-            },
-            {
-              "name": "Uniflex HM 660, HM 665, HM 1200",
-              "url": "https://abdex.com/products/uniflex-machinery/hydraulic-hose-crimpers-production/uniflex-hm-660/",
-              "image": {
-                "url": "/assets/abdex_images/HM-660_2-1-300x300.jpg",
-                "alt": "Uniflex HM 660 Series"
-              }
-            }
-          ]
-        },
-        {
-          "id": "hose-cutter",
-          "name": "Hydraulic Hose Cutter",
-          "url": "https://abdex.com/uniflex-machinery/hydraulic-hose-cutter/",
-          "description": "Uniflex hydraulic hose cutting machines for clean, precise hose cutting without deforming the hose end."
-        },
-        {
-          "id": "workshop-test-rigs",
-          "name": "Workshop Test Rigs",
-          "url": "https://abdex.com/product-category/uniflex-machinery/hose-test-bench/workshop-test-rigs/",
-          "description": "Workshop pressure test rigs and test benches for hose assembly proof testing and certification. Flexible design and build solutions available for sale or rental."
-        },
-        {
-          "id": "bending-machines",
-          "name": "Bending Machines",
-          "url": "https://abdex.com/product-category/uniflex-machinery/bending-machines/",
-          "description": "Uniflex tube and hose bending machines for precise, consistent bends in tubing and hose assemblies."
-        },
-        {
-          "id": "nipple-inserters",
-          "name": "Nipple Inserters",
-          "url": "https://abdex.com/product-category/uniflex-machinery/nipple-inserters/",
-          "description": "Pneumatic and hydraulic nipple insertion machines for fast, accurate fitting insertion into hose assemblies."
-        },
-        {
-          "id": "hose-coiling",
-          "name": "Hose Coiling, Measuring & Storage",
-          "url": "https://abdex.com/product-category/uniflex-machinery/hose-coiling-measuring-storage/",
-          "description": "Automated hose coiling, measuring, and storage solutions to improve workshop productivity and accuracy."
-        },
-        {
-          "id": "hose-skiving-machines",
-          "name": "Hose Skiving Machines",
-          "url": "https://abdex.com/product-category/uniflex-machinery/hose-skiving-machines/",
-          "description": "Precision hose skiving machines to remove the outer cover of hoses before fitting insertion. Essential for large bore and high pressure assemblies."
-        },
-        {
-          "id": "hose-cleaning-machines",
-          "name": "Hose Cleaning Machines",
-          "url": "https://abdex.com/product-category/uniflex-machinery/hose-cleaning-machines/",
-          "description": "Hose bore cleaning machines to clean contamination from inside hose assemblies after cutting \u2014 critical for hydraulic and precision systems."
-        },
-        {
-          "id": "pin-pricking",
-          "name": "Pin Pricking Machines",
-          "url": "https://abdex.com/product-category/uniflex-machinery/pin-pricking/",
-          "description": "Pin pricking machines for perforating the outer cover of hose to allow trapped air to escape during crimping."
-        },
-        {
-          "id": "marking-machines",
-          "name": "Marking Machines",
-          "url": "https://abdex.com/product-category/uniflex-machinery/marking-machines/",
-          "description": "Hose and assembly marking machines for permanent identification, traceability and compliance labelling."
-        },
-        {
-          "id": "pop-lock",
-          "name": "Uniflex POP-LOCK Hose Retention System",
-          "url": "https://abdex.com/products/uniflex-machinery/pop-lock/uniflex-pop-lock-hose-retention-system/",
-          "description": "The POP-LOCK is a safety hose retention system that locks hose fittings mechanically into connections, preventing accidental disconnection under pressure."
-        },
-        {
-          "id": "options-accessories",
-          "name": "Options and Accessories",
-          "url": "https://abdex.com/product-category/uniflex-machinery/options-and-accessories/",
-          "description": "Accessories, tooling and options for Uniflex machinery including dies, adaptors and upgrade components."
-        },
-        {
-          "id": "vehicle-container-service",
-          "name": "Vehicle & Container Fitting Service",
-          "url": "https://abdex.com/product-category/uniflex-machinery/vehicle-and-container-fitting-service/",
-          "description": "Mobile hose making units installed in vehicles or containers \u2014 complete hose workshops on wheels for field or workshop use."
-        }
-      ]
-    },
-    {
-      "id": "rental-equipment",
-      "name": "Rental Equipment",
-      "url": "https://abdex.com/product-category/rental-equipment/",
-      "description": "Pressure control and test equipment available for short-notice rental at competitive rates. Includes test rigs, pressure gauges and related accessories."
-    },
-    {
-      "id": "clearance",
-      "name": "Clearance",
-      "url": "https://abdex.com/product-category/clearance/",
-      "description": "Clearance items at reduced prices. Ex-demonstration and surplus stock across all product categories."
-    }
-  ],
-  "agent_knowledge_base": {
-    "common_questions": [
-      {
-        "question": "What pressure range do Abdex products cover?",
-        "answer": "Abdex offers fluid transfer solutions from low pressure right up to ultra-high pressure at 60,000 psi (4,135 bar). Our range includes hydraulic hoses, oil & gas hoses, high pressure valves, and ultra-high pressure tubing and fittings."
-      },
-      {
-        "question": "Do you have BOP hoses?",
-        "answer": "Yes. Abdex stocks Blowout Preventer (BOP) hoses from Gates (Megashield 5000, 345 Bar) and Parker (2390N, 280-490 Bar). These are API16D certified hoses designed for hydraulic connections between well control equipment and control systems, rated for fire, high heat and safety critical applications."
-      },
-      {
-        "question": "Are you the only certified API7K hose manufacturer in Australia?",
-        "answer": "Yes. Abdex is the only certified manufacturer of API7K drilling hoses in Australia. We offer a full range of rotary drilling hoses, slim hole rotary, and air drill hoses with matched fittings."
-      },
-      {
-        "question": "What is the A-track system?",
-        "answer": "A-track is Abdex's Hose Management System. It uses individual product etching and RFID technology to track your high pressure hose assets \u2014 know what you have and where it is at all times. This is critical for compliance, maintenance scheduling, and inspection records."
-      },
-      {
-        "question": "Do you sell Uniflex crimping machines?",
-        "answer": "Yes, Abdex is the authorised Uniflex distributor in Australia. We sell the full Uniflex range including the HM3H, HM220, HM380, HM450, HM660, HM1200, and the Ultra 2000 tonne crimper for large bore assemblies. We also provide machine service, calibration and training."
-      },
-      {
-        "question": "What valve pressure ratings do you have?",
-        "answer": "Our high pressure valve range (Fitok and Alco brands) covers from 1,000 psi right up to 60,000 psi. Types include ball valves, needle valves, check valves, relief valves, metering valves, manifold valves, double block and bleed valves, and oilfield valves. Materials include 316 stainless steel, alloy 400, and 904L."
-      },
-      {
-        "question": "Do you offer hose testing and certification?",
-        "answer": "Yes. Hose testing and certification is a core service at Abdex. We provide onsite inspection, assembly and pressure testing. We are NATA accredited and provide API certified hose assemblies."
-      },
-      {
-        "question": "What industries does Abdex serve?",
-        "answer": "Abdex services the marine & offshore, defence, manufacturing, pharmaceutical, mining, oil & gas, and chemical processing industries. We have been operating since 1974."
-      },
-      {
-        "question": "Do you have rental equipment?",
-        "answer": "Yes. Abdex stocks a range of pressure control and test equipment available for short-notice rental at competitive rates. Great for project-based needs without capital purchase."
-      },
-      {
-        "question": "What Parker hoses do you stock?",
-        "answer": "Abdex stocks a wide range of Parker hoses including the Black Eagle series (5K, 10K, 15K), Parker BOP hose (2390N), Parker Aramid Braided hoses (2022N-5K, 575X-12, 2022N-10K), Parker Drilling Hoses, and the Parker No Skive P35-32. Parker is one of our key supply partners."
-      },
-      {
-        "question": "What Gates hoses do you stock?",
-        "answer": "Abdex stocks Gates BOP hoses (Megashield 5000), Gates Rotary Drilling Hoses (Powerspiral 5000, 7500 Grade E), Gates Chemical Hose (Chem Master Plus XLPE), and Gates wire reinforced hydraulic hoses. Gates is one of our key supply partners."
-      },
-      {
-        "question": "Where is Abdex located?",
-        "answer": "Abdex operates in both Australia and the United Kingdom. Contact us at info@abdex.com.au (Australia) or info@abdex.co.uk (UK). Visit our contact page at https://abdex.com/contact/"
-      }
-    ],
-    "product_image_index": {
-      "note": "When a user asks about a specific product, retrieve the relevant image URL from the product listing above and display it. All image URLs are absolute URLs from abdex.com/wp-content/uploads/",
-      "example_lookups": [
-        {
-          "query": "Parker Black Eagle 5000 psi",
-          "image_url": "https://abdex.com/wp-content/uploads/2019/08/2448N-32V80-1-1-300x149.jpg",
-          "product_url": "https://abdex.com/products/oil-and-gas-hose/black-eagle/parker-black-eagle-5k/"
-        },
-        {
-          "query": "Gates BOP Hose Megashield",
-          "image_url": "https://abdex.com/wp-content/uploads/2019/08/megasheild-300x149.jpg",
-          "product_url": "https://abdex.com/products/oil-and-gas-hose/bop-and-hot-line/api16d/gates-bop-hose/"
-        },
-        {
-          "query": "API 7K Drilling Hose",
-          "image_url": "https://abdex.com/wp-content/uploads/2019/10/API7K-5000-1-1-1-300x149.jpg",
-          "product_url": "https://abdex.com/products/oil-and-gas-hose/drilling-hoses/api7k-drilling/api-7k-hose/"
-        },
-        {
-          "query": "Uniflex HM 450 Crimper",
-          "image_url": "https://abdex.com/wp-content/uploads/2019/10/HM450-1-300x300.jpg",
-          "product_url": "https://abdex.com/products/uniflex-machinery/hydraulic-hose-crimpers-production/uniflex-hm-450/"
-        },
-        {
-          "query": "10000 psi Needle Valve",
-          "image_url": "https://abdex.com/wp-content/uploads/2020/07/needlevalves2-1-300x230.jpg",
-          "product_url": "https://abdex.com/products/fittings-and-valves/high-pressure-valves/needle-valves/10k-to-60k-needle-valves/10000-psi-needle-valve/"
-        },
-        {
-          "query": "Continental Chemical Hose",
-          "image_url": "https://abdex.com/wp-content/uploads/2019/08/Pure-one.jpg",
-          "product_url": "https://abdex.com/products/industrial-hoses/chemical-hoses-4/suction-and-delivery/continental-chemical-hose/"
-        },
-        {
-          "query": "Abdex Drilling Hose P5675",
-          "image_url": "https://abdex.com/wp-content/uploads/2019/10/P5675-1-1-300x149.jpg",
-          "product_url": "https://abdex.com/products/oil-and-gas-hose/drilling-hoses/oilfield-hose/abdex-drilling-hose/"
-        },
-        {
-          "query": "Ultra 2000 Tonne Crimper",
-          "image_url": "https://abdex.com/wp-content/uploads/2020/05/ultra2000_2-1-300x300.jpg",
-          "product_url": "https://abdex.com/products/uniflex-machinery/hydraulic-hose-crimpers-production/ultra-2000-tonne-crimper/"
         }
       ]
     }
-  },
-  "metadata": {
-    "scraped_date": "2026-05-02",
-    "data_source": "https://abdex.com",
-    "intended_use": "ElevenLabs AI Agent knowledge base",
-    "pages_scraped": [
-      "https://abdex.com/",
-      "https://abdex.com/services/",
-      "https://abdex.com/service/hose-testing-and-assembly/",
-      "https://abdex.com/service/hose-management-system/",
-      "https://abdex.com/service/machine-training/",
-      "https://abdex.com/service/rental-equipment/",
-      "https://abdex.com/service/umbilical-hose/",
-      "https://abdex.com/product-category/oil-and-gas-hose/black-eagle/",
-      "https://abdex.com/product-category/oil-and-gas-hose/bop-and-hot-line/",
-      "https://abdex.com/product-category/oil-and-gas-hose/aramid-braided-hose/",
-      "https://abdex.com/product-category/oil-and-gas-hose/drilling-hoses/",
-      "https://abdex.com/product-category/industrial-hoses/chemical-hoses-4/",
-      "https://abdex.com/product-category/uniflex-machinery/hydraulic-hose-crimpers-production/",
-      "https://abdex.com/product-category/fittings-and-valves/high-pressure-valves/"
-    ],
-    "total_products_indexed": 60,
-    "note": "Product images are available for all indexed products. When user asks about a product, retrieve image URL from nested image.url fields and display alongside product information."
-  }
+  ]
 }

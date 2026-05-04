@@ -331,7 +331,9 @@ class ProcurementAgentAPI {
 const api = new ProcurementAgentAPI();
 
 // Export for use in other files
-window.ProcurementAgentAPI = api;
+window.api = api; // Short alias
+window.ProcurementAgentAPI = api; // Legacy/Full name
+console.log("[API] ProcurementAgentAPI initialized and attached to window.");
 
 // Professional Page Loader Logic
 window.showLoader = function() {
