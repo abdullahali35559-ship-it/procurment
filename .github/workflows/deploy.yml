@@ -2,8 +2,8 @@ name: Procurement Assistant CI/CD
 
 on:
   push:
-    tags:
-      - 'v*'
+    branches:
+      - main
 
 jobs:
   test:
@@ -18,25 +18,22 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-    # Add tests here when ready
-    # - name: Run Tests
-    #   run: pytest
 
   deploy:
     needs: test
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
     - name: Deploy to VPS
       uses: appleboy/ssh-action@master
       with:
-        host: ${{ secrets.VPS_HOST }}       # 72.60.79.148
-        username: ${{ secrets.VPS_USER }}   # root
+        host: ${{ secrets.VPS_HOST }}
+        username: ${{ secrets.VPS_USER }}
         key: ${{ secrets.VPS_SSH_KEY }}
         script: |
-          cd /root/rfi_vps_version
-          git pull origin main
-          pip install -r requirements.txt
-          # Restart the service (example using pm2 or systemd)
-          # systemctl restart procurement-agent
+            cd /root/rfi_vps_version
+            git pull origin main
+            pip install -r requirements.txt
+            # Ensure the server restarts with the new code
+            pkill -f "python api/main.py" || true
+            nohup python api/main.py > /dev/null 2>&1 &
