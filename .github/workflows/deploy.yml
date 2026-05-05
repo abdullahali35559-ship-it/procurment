@@ -34,13 +34,18 @@ jobs:
             cd /root/rfi_vps_version
             git pull origin main
             
-            # Create and use a Virtual Environment to avoid system package conflicts
+            # Use venv
             python3 -m venv venv || true
             source venv/bin/activate
-            
-            pip install --upgrade pip
             pip install -r requirements.txt
             
-            # Restart the server using the virtual environment's python
-            pkill -f "python api/main.py" || true
-            nohup venv/bin/python api/main.py > /dev/null 2>&1 &
+            # Kill any old process (be more aggressive with -9)
+            pkill -9 -f "api/main.py" || true
+            
+            # Start the server in background properly
+            # We use 'disown' and 'sleep' to ensure it keeps running after SSH closes
+            nohup venv/bin/python api/main.py > server_deploy.log 2>&1 &
+            sleep 2
+            
+            # Check if it actually started
+            ps aux | grep "api/main.py" | grep -v grep
