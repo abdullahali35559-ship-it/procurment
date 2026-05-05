@@ -33,7 +33,8 @@ jobs:
         script: |
             cd /root/rfi_vps_version
             git pull origin main
-            pip install -r requirements.txt
+            # Added --break-system-packages to bypass the environment restriction on VPS
+            pip install -r requirements.txt --break-system-packages
             # Ensure the server restarts with the new code
             pkill -f "python api/main.py" || true
             nohup python api/main.py > /dev/null 2>&1 &
