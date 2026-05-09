@@ -824,7 +824,7 @@
         async function loadConversations(mode = currentMode) {
             try {
                 // Ensure API is loaded
-                const api = window.api || window.ProcurementAgentAPI;
+                const api = window.ProcurementAgentAPI || window.api;
                 if (!api) {
                     console.warn('[Assistant] API not ready, retrying in 500ms...');
                     setTimeout(() => loadConversations(mode), 500);
@@ -957,7 +957,7 @@
                     appendMessage('assistant', "Error: " + errorMsg);
                 }
             } catch (error) {
-                removeTypingStatus(typingId);
+                removeTypingStatus(indicatorId);
                 let msg = "Connection error. Please ensure the backend is running.";
                 if (error.message && error.message.includes("timeout")) {
                     msg = "The request timed out while processing your document. I've increased the processing limit, but please try again.";
