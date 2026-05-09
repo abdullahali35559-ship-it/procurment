@@ -1,4 +1,5 @@
 import os
+import sys
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
@@ -9,7 +10,11 @@ from dotenv import load_dotenv
 # Load ENV
 load_dotenv()
 
-from api.routes import auth, dashboard, assistant, user, document, settings
+# Add current directory to path for imports
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
+# Imports from same directory
+from routes import auth, dashboard, assistant, user, document, settings
 from database.config import engine, Base
 
 # Create DB
