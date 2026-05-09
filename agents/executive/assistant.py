@@ -73,15 +73,21 @@ class ExecutiveAssistant:
                 if not kb_matches or explicit_service_request:
                     for s in data.get('services', []):
                         if is_match(s): 
-        try:
-            # Broaden search if query is about services
-            search_query = query
-            if any(word in query.lower() for word in ['service', 'provide', 'offer', 'do for us']):
-                search_query = "Abdex core services: Hose Testing, A-track Management, Machinery Training, Rental Equipment, Umbilical Hoses"
-            
-            kb_matches = search_knowledge_base(search_query)
+                            kb_matches.append(s)
+                            
         except Exception as e:
             print(f"Search Error: {e}")
+
+        # Supplemental broad search for services
+        if any(word in query.lower() for word in ['service', 'provide', 'offer', 'do for us']):
+            try:
+                service_query = "Abdex core services: Hose Testing, A-track Management, Machinery Training, Rental Equipment, Umbilical Hoses"
+                extra_matches = search_knowledge_base(service_query)
+                for m in extra_matches:
+                    if m not in kb_matches:
+                        kb_matches.append(m)
+            except:
+                pass
 
         # 3. PROMPT CONSTRUCTION
         context = json.dumps(kb_matches[:15], indent=2) if kb_matches else ""
