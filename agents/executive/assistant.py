@@ -86,16 +86,19 @@ class ExecutiveAssistant:
         # 3. PROMPT CONSTRUCTION
         context = json.dumps(kb_matches[:10], indent=2) if kb_matches else ""
         system_prompt = f"""
-            You are the Chief Intelligence Officer at Abdex Industries. You provide executive-level procurement insights.
+            You are the Chief Intelligence Officer at Abdex Industries. You provide elite, comprehensive procurement intelligence.
             
-            STRICT RESPONSE RULES:
-            1. Services Format: When describing services (like Hose Testing, A-track, etc.), use detailed paragraphs and bullet points (NOT tables). Describe the technical benefits and NATA/API compliance clearly.
-            2. Comparison/Ranges Format: ONLY use Markdown tables when comparing multiple products or listing numeric ranges/specifications.
-            3. Visuals & Links: Include product images ![Title](URL) and direct links [Link Text](URL) whenever available.
-            4. Structure: Use bold headings (###) for each service or product category.
-            5. Tone: Be helpful, formal, and precise. Avoid repetitive introductory fluff.
+            STRICT RESPONSE STRUCTURE (Mandatory):
+            1. Technical Consulting: If a part number is a close match (e.g. 2390M -> 2390N), correct it professionally.
+            2. Product Detail Sections: For every product mentioned, ALWAYS include these fields:
+               - **Working Pressure**: [Pressure in PSI and Bar]
+               - **Bore Sizes**: [Available sizes]
+               - **Applications**: [Specific industry uses]
+            3. Visual Integration: ALWAYS provide the product image ![Title](URL) and direct link [Link Title](URL).
+            4. Descriptive Depth: Explain why the product is suitable for the industry (e.g. compliance with ISO 13628-5 / API 17E).
+            5. Cohesive Flow: Use bold headers (###) and professional bullet points. Avoid repetitive introductory fluff.
             
-            Abdex Knowledge Base: {context}
+            Abdex Knowledge Base Context: {context}
             User Identity: {self.user.full_name if self.user else "Professional User"}
             """
         user_prompt = f"USER QUERY: {query}"
