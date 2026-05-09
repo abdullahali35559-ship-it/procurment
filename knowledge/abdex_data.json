@@ -5,50 +5,13 @@
     "established": 1974,
     "type": "Family owned and operated",
     "tagline": "Fluid transfer solutions up to 60,000 psi (4,135 bar)",
-    "description": "A family owned and run business established in 1974. Abdex services the marine, offshore, defence, manufacturing, pharmaceutical and mining industries. Abdex offers low, medium, high and ultra high-pressure fluid transfer solutions up to 60,000 psi (4,135 bar) and an extensive variety of fittings, valves and instrumentation components, pressure test systems and hose manufacturing machinery. Facilities are equipped with assembly, testing and servicing equipment providing clients with specific hose assembly solutions.",
-    "industries_served": [
-      "Marine & Offshore",
-      "Defence",
-      "Manufacturing",
-      "Pharmaceutical",
-      "Mining",
-      "Oil & Gas",
-      "Chemical Processing",
-      "Hydraulic Systems"
-    ],
+    "description": "A family owned and run business established in 1974. Abdex services the marine, offshore, defence, manufacturing, pharmaceutical and mining industries. Abdex offers low, medium, high and ultra high-pressure fluid transfer solutions up to 60,000 psi (4,135 bar) and an extensive variety of fittings, valves and instrumentation components, pressure test systems and hose manufacturing machinery.",
     "logo_url": "https://abdex.com/wp-content/uploads/2019/06/abdex-1.png",
     "contact": {
       "email_australia": "info@abdex.com.au",
-      "email_uk": "info@abdex.co.uk",
-      "contact_page": "https://abdex.com/contact/"
-    },
-    "locations": ["Australia", "United Kingdom"],
-    "accreditations": [
-      { "name": "DNV", "logo": "https://abdex.com/wp-content/uploads/2020/09/DNV2-1-390x231.jpg" },
-      { "name": "NATA", "logo": "https://abdex.com/wp-content/uploads/2020/09/NATA-2-390x231.jpg" },
-      { "name": "DNV-GL", "logo": "https://abdex.com/wp-content/uploads/2020/09/DNV1-1-390x231.jpg" },
-      { "name": "WJA - Water Jetting Association", "logo": "https://abdex.com/wp-content/uploads/2020/09/WJA-2-390x231.jpg" },
-      { "name": "BFPDA - British Fluid Power Distributors Association", "logo": "https://abdex.com/wp-content/uploads/2020/09/BFPDA-390x231.jpg" },
-      { "name": "Australian High Pressure Water Jetting Association", "logo": "https://abdex.com/wp-content/uploads/2020/09/ausjet-2-390x231.jpg" },
-      { "name": "ASSEMS", "logo": "https://abdex.com/wp-content/uploads/2020/09/assems-1-390x231.jpg" },
-      { "name": "SIR - Stichting Industriele Reinging", "logo": "https://abdex.com/wp-content/uploads/2020/12/SIR.jpg" }
-    ],
-    "key_suppliers": [
-      { "name": "Uniflex", "logo": "https://abdex.com/wp-content/uploads/2020/09/uniflex-1-390x231.jpg" },
-      { "name": "Parker", "logo": "https://abdex.com/wp-content/uploads/2020/09/PArker-390x231.jpg" },
-      { "name": "Fitok", "logo": "https://abdex.com/wp-content/uploads/2020/09/fitok-1-390x231.jpg" },
-      { "name": "Gates", "logo": "https://abdex.com/wp-content/uploads/2020/09/gates-2-390x231.jpg" },
-      { "name": "Continental", "logo": "https://abdex.com/wp-content/uploads/2020/09/conti-390x231.jpg" },
-      { "name": "Danfoss", "logo": "https://abdex.com/wp-content/uploads/2023/11/Danfoss-1-390x231.jpg" }
-    ],
-    "capability_statement_pdf": "https://abdex.com/wp-content/uploads/2024/04/Capability-Statement-Email.pdf",
-    "legal": {
-      "privacy_policy": "https://abdex.com/wordpress_abdex/wp-content/uploads/2022/12/Abdex-Privacy-Policy.pdf",
-      "terms_uk": "https://abdex.com/wordpress_abdex/wp-content/uploads/2022/12/Trading-Terms-Conditions.pdf",
-      "terms_australia": "https://abdex.com/wordpress_abdex/wp-content/uploads/2022/12/Terms_and_Conditions_ABDEX_AUS.pdf"
+      "email_uk": "info@abdex.co.uk"
     }
   },
-
   "services": [
     {
       "id": "hose-testing-assembly",
@@ -58,109 +21,59 @@
       "image": {
         "url": "https://abdex.com/wp-content/uploads/2019/09/crimper-440x260.jpg",
         "alt": "Hose Testing"
-      },
-      "key_features": [
-        "Pressure testing and certification",
-        "Onsite inspection services",
-        "Hose assembly",
-        "NATA certified testing",
-        "API certified assemblies"
-      ]
+      }
     },
     {
       "id": "hose-management-system",
       "name": "Hose Management System (A-track)",
       "url": "https://abdex.com/service/hose-management-system/",
-      "description": "Keeping track of high pressure assets is constant and often difficult work. The A-track system incorporates individual product etching and state-of-the-art RFID technology for tracking assets. You need to know what you have and where it is at all times.",
+      "description": "Keeping track of high pressure assets is constant and often difficult work. The A-track system incorporates individual product etching and state-of-the-art RFID technology for tracking assets.",
       "image": {
         "url": "https://abdex.com/wp-content/uploads/2019/08/hosemanagement2-1170x694-copy2-440x260.jpg",
         "alt": "Hose Management System"
-      },
-      "key_features": [
-        "RFID technology for asset tracking",
-        "Individual product etching",
-        "Digital asset management",
-        "Hose lifecycle monitoring",
-        "Compliance tracking"
-      ]
+      }
     },
     {
       "id": "machine-training",
       "name": "Machine Service, Calibration & Training",
       "url": "https://abdex.com/service/machine-training/",
-      "description": "Abdex offers a full training and installation service. We understand service and the need to keep machines working year after year. Service, calibration and training is available for Uniflex hose machinery and other equipment.",
+      "description": "Abdex offers a full training and installation service. Service, calibration and training is available for Uniflex hose machinery and other equipment.",
       "image": {
         "url": "https://abdex.com/wp-content/uploads/2019/08/training2-440x260.jpg",
         "alt": "Uniflex Training"
-      },
-      "key_features": [
-        "Machine installation service",
-        "Calibration services",
-        "Operator training programs",
-        "Preventative maintenance",
-        "Uniflex machinery specialist"
-      ]
+      }
     },
     {
       "id": "rental-equipment",
       "name": "Rental Equipment",
       "url": "https://abdex.com/service/rental-equipment/",
-      "description": "Abdex stocks a range of pressure control equipment. This equipment is available to rent at short notice with highly competitive rates. Ideal for projects that need equipment fast without capital purchase.",
+      "description": "Abdex stocks a range of pressure control equipment available to rent at short notice with highly competitive rates.",
       "image": {
         "url": "https://abdex.com/wp-content/uploads/2019/06/rental-440x260.jpg",
-        "alt": "hose testing rig"
-      },
-      "key_features": [
-        "Short-notice availability",
-        "Competitive rental rates",
-        "Pressure control equipment",
-        "Test rigs available",
-        "Full support included"
-      ]
+        "alt": "Rental Equipment"
+      }
     },
     {
       "id": "umbilical-hose",
       "name": "Umbilical Hose",
       "url": "https://abdex.com/service/umbilical-hose/",
-      "description": "Abdex has facilities for hose bundling (umbilicals) and Hydraulic Flying Leads (HFLs). Umbilical hoses bundle multiple hose lines together for subsea and offshore applications, providing a clean integrated solution.",
+      "description": "Abdex has facilities for hose bundling (umbilicals) and Hydraulic Flying Leads (HFLs). Umbilical hoses bundle multiple hose lines together for subsea and offshore applications.",
       "image": {
         "url": "https://abdex.com/wp-content/uploads/2018/01/Multi-line-hose-pic3-1-440x260.jpg",
         "alt": "Umbilical Hose"
-      },
-      "key_features": [
-        "Multi-line hose bundling",
-        "Hydraulic Flying Leads (HFLs)",
-        "Subsea umbilicals",
-        "Offshore applications",
-        "Custom bundling configurations"
-      ]
+      }
     }
   ],
-
   "product_categories": [
     {
       "id": "oil-and-gas-hoses",
       "name": "Oil & Gas Hoses",
       "url": "https://abdex.com/oil-and-gas-hoses/",
-      "description": "High quality API certified oilfield hose assemblies for offshore and onshore oil & gas applications. Pressure rated for demanding exploration and production environments.",
-      "banner_image": "https://abdex.com/wp-content/uploads/2024/04/bop-optimised-1.jpg",
       "subcategories": [
         {
           "id": "black-eagle",
           "name": "Black Eagle Hoses",
-          "url": "https://abdex.com/product-category/oil-and-gas-hose/black-eagle/",
-          "description": "Parker Black Eagle hoses are a multi-spiral, wire-reinforced thermoplastic high-pressure hose series specifically designed for the oil and gas market. Applications include offshore projects and land operations including acidising, cementing, methanol injection, and gas injection.",
-          "pressure_ranges": ["3,001-5,000 psi", "5,001-10,500 psi", "10,501-15,500 psi"],
-          "bore_sizes": ["1 1/2 (38mm)", "2 (50mm)", "3 (75mm)"],
           "products": [
-            {
-              "name": "Parker Black Eagle Hose Features",
-              "url": "https://abdex.com/products/oil-and-gas-hose/black-eagle/black-eagle-features/",
-              "image": {
-                "url": "https://abdex.com/wp-content/uploads/2019/08/blackeagle2-1-300x149.jpg",
-                "alt": "Parker Black Eagle Hose Features"
-              }
-            },
             {
               "name": "Parker Black Eagle – 5,000 psi",
               "url": "https://abdex.com/products/oil-and-gas-hose/black-eagle/parker-black-eagle-5k/",
@@ -171,27 +84,6 @@
               }
             },
             {
-              "name": "2\" 5K Parker Black Eagle Light Hose | 2248N-32V10 | WP 345 Bar",
-              "url": "https://abdex.com/products/oil-and-gas-hose/black-eagle/2-parker-black-eagle-hose-wp-345-bar-2-5000-psi-2/",
-              "part_number": "2248N-32V10",
-              "working_pressure": "345 Bar / 5,000 psi",
-              "bore_size": "2 inch",
-              "image": {
-                "url": "https://abdex.com/wp-content/uploads/2019/10/2248N-32V10-1-1-300x149.jpg",
-                "alt": "2 inch 5K Parker Black Eagle Light Hose"
-              }
-            },
-            {
-              "name": "Parker Black Eagle Hose – 10,000 psi",
-              "url": "https://abdex.com/products/oil-and-gas-hose/black-eagle/parker-black-eagle-10k/",
-              "part_number": "2580N-32V80",
-              "working_pressure": "690 Bar / 10,000 psi",
-              "image": {
-                "url": "https://abdex.com/wp-content/uploads/2019/10/2580N-32V80-1-1-300x149.jpg",
-                "alt": "Parker Black Eagle Hose - 10,000 Psi"
-              }
-            },
-            {
               "name": "Parker Black Eagle – 15,000 psi",
               "url": "https://abdex.com/products/oil-and-gas-hose/black-eagle/parker-black-eagle-15k/",
               "working_pressure": "1034 Bar / 15,000 psi",
@@ -199,253 +91,6 @@
                 "url": "https://abdex.com/wp-content/uploads/2019/08/2448N-32V80-1-1-300x149.jpg",
                 "alt": "Parker Black Eagle - 15,000 psi"
               }
-            }
-          ]
-        },
-        {
-          "id": "bop-hot-line",
-          "name": "BOP & Hot Line Hoses",
-          "url": "https://abdex.com/product-category/oil-and-gas-hose/bop-and-hot-line/",
-          "description": "Blowout Preventer (BOP) hoses developed to meet the most rigorous demands in exploration and deep drilling, both onshore and offshore. High-performance BOP hoses designed for hydraulic connections between well control equipment and control systems. Certified to withstand fire, high heat, and pressures in safety critical applications.",
-          "standards": ["API16D"],
-          "pressure_ranges": ["3,001-5,000 psi", "5,001-10,500 psi"],
-          "bore_sizes": ["1/4 (6.4mm)", "3/8 (10mm)", "1/2 (13mm)", "3/4 (19.6mm)", "1 (25mm)", "1 1/4 (32mm)", "1 1/2 (38mm)", "2 (50mm)"],
-          "products": [
-            {
-              "name": "Gates BOP Hose | 5000 Megashield | WP 345 Bar",
-              "url": "https://abdex.com/products/oil-and-gas-hose/bop-and-hot-line/api16d/gates-bop-hose/",
-              "working_pressure": "345 Bar / 5,000 psi",
-              "brand": "Gates",
-              "image": {
-                "url": "https://abdex.com/wp-content/uploads/2019/08/megasheild-300x149.jpg",
-                "alt": "Gates BOP Hose | 5000 Megashield | WP 345 Bar"
-              }
-            },
-            {
-              "name": "Parker BOP Hose | 2390N | WP 280-490 Bar",
-              "url": "https://abdex.com/products/oil-and-gas-hose/bop-and-hot-line/parker-bop-hose/",
-              "part_number": "2390N",
-              "working_pressure": "280-490 Bar",
-              "brand": "Parker",
-              "image": {
-                "url": "https://abdex.com/wp-content/uploads/2020/05/2390N-1-300x149.jpg",
-                "alt": "Parker Bop Hose"
-              }
-            }
-          ]
-        },
-        {
-          "id": "aramid-braided",
-          "name": "Aramid Braided Hose",
-          "url": "https://abdex.com/product-category/oil-and-gas-hose/aramid-braided-hose/",
-          "description": "Aramid braided hoses are low weight with high flexibility. Feature a smooth bore for improved flow rate and low pressure drop. Fully compliant to ISO 13628-5 / API 17E 'Specification for Subsea Production Control Umbilicals'.",
-          "standards": ["ISO 13628-5", "API 17E"],
-          "pressure_ranges": ["3,001-5,000 psi", "5,001-10,500 psi"],
-          "bore_sizes": ["1/4 (6.4mm)", "3/8 (10mm)", "1/2 (13mm)", "3/4 (19.6mm)"],
-          "products": [
-            {
-              "name": "Parker Aramid Braided Hose | 2022N-5K | WP 345 Bar | Offshore",
-              "url": "https://abdex.com/products/oil-and-gas-hose/aramid-braided-hose/parker-aramid-braided-hose-wp-345-bar-offshore/",
-              "part_number": "2022N-5K",
-              "working_pressure": "345 Bar / 5,000 psi",
-              "brand": "Parker",
-              "image": {
-                "url": "https://abdex.com/wp-content/uploads/2019/08/2022N-5K-2-1-300x149.jpg",
-                "alt": "Parker Aramid Braided Hose 2022N-5K"
-              }
-            },
-            {
-              "name": "Parker Aramid Braided Hose | 575X-12 | WP 345 Bar | Offshore",
-              "url": "https://abdex.com/products/oil-and-gas-hose/aramid-braided-hose/parker-aramid-braided-hose/",
-              "part_number": "575X-12",
-              "working_pressure": "345 Bar / 5,000 psi",
-              "brand": "Parker",
-              "image": {
-                "url": "https://abdex.com/wp-content/uploads/2019/08/575X-12-1-1-300x149.jpg",
-                "alt": "Parker Aramid Braided Hose 575X-12"
-              }
-            },
-            {
-              "name": "Parker Aramid Braided Hose | 2022N-10K | WP 690 Bar | Offshore",
-              "url": "https://abdex.com/products/oil-and-gas-hose/aramid-braided-hose/parker-aramid-braided-hose-offshore/",
-              "part_number": "2022N-10K",
-              "working_pressure": "690 Bar / 10,000 psi",
-              "brand": "Parker",
-              "image": {
-                "url": "https://abdex.com/wp-content/uploads/2019/08/2022N-10K-1-300x149.jpg",
-                "alt": "Parker Aramid Braided Hose 2022N-10K"
-              }
-            }
-          ]
-        },
-        {
-          "id": "drilling-hoses",
-          "name": "Drilling Hoses",
-          "url": "https://abdex.com/product-category/oil-and-gas-hose/drilling-hoses/",
-          "description": "Large range of drilling hoses including rotary drilling hose, air drill hose. Abdex is the only certified manufacturer in Australia of API7K hose. Matched fittings available.",
-          "standards": ["API7K"],
-          "subcategories": ["Oilfield Hose", "API7K", "Rotary Drilling Hose", "Slim Hole Rotary"],
-          "pressure_ranges": ["0-3,000 psi", "3,001-5,000 psi", "5,001-10,500 psi", "10,501-15,500 psi"],
-          "bore_sizes": ["1 (25mm)", "1 1/2 (38mm)", "1 1/4 (32mm)", "2 (50mm)", "2 1/2 (63mm)", "3 (75mm)", "3 1/2 (88mm)", "4 (100mm)", "5 (125mm)"],
-          "products": [
-            {
-              "name": "Bull Hose Air 600 | WP 165 Bar",
-              "url": "https://abdex.com/products/oil-and-gas-hose/drilling-hoses/bull-hose-air-600/",
-              "working_pressure": "165 Bar",
-              "image": {
-                "url": "https://abdex.com/wp-content/uploads/2025/10/Reflex-Steel-Air-600-300x149.jpg",
-                "alt": "R13 Hose - Bull Hose Air 600"
-              }
-            },
-            {
-              "name": "Abdex Rough Neck High Pressure Hose | WP 207 Bar",
-              "url": "https://abdex.com/products/oil-and-gas-hose/drilling-hoses/slim-hole-rotary/abdex-rough-neck-high-pressure-hose/",
-              "working_pressure": "207 Bar / 3,000 psi",
-              "brand": "Abdex",
-              "image": {
-                "url": "https://abdex.com/wp-content/uploads/2019/08/oilfieldhose-1-300x149.jpg",
-                "alt": "Abdex Rough Neck High Pressure Hose"
-              }
-            },
-            {
-              "name": "Bull Hose Air 1200 | WP 330 Bar",
-              "url": "https://abdex.com/products/oil-and-gas-hose/drilling-hoses/bull-hose-air-1200/",
-              "working_pressure": "330 Bar",
-              "image": {
-                "url": "https://abdex.com/wp-content/uploads/2025/10/Steel-Air-1200-300x149.jpg",
-                "alt": "Bull Hose Air 1200"
-              }
-            },
-            {
-              "name": "R13 Hose | 344 Bar | General Hydraulic",
-              "url": "https://abdex.com/products/oil-and-gas-hose/drilling-hoses/r13-hose/",
-              "working_pressure": "344 Bar / 5,000 psi",
-              "image": {
-                "url": "https://abdex.com/wp-content/uploads/2025/10/R13-300x149.jpg",
-                "alt": "R13 Hose"
-              }
-            },
-            {
-              "name": "Slim Hole Rotary Drilling Hose | Black Gold | WP 207-345 Bar",
-              "url": "https://abdex.com/products/oil-and-gas-hose/drilling-hoses/slim-hole-rotary/slim-hole-rotary-hose/",
-              "working_pressure": "207-345 Bar",
-              "image": {
-                "url": "https://abdex.com/wp-content/uploads/2020/06/slimhole-1-300x149.jpg",
-                "alt": "Slim Hole Rotary Drilling Hose"
-              }
-            },
-            {
-              "name": "Rotary Drilling Hose | 5000 Grade D | WP 345 Bar",
-              "url": "https://abdex.com/products/oil-and-gas-hose/drilling-hoses/rotary-vibrator/rotary-drilling-hose/",
-              "working_pressure": "345 Bar / 5,000 psi",
-              "grade": "API7K Grade D",
-              "image": {
-                "url": "https://abdex.com/wp-content/uploads/2019/10/Rotary-Vibrator-5000-Grade-D-1-Rotated-1-300x149.jpg",
-                "alt": "Rotary Drilling Hose 5000 Grade D"
-              }
-            },
-            {
-              "name": "Gates Rotary Drilling Hose | Powerspiral 5000 | WP 345 Bar",
-              "url": "https://abdex.com/products/oil-and-gas-hose/drilling-hoses/rotary-vibrator/gates-rotary-drilling-hose-2/",
-              "working_pressure": "345 Bar / 5,000 psi",
-              "brand": "Gates",
-              "image": {
-                "url": "https://abdex.com/wp-content/uploads/2019/10/5000-POWERSPIRAL-1-1-300x149.jpg",
-                "alt": "Gates Rotary Drilling Hose Powerspiral 5000"
-              }
-            },
-            {
-              "name": "API 7K Hose | 5,000 psi | WP 345 Bar",
-              "url": "https://abdex.com/products/oil-and-gas-hose/drilling-hoses/api7k-drilling/api-7k-hose/",
-              "working_pressure": "345 Bar / 5,000 psi",
-              "standards": ["API7K"],
-              "image": {
-                "url": "https://abdex.com/wp-content/uploads/2019/10/API7K-5000-1-1-1-300x149.jpg",
-                "alt": "API 7K Hose 5000 psi"
-              }
-            },
-            {
-              "name": "Parker Drilling Hose | WP 350 Bar | 2\" - 5,000 psi",
-              "url": "https://abdex.com/products/oil-and-gas-hose/drilling-hoses/oilfield-hose/parker-drilling-hose/",
-              "working_pressure": "350 Bar / 5,000 psi",
-              "brand": "Parker",
-              "bore_size": "2 inch",
-              "image": {
-                "url": "https://abdex.com/wp-content/uploads/2019/08/2-drilling-hose.jpg",
-                "alt": "Parker Drilling Hose WP 350 Bar"
-              }
-            },
-            {
-              "name": "Parker No Skive Hose | P35-32 | WP 350 Bar | 2\" - 5,000 psi",
-              "url": "https://abdex.com/products/oil-and-gas-hose/drilling-hoses/oilfield-hose/parker-no-skive-hose/",
-              "part_number": "P35-32",
-              "working_pressure": "350 Bar / 5,000 psi",
-              "brand": "Parker",
-              "image": {
-                "url": "https://abdex.com/wp-content/uploads/2019/08/P35-32-1.jpg",
-                "alt": "Parker No Skive Hose P35-32"
-              }
-            },
-            {
-              "name": "Gates Rotary Drilling Hose | 7500 Grade E | WP 517 Bar",
-              "url": "https://abdex.com/products/oil-and-gas-hose/drilling-hoses/rotary-vibrator/gates-rotary-drilling-hose/",
-              "working_pressure": "517 Bar / 7,500 psi",
-              "brand": "Gates",
-              "grade": "API7K Grade E",
-              "image": {
-                "url": "https://abdex.com/wp-content/uploads/2019/10/Rotary-Vibrator-5000-Grade-D-1-Rotated-1-300x149.jpg",
-                "alt": "Gates Rotary Drilling Hose Grade E"
-              }
-            },
-            {
-              "name": "Abdex Drilling Hose | P5675 | WP 552 Bar | 2\" - 8,000 psi",
-              "url": "https://abdex.com/products/oil-and-gas-hose/drilling-hoses/oilfield-hose/abdex-drilling-hose/",
-              "part_number": "P5675",
-              "working_pressure": "552 Bar / 8,000 psi",
-              "brand": "Abdex",
-              "image": {
-                "url": "https://abdex.com/wp-content/uploads/2019/10/P5675-1-1-300x149.jpg",
-                "alt": "Abdex Drilling Hose P5675"
-              }
-            },
-            {
-              "name": "Black Gold Hose | WP 345-689 Bar",
-              "url": "https://abdex.com/products/oil-and-gas-hose/drilling-hoses/black-gold-hose/",
-              "working_pressure": "345-689 Bar (5,000-10,000 psi)",
-              "image": {
-                "url": "https://abdex.com/wp-content/uploads/2019/10/slimhole-300x149.jpg",
-                "alt": "Black Gold Hose"
-              }
-            },
-            {
-              "name": "API 16C Choke & Kill Hoses | WP 689 Bar | 10,000 psi",
-              "url": "https://abdex.com/products/oil-and-gas-hose/drilling-hoses/choke-and-kill-line/",
-              "working_pressure": "689 Bar / 10,000 psi",
-              "standards": ["API 16C"],
-              "image": {
-                "url": "https://abdex.com/wp-content/uploads/2024/06/Choke-and-Kill-Imag-2-300x149.jpg",
-                "alt": "Choke and Kill Line"
-              }
-            },
-            {
-              "name": "Gates CR2 | 2-Wire Braid Hose",
-              "url": "https://abdex.com/products/hydraulic-hoses/gates-hydraulic-hose-fittings/wire-reinforced-hose-hydraulic/gates-cr2/",
-              "image": {
-                "url": "https://abdex.com/wp-content/uploads/2022/12/CR2.jpg",
-                "alt": "Gates CR2"
-              },
-              "description": "2-Wire braid hose with 3,125 PSI working pressure, compliant with SAE 100R2.",
-              "key_features": ["3,125 PSI WP", "2-Wire Braid", "SAE 100R2 compliant"]
-            },
-            {
-              "name": "Parker Non-Conductive Hose | 588N",
-              "url": "https://abdex.com/products/hydraulic-hoses/thermoplastic-hydraulic-hose/100r8-hydraulic-hose/parker-non-conductive-hose/",
-              "image": {
-                "url": "https://abdex.com/wp-content/uploads/2019/07/588N-3-1.jpg",
-                "alt": "Parker 588N"
-              },
-              "description": "Non-conductive thermoplastic hydraulic hose with 345 Bar (5,000 PSI) working pressure.",
-              "key_features": ["Non-conductive", "345 Bar WP", "SAE 100R8 compliant"]
             }
           ]
         }

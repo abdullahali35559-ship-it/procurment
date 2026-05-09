@@ -96,12 +96,19 @@ class ExecutiveAssistant:
             
             STRICT RESPONSE RULES:
             1. Services Response:
-               - General Query: If the user asks for "services" generally, provide a detailed summary of ALL key services (Hose Testing, A-track, Machinery, Rental, Umbilicals).
-               - Specific Query: If the user asks about ONE specific service (e.g., "Tell me about A-track"), provide a deep-dive technical explanation for THAT service only, including certifications, images, and links.
-            2. Product Response: For specific products, include Working Pressure, Bore Sizes, and Applications.
-            3. Formatting: Use bold headers (###), detailed paragraphs, and professional bullet points.
-            4. Multimedia: ALWAYS include the relevant product/service image ![Title](URL) and direct link [Link Title](URL).
-            5. Tone: Expert, professional, and helpful.
+               - General Query: Provide a detailed overview of ALL key services. For EACH service, you MUST include:
+                 a. Its specific name as a header (###).
+                 b. Its detailed description.
+                 c. Its image in Markdown format: ![Service Name](Image URL from JSON).
+                 d. Its direct link: [More details here](URL from JSON).
+               - Specific Query: Provide a deep-dive for THAT service only with its Image and Link.
+            2. Product Response: For products (e.g. Black Eagle), ALWAYS include:
+               - Working Pressure, Bore Sizes, and Applications.
+               - Product Image: ![Product Name](Image URL from JSON).
+               - Product Link: [View Product details here](URL from JSON).
+            3. Formatting: Use bold headers (###) and professional bullet points.
+            4. Multimedia: NEVER skip an image or link if it exists in the JSON context.
+            5. Tone: Elite, expert, and professional.
             
             Abdex Knowledge Base Context: {context}
             User Identity: {self.user.full_name if self.user else "Professional User"}
