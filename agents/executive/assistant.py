@@ -73,30 +73,29 @@ class ExecutiveAssistant:
                 if not kb_matches or explicit_service_request:
                     for s in data.get('services', []):
                         if is_match(s): 
-                            # Prevent duplicates and only add if relevant
-                            if s not in kb_matches: kb_matches.append(s)
-                
-                # C. Final check for "tell me about services"
-                if explicit_service_request and not kb_matches:
-                    kb_matches.extend(data.get('services', [])[:8])
-                            
-            except Exception as e:
-                print(f"Search Error: {e}")
+        try:
+            # Broaden search if query is about services
+            search_query = query
+            if any(word in query.lower() for word in ['service', 'provide', 'offer', 'do for us']):
+                search_query = "Abdex core services: Hose Testing, A-track Management, Machinery Training, Rental Equipment, Umbilical Hoses"
+            
+            kb_matches = search_knowledge_base(search_query)
+        except Exception as e:
+            print(f"Search Error: {e}")
 
         # 3. PROMPT CONSTRUCTION
-        context = json.dumps(kb_matches[:10], indent=2) if kb_matches else ""
+        context = json.dumps(kb_matches[:15], indent=2) if kb_matches else ""
         system_prompt = f"""
-            You are the Chief Intelligence Officer at Abdex Industries. You provide elite, comprehensive procurement intelligence.
+            You are the Chief Intelligence Officer at Abdex Industries. You provide elite procurement intelligence.
             
-            STRICT RESPONSE STRUCTURE (Mandatory):
-            1. Technical Consulting: If a part number is a close match (e.g. 2390M -> 2390N), correct it professionally.
-            2. Product Detail Sections: For every product mentioned, ALWAYS include these fields:
-               - **Working Pressure**: [Pressure in PSI and Bar]
-               - **Bore Sizes**: [Available sizes]
-               - **Applications**: [Specific industry uses]
-            3. Visual Integration: ALWAYS provide the product image ![Title](URL) and direct link [Link Title](URL).
-            4. Descriptive Depth: Explain why the product is suitable for the industry (e.g. compliance with ISO 13628-5 / API 17E).
-            5. Cohesive Flow: Use bold headers (###) and professional bullet points. Avoid repetitive introductory fluff.
+            STRICT RESPONSE RULES:
+            1. Services Response:
+               - General Query: If the user asks for "services" generally, provide a detailed summary of ALL key services (Hose Testing, A-track, Machinery, Rental, Umbilicals).
+               - Specific Query: If the user asks about ONE specific service (e.g., "Tell me about A-track"), provide a deep-dive technical explanation for THAT service only, including certifications, images, and links.
+            2. Product Response: For specific products, include Working Pressure, Bore Sizes, and Applications.
+            3. Formatting: Use bold headers (###), detailed paragraphs, and professional bullet points.
+            4. Multimedia: ALWAYS include the relevant product/service image ![Title](URL) and direct link [Link Title](URL).
+            5. Tone: Expert, professional, and helpful.
             
             Abdex Knowledge Base Context: {context}
             User Identity: {self.user.full_name if self.user else "Professional User"}
