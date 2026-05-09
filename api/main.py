@@ -10,11 +10,13 @@ from dotenv import load_dotenv
 # Load ENV
 load_dotenv()
 
-# Add current directory to path for imports
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+# Add ROOT directory to sys.path taake saray folders (api, database, models) mil sakein
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if BASE_DIR not in sys.path:
+    sys.path.append(BASE_DIR)
 
-# Imports from same directory
-from routes import auth, dashboard, assistant, user, document, settings
+# Ab hum absolute imports use kar sakte hain jo har jagah kaam karein gi
+from api.routes import auth, dashboard, assistant, user, document, settings
 from database.config import engine, Base
 
 # Create DB
