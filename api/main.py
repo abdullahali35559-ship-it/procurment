@@ -15,13 +15,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if BASE_DIR not in sys.path:
     sys.path.append(BASE_DIR)
 
-# Professional Explicit Imports
+# Professional Explicit Imports (Verified with local filesystem)
 from api.routes.auth import router as auth_router
 from api.routes.dashboard import router as dashboard_router
 from api.routes.assistant import router as assistant_router
 from api.routes.user import router as user_router
-from api.routes.document import router as document_router
-from api.routes.settings import router as settings_router
+from api.routes.emails import router as emails_router
+from api.routes.threads import router as threads_router
+from api.routes.drafts import router as drafts_router
 
 from database.config import engine, Base
 
@@ -44,8 +45,9 @@ app.include_router(auth_router, prefix="/api/auth", tags=["Auth"])
 app.include_router(dashboard_router, prefix="/api/dashboard", tags=["Dashboard"])
 app.include_router(assistant_router, prefix="/api/assistant", tags=["Assistant"])
 app.include_router(user_router, prefix="/api/user", tags=["User"])
-app.include_router(document_router, prefix="/api/documents", tags=["Documents"])
-app.include_router(settings_router, prefix="/api/settings", tags=["Settings"])
+app.include_router(emails_router, prefix="/api/emails", tags=["Emails"])
+app.include_router(threads_router, prefix="/api/threads", tags=["Threads"])
+app.include_router(drafts_router, prefix="/api/drafts", tags=["Drafts"])
 
 # Static Asset Serving
 app.mount("/css", StaticFiles(directory="ui/css"), name="css")
