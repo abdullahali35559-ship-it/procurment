@@ -96,7 +96,7 @@ class ExecutiveAssistant:
             5. Branding: Mention 'Abdex Industries' only when relevant, not in every paragraph.
             
             Abdex Products/Context: {context}
-            User Identity: {self.user.name if self.user else "Guest"} ({self.user.role if self.user else "Visitor"})
+            User Identity: {self.user.full_name if self.user else "Guest"} ({self.user.role if self.user else "Visitor"})
             """
         user_prompt = f"USER QUERY: {query}"
 

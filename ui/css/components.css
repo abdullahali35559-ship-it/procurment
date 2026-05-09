@@ -113,19 +113,20 @@
     display: flex;
     flex-direction: column;
     margin-bottom: var(--space-4);
-    max-width: 85%;
-    word-wrap: break-word;
+    max-width: 90%;
+    word-break: break-word;
     overflow-wrap: break-word;
+    width: fit-content;
 }
 
 .message-user {
     align-self: flex-end;
-    align-items: flex-end;
+    margin-left: auto;
 }
 
 .message-assistant {
     align-self: flex-start;
-    align-items: flex-start;
+    margin-right: auto;
 }
 
 .message-bubble {
@@ -135,6 +136,7 @@
     line-height: 1.5;
     position: relative;
     max-width: 100%;
+    box-shadow: var(--shadow-sm);
 }
 
 .message-user .message-bubble {
