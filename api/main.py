@@ -10,21 +10,21 @@ from dotenv import load_dotenv
 # Load ENV
 load_dotenv()
 
-# Add ROOT directory to sys.path taake saray folders (api, database, models) mil sakein
+# Add ROOT directory to sys.path for robust absolute imports
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if BASE_DIR not in sys.path:
     sys.path.append(BASE_DIR)
 
-# Ab hum absolute imports use kar sakte hain jo har jagah kaam karein gi
+# Professional Direct Imports (Bypassing __init__.py circularity)
 from api.routes import auth, dashboard, assistant, user, document, settings
 from database.config import engine, Base
 
-# Create DB
+# Create DB Tables
 Base.metadata.create_all(bind=engine)
 
-app = FastAPI(title="Procurement Assistant API")
+app = FastAPI(title="Procurement Assistant API - Abdex Industries")
 
-# CORS
+# Global CORS Configuration
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -33,7 +33,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Routes
+# Route Registration
 app.include_router(auth.router, prefix="/api/auth", tags=["Auth"])
 app.include_router(dashboard.router, prefix="/api/dashboard", tags=["Dashboard"])
 app.include_router(assistant.router, prefix="/api/assistant", tags=["Assistant"])
@@ -41,7 +41,7 @@ app.include_router(user.router, prefix="/api/user", tags=["User"])
 app.include_router(document.router, prefix="/api/documents", tags=["Documents"])
 app.include_router(settings.router, prefix="/api/settings", tags=["Settings"])
 
-# Static Files
+# Static Asset Serving
 app.mount("/css", StaticFiles(directory="ui/css"), name="css")
 app.mount("/js", StaticFiles(directory="ui/js"), name="js")
 app.mount("/images", StaticFiles(directory="ui/images"), name="images")
