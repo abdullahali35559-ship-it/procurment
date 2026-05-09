@@ -75,8 +75,8 @@ class ExecutiveAssistant:
                         if is_match(s): 
                             kb_matches.append(s)
                             
-        except Exception as e:
-            print(f"Search Error: {e}")
+            except Exception as e:
+                print(f"Search Error: {e}")
 
         # Supplemental broad search for services
         if any(word in query.lower() for word in ['service', 'provide', 'offer', 'do for us']):
