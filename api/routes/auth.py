@@ -98,9 +98,9 @@ async def login(request: Request, response: Response, db: Session = Depends(get_
     
     # Smart Routing Logic
     if user.role in ["admin", "superadmin"]:
-        redirect_to = "/admin_portal"
+        redirect_to = "/admin.html"
     else:
-        redirect_to = "/user_portal"
+        redirect_to = "/assistant.html"
 
     # Update last login
     user.last_login = datetime.now(timezone.utc)
