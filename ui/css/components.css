@@ -108,6 +108,49 @@
     border-bottom: 1px solid var(--border-light);
 }
 
+/* Chat Message Styles */
+.message {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: var(--space-4);
+    max-width: 85%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.message-user {
+    align-self: flex-end;
+    align-items: flex-end;
+}
+
+.message-assistant {
+    align-self: flex-start;
+    align-items: flex-start;
+}
+
+.message-bubble {
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-lg);
+    font-size: var(--text-sm);
+    line-height: 1.5;
+    position: relative;
+    max-width: 100%;
+}
+
+.message-user .message-bubble {
+    background: var(--primary-orange);
+    color: white;
+    border-bottom-right-radius: var(--radius-xs);
+}
+
+.message-assistant .message-bubble {
+    background: white;
+    color: var(--text-primary);
+    border: 1px solid var(--border-light);
+    border-bottom-left-radius: var(--radius-xs);
+    box-shadow: var(--shadow-sm);
+}
+
 .card-title {
     font-size: var(--text-xl);
     font-weight: var(--font-semibold);

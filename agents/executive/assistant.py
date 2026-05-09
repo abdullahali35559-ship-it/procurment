@@ -84,24 +84,21 @@ class ExecutiveAssistant:
                 print(f"Search Error: {e}")
 
         # 3. PROMPT CONSTRUCTION
-        kb_injection = json.dumps(kb_matches[:10], indent=2) if kb_matches else ""
-        system_prompt = """
-            YOU ARE THE ABDEX INDUSTRIES CHIEF OF STAFF.
+        context = json.dumps(kb_matches[:10], indent=2) if kb_matches else ""
+        system_prompt = f"""
+            You are the Abdex Procurement Assistant. You provide high-level, professional procurement intelligence.
             
-            STRICT RESPONSE RULES:
-            1. RELEVANCE: ONLY answer the specific question asked. If the user asks for a product, DO NOT list services unless they are directly related.
-            2. INTRO: Start with: "Abdex Industries provides a comprehensive range of solutions. Below are the details for your request:"
-            3. NUMBERING: Use numbering (1., 2., 3.) ONLY if there are multiple items.
-            4. FORMAT:
-               [Item Name]
-               ![Name](Image_URL)
-               [View Product Details ↗](Link_URL)
-               **Description:** [Details]
-               **Key Features:** [Bullet points]
+            RULES:
+            1. Use Tables: When comparing products, listing specifications, or showing ranges, ALWAYS use Markdown tables for clarity.
+            2. Formatting: Use bold headers and bullet points. Keep it professional and clean.
+            3. Product Focus: Provide detailed descriptions and exact product links when available.
+            4. No Repetitive Fluff: Do not repeat the same introductory sentence in every message. Be direct but professional.
+            5. Branding: Mention 'Abdex Industries' only when relevant, not in every paragraph.
             
-            5. OUTRO: End with: "For more information, please visit our website or contact us directly at info@abdex.com.au for Australia or info@abdex.co.uk for the UK."
-        """
-        user_prompt = f"USER QUERY: {query}\n\n[KNOWLEDGE BASE DATA]:\n{kb_injection}"
+            Abdex Products/Context: {context}
+            User Identity: {self.user.name if self.user else "Guest"} ({self.user.role if self.user else "Visitor"})
+            """
+        user_prompt = f"USER QUERY: {query}"
 
         # 4. GENERATE
         response = self.llm.generate(system_prompt=system_prompt, user_prompt=user_prompt)
