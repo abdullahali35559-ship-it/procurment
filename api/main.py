@@ -15,7 +15,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if BASE_DIR not in sys.path:
     sys.path.append(BASE_DIR)
 
-# Professional Explicit Imports (Verified with local filesystem)
+# Professional Explicit Imports
 from api.routes.auth import router as auth_router
 from api.routes.dashboard import router as dashboard_router
 from api.routes.assistant import router as assistant_router
@@ -24,7 +24,7 @@ from api.routes.emails import router as emails_router
 from api.routes.threads import router as threads_router
 from api.routes.drafts import router as drafts_router
 
-from database.config import engine, Base
+from database.connection import engine, Base
 
 # Create DB Tables
 Base.metadata.create_all(bind=engine)
@@ -40,19 +40,18 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Explicit Route Registration
-app.include_router(auth_router, prefix="/api/auth", tags=["Auth"])
-app.include_router(dashboard_router, prefix="/api/dashboard", tags=["Dashboard"])
-app.include_router(assistant_router, prefix="/api/assistant", tags=["Assistant"])
-app.include_router(user_router, prefix="/api/user", tags=["User"])
-app.include_router(emails_router, prefix="/api/emails", tags=["Emails"])
-app.include_router(threads_router, prefix="/api/threads", tags=["Threads"])
-app.include_router(drafts_router, prefix="/api/drafts", tags=["Drafts"])
+# Route Registration (Removed redundant prefixes)
+app.include_router(auth_router)
+app.include_router(dashboard_router)
+app.include_router(assistant_router)
+app.include_router(user_router)
+app.include_router(emails_router)
+app.include_router(threads_router)
+app.include_router(drafts_router)
 
 # Static Asset Serving
 app.mount("/css", StaticFiles(directory="ui/css"), name="css")
 app.mount("/js", StaticFiles(directory="ui/js"), name="js")
-app.mount("/images", StaticFiles(directory="ui/images"), name="images")
 
 @app.get("/")
 async def read_root():
