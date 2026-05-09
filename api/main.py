@@ -10,13 +10,19 @@ from dotenv import load_dotenv
 # Load ENV
 load_dotenv()
 
-# Add ROOT directory to sys.path for robust absolute imports
+# Add ROOT directory to sys.path
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if BASE_DIR not in sys.path:
     sys.path.append(BASE_DIR)
 
-# Professional Direct Imports (Bypassing __init__.py circularity)
-from api.routes import auth, dashboard, assistant, user, document, settings
+# Professional Explicit Imports
+from api.routes.auth import router as auth_router
+from api.routes.dashboard import router as dashboard_router
+from api.routes.assistant import router as assistant_router
+from api.routes.user import router as user_router
+from api.routes.document import router as document_router
+from api.routes.settings import router as settings_router
+
 from database.config import engine, Base
 
 # Create DB Tables
@@ -33,13 +39,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Route Registration
-app.include_router(auth.router, prefix="/api/auth", tags=["Auth"])
-app.include_router(dashboard.router, prefix="/api/dashboard", tags=["Dashboard"])
-app.include_router(assistant.router, prefix="/api/assistant", tags=["Assistant"])
-app.include_router(user.router, prefix="/api/user", tags=["User"])
-app.include_router(document.router, prefix="/api/documents", tags=["Documents"])
-app.include_router(settings.router, prefix="/api/settings", tags=["Settings"])
+# Explicit Route Registration
+app.include_router(auth_router, prefix="/api/auth", tags=["Auth"])
+app.include_router(dashboard_router, prefix="/api/dashboard", tags=["Dashboard"])
+app.include_router(assistant_router, prefix="/api/assistant", tags=["Assistant"])
+app.include_router(user_router, prefix="/api/user", tags=["User"])
+app.include_router(document_router, prefix="/api/documents", tags=["Documents"])
+app.include_router(settings_router, prefix="/api/settings", tags=["Settings"])
 
 # Static Asset Serving
 app.mount("/css", StaticFiles(directory="ui/css"), name="css")
