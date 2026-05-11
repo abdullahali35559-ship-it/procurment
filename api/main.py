@@ -1,9 +1,10 @@
 import os
 import sys
+import requests
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, JSONResponse, Response
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -52,6 +53,21 @@ app.include_router(drafts_router)
 # Static Asset Serving
 app.mount("/css", StaticFiles(directory="ui/css"), name="css")
 app.mount("/js", StaticFiles(directory="ui/js"), name="js")
+
+@app.get("/api/image-proxy")
+async def image_proxy(url: str):
+    try:
+        # Using professional headers to avoid blocking
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+            "Referer": "https://abdex.com/"
+        }
+        resp = requests.get(url, headers=headers, timeout=15)
+        if resp.status_code == 200:
+            return Response(content=resp.content, media_type=resp.headers.get("content-type", "image/jpeg"))
+        return JSONResponse({"error": "Failed to fetch image"}, status_code=resp.status_code)
+    except Exception as e:
+        return JSONResponse({"error": str(e)}, status_code=500)
 
 @app.get("/")
 async def read_root():
